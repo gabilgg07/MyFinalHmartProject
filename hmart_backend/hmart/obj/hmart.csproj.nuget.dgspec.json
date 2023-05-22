@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\GabilGG\\Desktop\\projects\\gabilgg_final_project\\hmart_backend\\hmart\\hmart.csproj": {}
+    "D:\\Codes\\gitProjects\\MyFinalHmartProject\\hmart_backend\\hmart\\hmart.csproj": {}
   },
   "projects": {
-    "C:\\Users\\GabilGG\\Desktop\\projects\\gabilgg_final_project\\hmart_backend\\hmart\\hmart.csproj": {
+    "D:\\Codes\\gitProjects\\MyFinalHmartProject\\hmart_backend\\hmart\\hmart.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\GabilGG\\Desktop\\projects\\gabilgg_final_project\\hmart_backend\\hmart\\hmart.csproj",
+        "projectUniqueName": "D:\\Codes\\gitProjects\\MyFinalHmartProject\\hmart_backend\\hmart\\hmart.csproj",
         "projectName": "hmart",
-        "projectPath": "C:\\Users\\GabilGG\\Desktop\\projects\\gabilgg_final_project\\hmart_backend\\hmart\\hmart.csproj",
-        "packagesPath": "C:\\Users\\GabilGG\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\GabilGG\\Desktop\\projects\\gabilgg_final_project\\hmart_backend\\hmart\\obj\\",
+        "projectPath": "D:\\Codes\\gitProjects\\MyFinalHmartProject\\hmart_backend\\hmart\\hmart.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "D:\\Codes\\gitProjects\\MyFinalHmartProject\\hmart_backend\\hmart\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\GabilGG\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -85,10 +90,29 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.32, 3.1.32]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -97,7 +121,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
