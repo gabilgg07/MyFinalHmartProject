@@ -1,0 +1,213 @@
+﻿@model AboutVM
+@{
+    ViewData["Title"] = "About";
+    Setting setting = Model.Setting;
+}
+
+<!-- Main Start -->
+<main>
+    <!-- Main-header start -->
+    <section id="main-header" data-bg-image="../uploads/setting/@setting.MainBgImgSrc">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 text-center">
+                    <h2 class="header-title">About Us</h2>
+                    <ul class="page-list">
+                        <li class="page-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                        <li class="page-item active">About Us</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main-header end -->
+    <!-- About start -->
+    <section id="about" class="pt-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="about-wrapper text-center">
+                        <div class="about-contant">
+                            <h2 class="title">
+                                <span>@setting.AboutSubtitle </span>
+                                @setting.AboutTitle
+                            </h2>
+                            <p>
+                                @setting.AboutDesc
+                            </p>
+                        </div>
+                        <div class="promo-video">
+                            <img src="~/uploads/setting/@setting.PromoImgSrc" alt="Promo Image">
+                            <a href="@setting.PromoVideoLink" class="venobox overlay-box"
+                               data-vbtype="video">
+                                <span>
+                                    <i class="icon-play"></i><span class="animate"></span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About end -->
+    <!-- Teams start -->
+    <section id="teams">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2 class="title">@setting.AboutTeamTitle</h2>
+                        <p>@setting.AboutTeamDesc</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.Teams)
+                {
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 @(item.Id==Model.Teams.LastOrDefault().Id?"":"mb-col")">
+                        <div class="team-wrapper">
+                            <div class="team-image overflow-hidden">
+                                <img src="~/uploads/teams/@item.Image" alt="@item.Fullname">
+                            </div>
+                            <div class="team-content">
+                                <h6 class="title">@item.Fullname</h6>
+                                <span class="sub-title">@item.Position</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- Teams end -->
+    <!-- Features start -->
+    <section id="features" class="py-section">
+        <div class="container">
+            <div class="feature-wrapper">
+                <div class="row">
+                    @foreach (var item in Model.Features)
+                    {
+                        <div class="col-lg-4 col-md-6  @(item.Id==Model.Features.LastOrDefault().Id?"":"mb-col")">
+                            <div class="single-feature">
+                                <div class="feature-icon">
+                                    <img src="~/uploads/features/@item.Image" alt="@item.Title">
+                                </div>
+                                <div class="feature-content">
+                                    <h4 class="title">@item.Title</h4>
+                                    <span class="sub-title">@item.Subtitle</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features end -->
+    <!-- Testimonial start -->
+    <section id="testimonial" class="py-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center m-0">
+                        <h2 class="title">@setting.TestimonialsTitle</h2>
+                        <p>@setting.TestimonialsDesc</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="swiper testimonial-slider">
+                        <div class="swiper-wrapper">
+                            @foreach (var item in Model.Testimonials)
+                            {
+                                <div class="swiper-slide">
+                                    <div class="testi-inner">
+                                        <div class="testi-content">
+                                            <p>
+                                                @item.Desc
+                                            </p>
+                                        </div>
+                                        <div class="testi-author">
+                                            <div class="author-image">
+                                                <img src="~/uploads/testimonials/@item.Image" alt="@item.FullName">
+                                            </div>
+                                            <div class="author-name">
+                                                <h4 class="name">@item.FullName<span>@item.Position</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="swiper-buttons">
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial end -->
+    <!-- Blog start -->
+    <section id="blog" class="py-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2 class="title">@setting.BlogsTitle</h2>
+                        <p> @setting.BlogsDesc</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.Blogs)
+                {
+
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="single-blog mb-blog">
+                            <div class="blog-image">
+                                <a asp-controller="blog" asp-action="detail" asp-route-id="@item.Id">
+                                    <img src="~/uploads/blogs/@item.Image" alt="@item.Title">
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-date-author">
+                                    <span class="blog-date">
+                                        <i class="icon-calendar"></i>
+                                        @item.Date.ToString("dd, MMM yyyy")
+                                    </span>
+                                    <span class="blog-author">
+                                        <span>
+                                            <i class="icon-user"></i>
+                                            @item.Author
+                                        </span>
+                                    </span>
+                                </div>
+                                <h5 class="blog-heading">
+                                    <a asp-controller="blog" asp-action="detail" asp-route-id="@item.Id" class="blog-heading-link">@item.Title</a>
+                                </h5>
+                                <p>
+                                    @item.Desc
+                                </p>
+                                <a asp-controller="blog" asp-action="detail" asp-route-id="@item.Id" class="btn-primary blog-btn"> Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- Blog end -->
+</main>
+<!-- Main End -->
+@section Scripts{
+    <script type="text/javascript" src="~/assets/js/venobox.js"></script>
+    <script>
+        // Venobox start
+        $(".venobox").venobox();
+        // Venobox end
+    </script>
+}

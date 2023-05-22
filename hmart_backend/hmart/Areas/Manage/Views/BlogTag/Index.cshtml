@@ -1,0 +1,55 @@
+﻿@model List<BlogTag>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-action">
+                        Blog Tags Table
+                        <div class="create-div d-flex j-c-fe">
+                            <a asp-action="create" class="btn btn-success">Create Blog Tag</a>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th style="width:200px">Order</th>
+                                        <th style="width:200px">Name</th>
+                                        <th style="width:200px">Button</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (BlogTag blogTag in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @blogTag.Order
+                                            </td>
+                                            <td>
+                                                @blogTag.Name
+                                            </td>
+                                            <th>
+                                                <a asp-action="edit" asp-route-id="@blogTag.Id" style="width:200px" class="btn btn-warning d-block ml-auto mb-1">Edit</a>
+                                                <a asp-action="delete" asp-route-id="@blogTag.Id" style="width:200px" class="btn btn-danger d-block ml-auto">Delete</a>
+                                            </th>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

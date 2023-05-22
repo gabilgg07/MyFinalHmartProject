@@ -1,0 +1,456 @@
+﻿@model CartVM
+@{
+    ViewData["Title"] = "Cart";
+    double price = 0;
+    string standartPrice = "";
+    string expressPrice = "";
+}
+
+<!-- Main Start -->
+<main>
+    <!-- Main-header start -->
+    <section id="main-header" data-bg-image="@Url.Content("/uploads/setting/" + Model.Setting.MainBgImgSrc)">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 text-center">
+                    <h2 class="header-title">Cart</h2>
+                    <ul class="page-list">
+                        <li class="page-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                        <li class="page-item active"> Cart</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main-header end -->
+    <!-- Cart items start -->
+    <section id="cart-items" class="py-section">
+        <div class="container" id="cart_list">
+            <h3 class="page-title">Your cart items</h3>
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="product-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Until Price</th>
+                                    <th>Qty</th>
+                                    <th>Subtotal</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.BasketItemVMs.Count > 0)
+                                {
+                                    @foreach (var item in Model.BasketItemVMs)
+                                    {
+                                        Product p = item.Product;
+                                        <tr id="product_by_id_@p.Id">
+                                            <td class="product-image">
+                                                <a asp-controller="shop" asp-action="detail" asp-route-id="@p.Id">
+                                                    <img class="ms-2" src="~/uploads/products/@p.GetPosterImage()"
+                                                         alt="@p.Name">
+                                                </a>
+                                            </td>
+                                            <td class="product-name">
+                                                <a asp-controller="shop" asp-action="detail" asp-route-id="@p.Id">@p.Name</a>
+                                            </td>
+                                            <td class="product-price">
+                                                @{
+                                                    price = (double)(p.DiscountPercent == null ? p.Price : p.Price - p.Price * p.DiscountPercent / 100);
+                                                }
+                                                <span class="amount">$@price.ToString("#.00")</span>
+                                            </td>
+                                            <td class="product-quantity">
+                                                <div class="plus-minus">
+                                                    <a asp-controller="shop" asp-action="deletefrombasket" asp-route-id="@p.Id" asp-route-isCanvas="no" class="minus-remove ope">-</a>
+                                                    <input type="text" class="count" value="@item.Count">
+                                                    <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@p.Id" class="plus-add ope">+</a>
+                                                </div>
+                                            </td>
+                                            <td class="product-subtotal">$@((price*item.Count).ToString("#.00"))</td>
+                                            <td class="product-remove">
+                                                <a asp-controller="shop" asp-action="deletefrombasket" asp-route-id="@p.Id" asp-route-isCanvas="no" asp-route-keyWord="out" class="out_from_basket"><i class="icon-close"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr class="empty-tr">
+                                        <td colspan="6"> Cart is empty!</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="shopping-btn-wrapper">
+                        <div class="continue-shopping">
+                            <a asp-controller="shop" asp-action="index">Continue Shopping</a>
+                        </div>
+                        <div class="clear-cart">
+                            <a asp-controller="shop" asp-action="deletefrombasket" asp-route-isCanvas="no" asp-route-keyWord="clear" id="clear_cartList">Clear Shopping Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-col">
+                    <div class="cart-wrapper">
+                        <div class="title-wrapper">
+                            <h4 class="title">Standart Shipping Info</h4>
+                        </div>
+                        <div class="count-percent">
+                            <p class="count-info">For one product</p>
+                            <span class="percent">8%</span>
+                        </div>
+                        <div class="count-percent">
+                            <p class="count-info">For 2 products</p>
+                            <span class="percent">7.5%</span>
+                        </div>
+                        <div class="count-percent">
+                            <p class="count-info">For 3 products</p>
+                            <span class="percent">7%</span>
+                        </div>
+                        <div class="count-percent">
+                            <p class="count-info">For 4 products</p>
+                            <span class="percent">6%</span>
+                        </div>
+                        <div class="count-percent">
+                            <p class="count-info">For 5 and more products</p>
+                            <span class="percent">5%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-col">
+                    <div class="cart-wrapper">
+                        <div class="title-wrapper">
+                            <h4 class="title">Express Shipping Info</h4>
+                        </div>
+                        <div class="count-percent">
+                            <p class="count-info">For one product</p>
+                            <span class="percent">12%</span>
+                        </div>
+                        <div class="count-percent">
+                            <p class="count-info">For 2 products</p>
+                            <span class="percent">11.5%</span>
+                        </div>
+                        <div class="count-percent">
+                            <p class="count-info">For 3 products</p>
+                            <span class="percent">11%</span>
+                        </div>
+                        <div class="count-percent">
+                            <p class="count-info">For 4 products</p>
+                            <span class="percent">10.5%</span>
+                        </div>
+                        <div class="count-percent">
+                            <p class="count-info">For 5 and more products</p>
+                            <span class="percent">10%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="cart-wrapper">
+                        <div class="title-wrapper">
+                            <h4 class="title">Cart Total</h4>
+                        </div>
+                        <h4 class="total-price">Total products <span class="price">$@Model.TotalPrice.ToString("#.00")</span></h4>
+                        <div class="total-shipping">
+                            <h5>Total shipping</h5>
+                            <ul>
+                                <li>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="standartPrice"> Standard
+                                    </div>
+                                    @if (Model.Count < 5)
+                                    {
+                                        @switch (Model.Count)
+                                        {
+                                            case 1:
+                                                standartPrice = (Model.TotalPrice * 8 / 100).ToString("#.00");
+                                                break;
+                                            case 2:
+                                                standartPrice = (Model.TotalPrice * 7.5 / 100).ToString("#.00");
+                                                break;
+                                            case 3:
+                                                standartPrice = (Model.TotalPrice * 7 / 100).ToString("#.00");
+                                                break;
+                                            case 4:
+                                                standartPrice = (Model.TotalPrice * 6 / 100).ToString("#.00");
+                                                break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        standartPrice = (Model.TotalPrice * 5 / 100).ToString("#.00");
+                                    }
+                                    <span>$@standartPrice</span>
+                                </li>
+                                <li>
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="expressPrice"> Express
+                                    </div>
+                                    @if (Model.Count < 5)
+                                    {
+                                        @switch (Model.Count)
+                                        {
+                                            case 1:
+                                                expressPrice = (Model.TotalPrice * 12 / 100).ToString("#.00");
+                                                break;
+                                            case 2:
+                                                expressPrice = (Model.TotalPrice * 11.5 / 100).ToString("#.00");
+                                                break;
+                                            case 3:
+                                                expressPrice = (Model.TotalPrice * 11 / 100).ToString("#.00");
+                                                break;
+                                            case 4:
+                                                expressPrice = (Model.TotalPrice * 10.5 / 100).ToString("#.00");
+                                                break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        expressPrice = (Model.TotalPrice * 10 / 100).ToString("#.00");
+                                    }
+                                    <span>$@expressPrice</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <h4 class="grand-totall-price">Grand Total <span class="grand-price">$@Model.TotalPrice.ToString("#.00")</span></h4>
+                        <a asp-controller="order" asp-action="checkout">Proceed to Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Cart items end -->
+</main>
+<!-- Main End -->
+
+@section Scripts{
+    <script>
+        $(document).ready(function (e) {
+            $(document).on("click", ".minus-remove.ope", function (e) {
+                e.preventDefault();
+
+                let url = $(this).attr("href");
+                let id = url.substring(url.lastIndexOf("/") + 1, url.indexOf("?"));
+                let cartListUrl = "/shop/cartlist/";
+
+                async function ResponseDeleteFromBasketHtml() {
+                    const response = await fetch(url)
+                        .then(resp => {
+                            if (!resp.ok) {
+                                let error = '/details?id=' + id + '&code=404&name=Product';
+                                window.location.href = error;
+                            }
+                            return resp.text();
+                        })
+                        .then(data => {
+                            $(".basket-partial").html(data);
+                            async function ResponseCartListHtml() {
+                                const response = await fetch(cartListUrl)
+                                    .then(resp => {
+                                        if (!resp.ok) {
+                                            let error = '/details?id=' + id + '&code=404&name=Product';
+                                            window.location.href = error;
+                                        }
+                                        return resp.text();
+                                    })
+                                    .then(data => {
+                                        $("#cart_list").html(data);
+                                    }
+                                    );
+                            }
+
+                            ResponseCartListHtml();
+                        }
+                        );
+                }
+
+                ResponseDeleteFromBasketHtml();
+            });
+
+            $(document).on("click", ".plus-add.ope", function (e) {
+                e.preventDefault();
+
+                let url = $(this).attr("href");
+                let id = url.substring(url.lastIndexOf("/") + 1, url.indexOf("?"));
+                let cartListUrl = "/shop/cartlist/";
+
+                async function ResponseDeleteFromBasketHtml() {
+                    const response = await fetch(url)
+                        .then(resp => {
+                            if (!resp.ok) {
+                                let error = '/details?id=' + id + '&code=404&name=Product';
+                                window.location.href = error;
+                            }
+                            return resp.text();
+                        })
+                        .then(data => {
+                            $(".basket-partial").html(data);
+                            async function ResponseCartListHtml() {
+                                const response = await fetch(cartListUrl)
+                                    .then(resp => {
+                                        if (!resp.ok) {
+                                            let error = '/details?id=' + id + '&code=404&name=Product';
+                                            window.location.href = error;
+                                        }
+                                        return resp.text();
+                                    })
+                                    .then(data => {
+                                        $("#cart_list").html(data);
+                                    }
+                                    );
+                            }
+
+                            ResponseCartListHtml();
+                        }
+                        );
+                }
+
+                ResponseDeleteFromBasketHtml();
+            });
+
+            $(document).on("click", ".out_from_basket", function (e) {
+                e.preventDefault();
+
+                let url = $(this).attr("href");
+                let id = url.substring(url.lastIndexOf("/") + 1, url.indexOf("?"));
+                let cartListUrl = "/shop/cartlist/";
+
+                async function ResponseDeleteFromBasketHtml() {
+                    const response = await fetch(url)
+                        .then(resp => {
+                            if (!resp.ok) {
+                                let error = '/details?id=' + id + '&code=404&name=Product';
+                                window.location.href = error;
+                            }
+                            return resp.text();
+                        })
+                        .then(data => {
+                            $(".basket-partial").html(data);
+                            async function ResponseCartListHtml() {
+                                const response = await fetch(cartListUrl)
+                                    .then(resp => {
+                                        if (!resp.ok) {
+                                            let error = '/details?id=' + id + '&code=404&name=Product';
+                                            window.location.href = error;
+                                        }
+                                        return resp.text();
+                                    })
+                                    .then(data => {
+                                        $("#cart_list").html(data);
+                                    }
+                                    );
+                            }
+
+                            ResponseCartListHtml();
+                        }
+                        );
+                }
+
+                ResponseDeleteFromBasketHtml();
+            });
+
+            $(document).on("click", "#clear_cartList", function (e) {
+                e.preventDefault();
+
+                let url = $(this).attr("href");
+                let cartListUrl = "/shop/cartlist/";
+
+                async function ResponseDeleteFromBasketHtml() {
+                    const response = await fetch(url)
+                        .then(resp => {
+                            if (!resp.ok) {
+                                let error = '/details?id=' + id + '&code=404&name=Product';
+                                window.location.href = error;
+                            }
+                            return resp.text();
+                        })
+                        .then(data => {
+                            $(".basket-partial").html(data);
+                            async function ResponseCartListHtml() {
+                                const response = await fetch(cartListUrl)
+                                    .then(resp => {
+                                        if (!resp.ok) {
+                                            let error = '/details?id=' + id + '&code=404&name=Product';
+                                            window.location.href = error;
+                                        }
+                                        return resp.text();
+                                    })
+                                    .then(data => {
+                                        $("#cart_list").html(data);
+                                    }
+                                    );
+                            }
+
+                            ResponseCartListHtml();
+                        }
+                        );
+                }
+
+                ResponseDeleteFromBasketHtml();
+            });
+
+            $(document).on("change", ".checkbox input", function (e) {
+                let inputChanged = $(this)[0];
+                $(".checkbox input").each(function (e) {
+                    if ($(this)[0] == inputChanged) {
+                        if ($(this)[0].checked == true) {
+                            $(this)[0].checked = true;
+
+                            let cartListUrl = "/shop/cartlist?keyWord=" + $(this).attr("id");
+                            async function ResponseCartListHtml() {
+                                const response = await fetch(cartListUrl)
+                                    .then(resp => {
+                                        if (!resp.ok) {
+                                            let error = '/details?id=' + id + '&code=404&name=Product';
+                                            window.location.href = error;
+                                        }
+                                        return resp.text();
+                                    })
+                                    .then(data => {
+                                        $("#cart_list").html(data);
+                                    }
+                                    );
+                            }
+
+                            ResponseCartListHtml();
+                        }
+                        else
+                        {
+                            $(this)[0].checked = false;
+
+                            let cartListUrl = "/shop/cartlist";
+                            async function ResponseCartListHtml() {
+                                const response = await fetch(cartListUrl)
+                                    .then(resp => {
+                                        if (!resp.ok) {
+                                            let error = '/details?id=' + id + '&code=404&name=Product';
+                                            window.location.href = error;
+                                        }
+                                        return resp.text();
+                                    })
+                                    .then(data => {
+                                        $("#cart_list").html(data);
+                                    }
+                                    );
+                            }
+
+                            ResponseCartListHtml();
+                        }
+                    } else {
+                        $(this)[0].checked = false;
+                    }
+                });
+            });
+        });
+    </script>
+}

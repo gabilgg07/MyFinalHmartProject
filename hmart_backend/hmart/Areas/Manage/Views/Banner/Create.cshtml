@@ -1,0 +1,98 @@
+﻿@model Banner
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-action">
+                        Create Banner
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="card p-1">
+                                        <div class="image-poster">
+                                            <div class="image-wrapper d-none" style="position:relative">
+                                                <img style="width:100%" src="" class="banner-image" alt="Banner Image" />
+                                            </div>
+                                        </div>
+                                        <div class="input-field mt-12">
+                                            <input asp-for="ImageFile" class="d-none image-file">
+                                            <label asp-for="ImageFile" class="p-s input-file white">
+                                                <span class="d-i-b p-a">Banner Image</span>
+                                            </label>
+                                            <span class="text-danger" asp-validation-for="ImageFile"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5 col-md-5 col-sm-6">
+                                    <div class="input-field">
+                                        <input asp-for="Title" class="validate @(Model?.Title!=null?"valid":"")">
+                                        <label asp-for="Title" class="@(Model?.Title!=null?"active":"")">Title</label>
+                                        <span class="text-danger" asp-validation-for="Title"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                    <div class="input-field">
+                                        <input asp-for="Price" class="validate @(Model?.Price!=null?"valid":"")">
+                                        <label asp-for="Price" class="@(Model?.Price!=null?"active":"")">Price</label>
+                                        <span class="text-danger" asp-validation-for="Price"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6 mb-15">
+                                    <div class="input-field">
+                                        <input asp-for="IsMain" class="validate filled-in @(Model?.IsMain!=null?"valid":"")" />
+                                        <label asp-for="IsMain" class="@(Model?.IsMain!=null?"active":"")">IsMain</label>
+                                        <span class="text-danger" asp-validation-for="IsMain"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-6">
+                                    <div class="input-field">
+                                        <input asp-for="Order" class="validate @(Model?.Order!=null?"valid":"")">
+                                        <label asp-for="Order" class="@(Model?.Order!=null?"active":"")">Order</label>
+                                        <span class="text-danger" asp-validation-for="Order"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="waves-effect waves-light btn btn-success" style="width:180px">Create</button>
+                            <a asp-action="index" class="waves-effect waves-light btn btn-danger m-lt-buttons-1" style="width:180px">Cancel</a>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            let imageInputValue;
+            $(document).on("change", ".image-file", function (e) {
+                let inputFile = "";
+                if ($(this)[0].files[0]) {
+                    inputFile = $(this)[0].files[0].name;
+                    if (inputFile.length > 25) {
+                        inputFile = inputFile.substring(0, 22) + "..."
+                    }
+                    $(this).next().text("");
+                    $(this).next().append(inputFile);
+                    imageInputValue = URL.createObjectURL(e.target.files[0]);
+
+                    $(".banner-image").parent().removeClass("d-none");
+                    $(".banner-image").fadeIn("fast").attr('src', imageInputValue);
+                }
+                $(this).next().addClass("valid");
+                $(this).next().children().addClass("active");
+            });
+        });
+    </script>
+}

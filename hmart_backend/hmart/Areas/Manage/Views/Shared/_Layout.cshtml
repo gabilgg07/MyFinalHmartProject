@@ -1,0 +1,224 @@
+﻿@inject Microsoft.AspNetCore.Identity.UserManager<AppUser> userM
+@{
+    AppUser admin = null;
+    AppUser superAdmin = null;
+
+
+    if (User.Identity.IsAuthenticated)
+    {
+        admin = userM.FindByNameAsync(User.Identity.Name).Result;
+        superAdmin = userM.GetUsersInRoleAsync("SuperAdmin").Result.FirstOrDefault();
+    }
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hmart Admin Panel</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/manage/assets/img/AP-title-icon.png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js" integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://kit.fontawesome.com/582d45796b.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="~/manage/assets/materialize/css/materialize.min.css" media="screen,projection" />
+    <!-- Bootstrap Styles-->
+    <link href="~/manage/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="~/manage/assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="~/manage/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="~/manage/assets/css/custom-styles.css" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link rel="stylesheet" href="~/manage/assets/js/Lightweight-Chart/cssCharts.css">
+    <link rel="stylesheet" href="~/manage/assets/css/style.css">
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle waves-effect waves-dark" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand waves-effect waves-dark" asp-controller="dashboard" asp-action="index" style="display:flex"><i class="material-icons dp48">settings_cell</i> <strong style="margin-left:10px">Hmart AP</strong></a>
+
+                <div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
+                <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i class="fa fa-user fa-fw"></i> <b>@admin.FisrtName @admin.LastName</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+        </nav>
+        <!-- Dropdown Structure -->
+        <ul id="dropdown1" class="dropdown-content">
+            <li>
+                @if (User.IsInRole("SuperAdmin"))
+                {
+                    <a asp-controller="superadmin" asp-action="set"><i class="fa fa-user fa-fw"></i> My Profile</a>
+                }
+                else
+                {
+                    <a asp-controller="admin" asp-action="set"><i class="fa fa-user fa-fw"></i> My Profile</a>
+                }
+
+            </li>
+            <li>
+                <a asp-controller="account" asp-action="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            </li>
+        </ul>
+        <ul id="dropdown2" class="dropdown-content w250">
+            <li>
+                <div>
+                    <i class="fa fa-comment fa-fw"></i> New Comment
+                    <span class="pull-right text-muted small">4 min</span>
+                </div>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <div>
+                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                    <span class="pull-right text-muted small">4 min</span>
+                </div>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a class="text-center" href="#">
+                    <strong>See All Alerts</strong>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse overflow-y">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a class="active-menu waves-effect waves-dark" asp-controller="dashboard" asp-action="index"><i class="fa fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li class="active">
+                        <a href="#" class="waves-effect waves-dark"><i class="fa fa-table"></i> Tables<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            @if (User.IsInRole("SuperAdmin"))
+                            {
+                                <li>
+                                    <a asp-controller="superadmin" asp-action="index">Admins</a>
+                                </li>
+                            }
+                            <li>
+                                <a> ViewTables<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a asp-controller="setting" asp-action="index">Setting</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="slider" asp-action="index">Sliders</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="banner" asp-action="index">Banners</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="offer" asp-action="index">Offers</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="testimonial" asp-action="index">Testimonials</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="partner" asp-action="index">Partners</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="team" asp-action="index">Teams</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="feature" asp-action="index">Features</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a asp-controller="category" asp-action="index">Categories</a>
+                            </li>
+                            <li>
+                                <a asp-controller="brand" asp-action="index">Brands</a>
+                            </li>
+                            <li>
+                                <a asp-controller="product" asp-action="index">Products</a>
+                            </li>
+                            <li>
+                                <a asp-controller="producttag" asp-action="index">Product Tags</a>
+                            </li>
+                            <li>
+                                <a asp-controller="color" asp-action="index">Colors</a>
+                            </li>
+                            <li>
+                                <a asp-controller="blog" asp-action="index">Blogs</a>
+                            </li>
+                            <li>
+                                <a asp-controller="blogtag" asp-action="index">Blog Tags</a>
+                            </li>
+                            @if (!User.IsInRole("EditorAdmin"))
+                            {
+                                <li>
+                                    <a asp-controller="user" asp-action="index">Users</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="order" asp-action="index">Orders</a>
+                                </li>
+                                <li>
+                                    <a asp-controller="contactmessage" asp-action="index">Contact Messages</a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /. NAV SIDE  -->
+
+        @RenderBody()
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="~/manage/assets/js/jquery-1.10.2.js"></script>
+
+    <!-- Bootstrap Js -->
+    <script src="~/manage/assets/js/bootstrap.min.js"></script>
+
+    <script src="~/manage/assets/materialize/js/materialize.min.js"></script>
+
+    <!-- Metis Menu Js -->
+    <script src="~/manage/assets/js/jquery.metisMenu.js"></script>
+    <!-- Morris Chart Js -->
+    <script src="~/manage/assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="~/manage/assets/js/morris/morris.js"></script>
+
+
+    <script src="~/manage/assets/js/easypiechart.js"></script>
+    <script src="~/manage/assets/js/easypiechart-data.js"></script>
+
+    <script src="~/manage/assets/js/Lightweight-Chart/jquery.chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @RenderSection("Scripts", required: false);
+    <!-- DATA TABLE SCRIPTS -->
+    <script src="~/manage/assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="~/manage/assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+        });
+    </script>
+    <!-- Custom Js -->
+    <script src="~/manage/assets/js/custom-scripts.js"></script>
+
+
+</body>
+
+</html>

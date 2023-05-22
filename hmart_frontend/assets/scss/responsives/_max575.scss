@@ -1,0 +1,244 @@
+@media screen and (max-width: 575px) {
+    //#region Common
+
+    // Col sizes start
+
+    .col-xs-6 {
+        width: 50%;
+    }
+
+    // Col sizes end
+
+    //#region Other Styles
+
+    // Primary Button start
+    .btn-primary {
+        border-radius: 16px;
+        width: 180px;
+        height: 50px;
+        font-size: 16px;
+    }
+    // Primary Button end
+
+    // Swiper Arrows start
+    .swiper {
+        &:hover {
+            .swiper-buttons {
+                div {
+                    width: 35px;
+                    height: 35px;
+                    line-height: 35px;
+                    &::after {
+                        font-size: 10px;
+                    }
+                }
+                .swiper-button-next {
+                    right: 10px;
+                }
+                .swiper-button-prev {
+                    left: 10px;
+                }
+            }
+        }
+    }
+    // Swiper Arrows end
+
+    //#endregion
+
+    // Main start
+    main {
+        #main-header {
+            height: 260px;
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Pages
+
+    //#region Home Page
+
+    // Main Start
+    main {
+        // Banner start
+        #banner {
+            .single-banner {
+                .banner-content {
+                    top: 20px;
+                    left: 30px;
+                    h3 {
+                        font-size: 24px;
+                        line-height: 34px;
+                        margin: 0 0 5px;
+                    }
+                    span {
+                        font-size: 20px;
+                        line-height: 30px;
+                    }
+                    a {
+                        font-size: 16px;
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+            }
+        }
+        // Banner end
+
+        // Product start
+        #product {
+            .product-tab-nav {
+                .product-tab-nav-list {
+                    .product-nav-item {
+                        .product-nav-btn {
+                            width: 140px;
+                            height: 40px;
+                            font-size: 14px;
+                        }
+                        &:not(:first-child) {
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+            .product-tab-content {
+                .product {
+                    .content {
+                        .title {
+                            a {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Product end
+
+        // Fashion start
+        #fashion {
+            height: 300px;
+            .title {
+                font-size: 32px;
+                line-height: 50px;
+                margin-bottom: 25px;
+                span {
+                    font-size: 24px;
+                    line-height: 32px;
+                }
+            }
+        }
+        // Fashion end
+
+        // Feature start
+        #feature_product {
+            .feature-right-content {
+                .image-side {
+                    width: 180px;
+                    justify-content: center;
+                    align-items: center;
+                    display: flex;
+                    flex-direction: column;
+                }
+                .content-side {
+                    width: calc(100% - 180px);
+                    .prize-content {
+                        padding: 15px 0;
+                    }
+                    .product-feature {
+                        margin-top: 20px;
+                        ul {
+                            li {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Feature end
+
+        // Blog start
+        #blog {
+            .single-blog {
+                &.mb-blog {
+                    margin-bottom: 30px;
+                }
+            }
+        }
+        // Blog end
+    }
+    // Main End
+
+    //#endregion
+
+    //#region Single Product Page
+
+    // Main start
+    main {
+        #product-detail {
+            .description-review-wrapper {
+                .description-review-topbar {
+                    .tab-btn {
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Contact Us Page
+
+    // Main start
+    main {
+        #contact {
+            .contact-wrapper {
+                padding: 50px 30px;
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Single Blog Page
+
+    // Main Start
+    main {
+        .blog-post {
+            .quate-speech-area {
+                .quate-speech {
+                    font-size: 18px;
+                    line-height: 28px;
+                }
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#region Thank You Page Page
+
+    // Main Start
+    main {
+        #thank-you-page {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            .quick-order {
+                .title {
+                    font-size: 26px;
+                }
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#endregion
+}

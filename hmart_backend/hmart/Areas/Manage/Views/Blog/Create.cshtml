@@ -1,0 +1,151 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-action">
+                        Create Blog
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <div class="input-field">
+                                        <input asp-for="Title" class="validate @(Model?.Title!=null?"valid":"")">
+                                        <label asp-for="Title" class="@(Model?.Title!=null?"active":"")">Title</label>
+                                        <span class="text-danger" asp-validation-for="Title"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                    <div class="input-field">
+                                        <input asp-for="Date" class="validate @(Model?.Date!=null?"valid":"")">
+                                        <label asp-for="Date" class="active">Date</label>
+                                        <span class="text-danger" asp-validation-for="Date"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                    <div class="input-field">
+                                        <input asp-for="Author" class="validate filled-in @(Model?.Author!=null?"valid":"")" />
+                                        <label asp-for="Author" class="@(Model?.Author!=null?"active":"")">Author</label>
+                                        <span class="text-danger" asp-validation-for="Author"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-field">
+                                        <textarea asp-for="Desc" class="validate @(Model?.Desc!=null?"valid":"")"></textarea>
+                                        <label asp-for="Desc" class="@(Model?.Desc!=null?"active":"")">Description</label>
+                                        <span class="text-danger" asp-validation-for="Desc"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 col-sm-7">
+                                    <div class="input-field">
+                                        <select class="form-control" style="height: 65%; overflow-y: auto; background-image: none;" asp-for="TagIds" asp-items="@(new SelectList(ViewBag.Tags, "Id","Name"))">
+                                        </select>
+                                        <label asp-for="TagIds" class="active">Tags: </label>
+                                        <span class="text-danger" asp-validation-for="TagIds"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="input-field">
+                                        <input asp-for="Quoter" class="validate filled-in @(Model?.Quoter!=null?"valid":"")" />
+                                        <label asp-for="Quoter" class="@(Model?.Quoter!=null?"active":"")">Quoter</label>
+                                        <span class="text-danger" asp-validation-for="Quoter"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-field">
+                                        <textarea asp-for="Quote" class="validate @(Model?.Quote!=null?"valid":"")"></textarea>
+                                        <label asp-for="Quote" class="@(Model?.Quote!=null?"active":"")">Quote</label>
+                                        <span class="text-danger" asp-validation-for="Quote"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="card p-1">
+                                        <div class="image-poster">
+                                            <div class="image-wrapper d-none" style="position:relative">
+                                                <img style="width:100%" src="" id="blogImg" class="blog-image" alt="Blog Image" />
+                                            </div>
+                                        </div>
+                                        <div class="input-field mt-12">
+                                            <input asp-for="ImageFile" class="d-none image-file" data-img-id="#blogImg">
+                                            <label asp-for="ImageFile" class="p-s input-file white">
+                                                <span class="d-i-b p-a">Blog Image</span>
+                                            </label>
+                                            <span class="text-danger" asp-validation-for="ImageFile"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="card p-1">
+                                        <div class="image-poster">
+                                            <div class="image-wrapper d-none" style="position:relative">
+                                                <img style="width:100%" src="" id="blogTxtImg" class="blog-image" alt="Blog Image" />
+                                            </div>
+                                        </div>
+                                        <div class="input-field mt-12">
+                                            <input asp-for="TextImageFile" class="d-none image-file" data-img-id="#blogTxtImg">
+                                            <label asp-for="TextImageFile" class="p-s input-file white">
+                                                <span class="d-i-b p-a">Blog Text Image</span>
+                                            </label>
+                                            <span class="text-danger" asp-validation-for="TextImageFile"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-field">
+                                        <textarea asp-for="Text" class="validate @(Model?.Text!=null?"valid":"")"></textarea>
+                                        <label asp-for="Text" class="@(Model?.Text!=null?"active":"")">Text</label>
+                                        <span class="text-danger" asp-validation-for="Text"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="waves-effect waves-light btn btn-success" style="width:180px">Create</button>
+                            <a asp-action="index" class="waves-effect waves-light btn btn-danger m-lt-buttons-1" style="width:180px">Cancel</a>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            let imageInputValue;
+            $(document).on("change", ".image-file", function (e) {
+                let inputFile = "";
+                if ($(this)[0].files[0]) {
+                    inputFile = $(this)[0].files[0].name;
+                    if (inputFile.length > 25) {
+                        inputFile = inputFile.substring(0, 22) + "..."
+                    }
+                    $(this).next().text("");
+                    $(this).next().append(inputFile);
+                    imageInputValue = URL.createObjectURL(e.target.files[0]);
+
+                    $($(this).attr("data-img-id")).parent().removeClass("d-none");
+                    $($(this).attr("data-img-id")).fadeIn("fast").attr('src', imageInputValue);
+                }
+                $(this).next().addClass("valid");
+                $(this).next().children().addClass("active");
+            })
+        })
+    </script>
+}

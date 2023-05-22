@@ -1,0 +1,577 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Home Page";
+    Setting setting = Model.Setting;
+    double newPrice = 0;
+}
+
+<!-- Main Start -->
+<main>
+    <!-- Main Slider Section start -->
+    <section id="slider">
+        <div class="swiper main-slider" data-bg-image="../uploads/setting/@setting.SliderBgImgSrc">
+            <div class="swiper-wrapper container">
+                @foreach (var item in Model.Sliders)
+                {
+                    <div class="swiper-slide slide-animate">
+                        <div class="row h-100">
+                            <div class="col-6">
+                                <div class="slider-content">
+                                    <span class="animate__animated">
+                                        @item.Subtitle
+                                    </span>
+                                    <h2 class="title-slider animate__animated">
+                                        @Html.Raw(item.Title)
+                                    </h2>
+                                    <a asp-controller="shop" asp-action="index" class="btn-primary btn-slider animate__animated">
+                                        @item.BtnText
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="slider-product">
+                                    <div class="product-image animate__animated">
+                                        <img src="~/uploads/sliders/@item.Image"
+                                             alt="Slider product">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="swiper-buttons">
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Main Slider Section end -->
+    <!-- Banner Section start -->
+    <section id="banner" class="py-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="single-banner first-banner">
+                        <img src="~/uploads/banners/@Model.MainBanner.Image" alt="@Html.Raw(Model.MainBanner.Title)">
+                        <div class="banner-content">
+                            <h3>@Html.Raw(Model.MainBanner.Title)</h3>
+                            <span>From $@Model.MainBanner.Price.ToString("#.00")</span>
+                            <a asp-controller="shop" asp-action="index">
+                                <i class="icon-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="double-banners">
+                        @foreach (var item in Model.Banners)
+                        {
+                            <div class="single-banner">
+                                <img src="~/uploads/banners/@item.Image" alt="@Html.Raw(item.Title)">
+                                <div class="banner-content">
+                                    <h3>@Html.Raw(item.Title)</h3>
+                                    <span>From $@item.Price.ToString("#.00")</span>
+                                    <a asp-controller="shop" asp-action="index">
+                                        <i class="icon-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner Section end -->
+    <!-- Product Section start -->
+    <section id="product" class="pb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-tab-nav">
+                        <ul class="product-tab-nav-list">
+                            <li class="product-nav-item">
+                                <a data-type="tab" data-target="#new_products" class="product-nav-btn">New Arrivals</a>
+                            </li>
+                            <li class="product-nav-item">
+                                <a data-type="tab" data-target="#rated_products" class="product-nav-btn active">Top Rated</a>
+                            </li>
+                            <li class="product-nav-item">
+                                <a data-type="tab" data-target="#featured_products" class="product-nav-btn">Featured</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 tab-content">
+                    <div id="new_products" class="tab-pane">
+                        <div class="row">
+                            @if (Model.NewProducts.Count() > 0)
+                            {
+                                @foreach (var item in Model.NewProducts)
+                                {
+                                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-product">
+                                        <div class="product">
+                                            <span class="badges">
+                                                @if (item.Count != 0)
+                                                {
+                                                    @if (item.DiscountPercent != null)
+                                                    {
+                                                        <span class="sale">-@item.DiscountPercent%</span>
+                                                    }
+                                                    @if (item.CreatedAt > DateTime.Today.AddDays(-7))
+                                                    {
+                                                        <span class="new">New</span>
+                                                    }
+                                                }
+                                                else if (item.Count == 0)
+                                                {
+                                                    <span class="new">Sale</span>
+                                                }
+                                            </span>
+                                            <div class="product-image w-custom-100">
+                                                <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id" class="image w-custom-100">
+                                                    <div class="poster w-custom-100" data-bg-image='../uploads/products/@item.GetPosterImage()'></div>
+                                                    <div class="hover-poster w-custom-100" data-bg-image='../uploads/products/@item.GetHoverPosterImage()'></div>
+                                                </a>
+                                            </div>
+                                            <div class="content">
+                                                <span class="category">
+                                                <a asp-controller="shop" asp-action="index" asp-route-categoryId="@item.Category.Id">@item.Category.Name</a>
+                                                </span>
+                                                <h5 class="title">
+                                                    <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id">
+                                                        @item.Name
+                                                    </a>
+                                                </h5>
+                                                <span class="price">
+                                                    @if (item.DiscountPercent != null && item.Count > 0)
+                                                    {
+                                                        newPrice = (double)(item.Price - item.Price * item.DiscountPercent / 100);
+
+                                                        <span class="old">$@item.Price.ToString("#.00")</span>
+                                                        <span class="new">$@newPrice.ToString("#.00")</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="new">$@item.Price.ToString("#.00")</span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <div class="actions">
+                                                <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" title="Add To Cart" class="action add-to-cart">
+                                                    <i class="icon-basket"></i>
+                                                </a>
+                                                <a asp-controller="shop" asp-action="addtowishlist" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" class="action wishlist" title="Wishlist">
+                                                    <i class="icon-heart1"></i>
+                                                </a>
+                                                <a asp-controller="shop" asp-action="getdetail" asp-route-id="@item.Id" class="action quickview" title="Quick view">
+                                                    <i class="icon-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div id="rated_products" class="tab-pane active">
+                        <div class="row">
+                            @if (Model.TopRatedProducts.Count() > 0)
+                            {
+                                @foreach (var item in Model.TopRatedProducts)
+                                {
+                                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-product">
+                                        <div class="product">
+                                            <span class="badges">
+                                                @if (item.Count != 0)
+                                                {
+                                                    @if (item.DiscountPercent != null)
+                                                    {
+                                                        <span class="sale">-@item.DiscountPercent%</span>
+                                                    }
+                                                    @if (item.CreatedAt > DateTime.Today.AddDays(-7))
+                                                    {
+                                                        <span class="new">New</span>
+                                                    }
+                                                }
+                                                else if (item.Count == 0)
+                                                {
+                                                    <span class="new">Sale</span>
+                                                }
+                                            </span>
+                                            <div class="product-image w-custom-100">
+                                                <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id" class="image w-custom-100">
+                                                    <div class="poster w-custom-100" data-bg-image='../uploads/products/@item.GetPosterImage()'></div>
+                                                    <div class="hover-poster w-custom-100" data-bg-image='./uploads/products/@item.GetHoverPosterImage()'></div>
+                                                </a>
+                                            </div>
+                                            <div class="content">
+                                                <span class="category"><a asp-controller="shop" asp-action="index" asp-route-categoryId="@item.Category.Id">@item.Category.Name</a></span>
+                                                <h5 class="title">
+                                                    <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id">
+                                                        @item.Name
+                                                    </a>
+                                                </h5>
+                                                <span class="price">
+                                                    @if (item.DiscountPercent != null && item.Count > 0)
+                                                    {
+                                                        newPrice = (double)(item.Price - item.Price * item.DiscountPercent / 100);
+
+                                                        <span class="old">$@item.Price.ToString("#.00")</span>
+                                                        <span class="new">$@newPrice.ToString("#.00")</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="new">$@item.Price.ToString("#.00")</span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <div class="actions">
+                                                <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" title="Add To Cart" class="action add-to-cart">
+                                                    <i class="icon-basket"></i>
+                                                </a>
+                                                <a asp-controller="shop" asp-action="addtowishlist" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" class="action wishlist" title="Wishlist">
+                                                    <i class="icon-heart1"></i>
+                                                </a>
+                                                <a asp-controller="shop" asp-action="getdetail" asp-route-id="@item.Id" class="action quickview" title="Quick view">
+                                                    <i class="icon-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div id="featured_products" class="tab-pane">
+                        <div class="row">
+                            @if (Model.FeaturedProducts.Count() > 0)
+                            {
+                                @foreach (var item in Model.FeaturedProducts)
+                                {
+                                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-product">
+                                        <div class="product">
+                                            <span class="badges">
+                                                @if (item.Count != 0)
+                                                {
+                                                    @if (item.DiscountPercent != null)
+                                                    {
+                                                        <span class="sale">-@item.DiscountPercent%</span>
+                                                    }
+                                                    @if (item.CreatedAt > DateTime.Today.AddDays(-7))
+                                                    {
+                                                        <span class="new">New</span>
+                                                    }
+                                                }
+                                                else if (item.Count == 0)
+                                                {
+                                                    <span class="new">Sale</span>
+                                                }
+                                            </span>
+                                            <div class="product-image w-custom-100">
+                                                <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id" class="image w-custom-100">
+                                                    <div class="poster w-custom-100" data-bg-image='../uploads/products/@item.GetPosterImage()'></div>
+                                                    <div class="hover-poster w-custom-100" data-bg-image='./uploads/products/@item.GetHoverPosterImage()'></div>
+                                                </a>
+                                            </div>
+                                            <div class="content">
+                                                <span class="category"><a asp-controller="shop" asp-action="index" asp-route-categoryId="@item.Category.Id">@item.Category.Name</a></span>
+                                                <h5 class="title">
+                                                    <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id">
+                                                        @item.Name
+                                                    </a>
+                                                </h5>
+                                                <span class="price">
+                                                    @if (item.DiscountPercent != null && item.Count > 0)
+                                                    {
+                                                        newPrice = (double)(item.Price - item.Price * item.DiscountPercent / 100);
+
+                                                        <span class="old">$@item.Price.ToString("#.00")</span>
+                                                        <span class="new">$@newPrice.ToString("#.00")</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="new">$@item.Price.ToString("#.00")</span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <div class="actions">
+                                                <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" title="Add To Cart" class="action add-to-cart">
+                                                    <i class="icon-basket"></i>
+                                                </a>
+                                                <a asp-controller="shop" asp-action="addtowishlist" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" class="action wishlist" title="Wishlist">
+                                                    <i class="icon-heart1"></i>
+                                                </a>
+                                                <a asp-controller="shop" asp-action="getdetail" asp-route-id="@item.Id" class="action quickview" title="Quick view">
+                                                    <i class="icon-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section end -->
+    <!-- Fashion Section start -->
+    <section id="fashion" data-bg-image="../uploads/setting/@setting.FashionBgImgSrc">
+        <div class="container h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 text-center">
+                    <h2 class="title">
+                        <span>@setting.FashionTitle</span> @setting.FashionSubTitle
+                    </h2>
+                    <a asp-controller="shop" asp-action="index" class="btn-primary m-auto text-capitalize">@setting.FashionBtnText</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fashion Section end -->
+    <!-- Feature Section start -->
+    <section id="feature_product" class="py-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2 class="title">
+                            @setting.FeaturedTitle
+                        </h2>
+                        <p>
+                            @setting.FeaturedDesc
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 mb-feature p-2">
+                    <div class="single-feature-content">
+                        <div class="feature-image">
+                            <img src="~/uploads/products/@Model.MainOffer.Product.GetPosterImage()" alt="@Model.MainOffer.Product.Name">
+                        </div>
+                        <div class="top-content">
+                            <h4 class="title">
+                                <a href="">@Model.MainOffer.Product.Name</a>
+                            </h4>
+                            <span class="price">
+                                @{
+                                    newPrice = (double)(Model.MainOffer.Product.Price - Model.MainOffer.Product.Price * Model.MainOffer.Product.DiscountPercent / 100);
+
+                                    <span class="old">$@Model.MainOffer.Product.Price.ToString("#.00")</span>
+                                    <span class="new">$@newPrice.ToString("#.00")</span>
+                                }
+                            </span>
+                        </div>
+                        <div class="bottom-content">
+                            <div class="deal-timing">
+                                <div data-countdown="@Model.MainOffer.OfferTime.ToString("yyyy-MM-dd")">
+                                    <div class="cdown hour">
+                                        <span class="cdown-1">0</span>
+                                        <p>Hrs</p>
+                                    </div>
+                                    <div class="cdown minutes">
+                                        <span class="cdown-1">00</span>
+                                        <p>Min</p>
+                                    </div>
+                                    <div class="cdown second">
+                                        <span class="cdown-1"> 00</span>
+                                        <p>Sec</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a asp-controller="shop" asp-action="detail" asp-route-id="@Model.MainOffer.Product.Id" class="btn btn-primary  m-auto">
+                                Shop Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 p-2">
+                    @foreach (var item in Model.Offers)
+                    {
+                        <div class="feature-right-content @(item.Id == Model.Offers.LastOrDefault().Id?"feature-right-mt":"")">
+                            <div class="image-side">
+                                <img src="~/uploads/products/@item.Product.GetPosterImage()" alt="@item.Product.Name">
+                                <button title="Add To Cart" class="action add-to-cart">
+                                    <i class="icon-basket"></i>
+                                </button>
+                            </div>
+                            <div class="content-side">
+                                <div class="deal-timing">
+                                    <span>End In:</span>
+                                    <div data-countdown="@item.OfferTime.ToString("yyyy-MM-dd")">
+                                        <div class="cdown hour">
+                                            <span class="cdown-1">0</span>
+                                            <p>Hrs</p>
+                                        </div>
+                                        <div class="cdown minutes">
+                                            <span class="cdown-1">00</span>
+                                            <p>Min</p>
+                                        </div>
+                                        <div class="cdown second">
+                                            <span class="cdown-1"> 00</span>
+                                            <p>Sec</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="prize-content">
+                                    <h5 class="title">
+                                    <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Product.Id">@item.Product.Name</a>
+                                    </h5>
+                                    <span class="price">
+                                        @{
+                                            newPrice = (double)(item.Product.Price - item.Product.Price * item.Product.DiscountPercent / 100);
+
+                                            <span class="old">$@item.Product.Price.ToString("#.00")</span>
+                                            <span class="new">$@newPrice.ToString("#.00")</span>
+                                        }
+                                    </span>
+                                </div>
+                                <div class="product-feature">
+                                    <ul>
+                                        <li>Predecessor : <span>@item.Predecessor</span></li>
+                                        <li>Support Type : <span>@item.SupporType</span></li>
+                                        <li>Cushioning : <span>@item.Cushioning</span></li>
+                                        <li>Total Weight : <span> @item.Product.Weight</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature Section end -->
+    <!-- Testimonial start -->
+    <section id="testimonial" class="py-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center m-0">
+                        <h2 class="title">@setting.TestimonialsTitle</h2>
+                        <p>@setting.TestimonialsDesc</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="swiper testimonial-slider">
+                        <div class="swiper-wrapper">
+                            @foreach (var item in Model.Testimonials)
+                            {
+                                <div class="swiper-slide">
+                                    <div class="testi-inner">
+                                        <div class="testi-content">
+                                            <p>
+                                                @item.Desc
+                                            </p>
+                                        </div>
+                                        <div class="testi-author">
+                                            <div class="author-image">
+                                                <img src="~/uploads/testimonials/@item.Image" alt="@item.FullName">
+                                            </div>
+                                            <div class="author-name">
+                                                <h4 class="name">@item.FullName<span>@item.Position</span></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="swiper-buttons">
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonial end -->
+    <!-- Partners start -->
+    <section id="partners" class="py-section">
+        <div class="container">
+            <div class="partners-slider swiper">
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model.Partners)
+                    {
+                        <div class="swiper-slide partners-slider-item  text-center">
+                            <a >
+                                <img src="~/uploads/partners/@item.Image" alt="Partner">
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Partners end -->
+    <!-- Blog start -->
+    <section id="blog" class="pb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h2 class="title">@setting.BlogsTitle</h2>
+                        <p> @setting.BlogsDesc</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.Blogs)
+                {
+
+                    <div class="col-lg-6 col-sm-6">
+                        <div class="single-blog mb-blog">
+                            <div class="blog-image">
+                                <a asp-controller="blog" asp-action="detail" asp-route-id="@item.Id">
+                                    <img src="~/uploads/blogs/@item.Image" alt="@item.Title">
+                                </a>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-date-author">
+                                    <span class="blog-date">
+                                        <i class="icon-calendar"></i>
+                                        @item.Date.ToString("dd, MMM yyyy")
+                                    </span>
+                                    <span class="blog-author">
+                                        <span>
+                                            <i class="icon-user"></i>
+                                            @item.Author
+                                        </span>
+                                    </span>
+                                </div>
+                                <h5 class="blog-heading">
+                                    <a asp-controller="blog" asp-action="detail" asp-route-id="@item.Id" class="blog-heading-link">@item.Title</a>
+                                </h5>
+                                <p>
+                                    @item.Desc
+                                </p>
+                                <a asp-controller="blog" asp-action="detail" asp-route-id="@item.Id" class="btn-primary blog-btn"> Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- Blog end -->
+</main>
+<!-- Main End -->
+@section Scripts{ 
+    <script>
+        $(document).ready(function (e) {
+            if ($("[data-bg-image]")) {
+                $("[data-bg-image]").each(function (e) {
+                    $(this).css("background-image", 'url(' + $(this).attr('data-bg-image') + ')');
+                })
+            }
+        })
+    </script>
+}

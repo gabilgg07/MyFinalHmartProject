@@ -1,0 +1,78 @@
+﻿@model AdminEditVM
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-action">
+                        Edit Admin
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div asp-validation-summary="ModelOnly" class="red-text"></div>
+                                    <div class="row m-0">
+                                        <div class="input-field col s12">
+                                            <input asp-for="FirstName" class="validate @(Model?.FirstName!=null?"valid":"")">
+                                            <label asp-for="FirstName" class="@(Model?.FirstName!=null?"active":"")">First Name</label>
+                                            <span class="text-danger" asp-validation-for="FirstName"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="LastName" class="validate @(Model?.LastName!=null?"valid":"")">
+                                            <label asp-for="LastName" class="@(Model?.LastName!=null?"active":"")">Last Name</label>
+                                            <span class="text-danger" asp-validation-for="LastName"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="UserName" class="validate @(Model?.UserName!=null?"valid":"")">
+                                            <label asp-for="UserName" class="@(Model?.UserName!=null?"active":"")">UserName</label>
+                                            <span class="text-danger" asp-validation-for="UserName"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="Email" class="validate @(Model?.Email!=null?"valid":"")">
+                                            <label asp-for="Email" class="@(Model?.Email!=null?"active":"")">Email</label>
+                                            <span class="text-danger" asp-validation-for="Email"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="OldPassword" class="validate @(Model?.OldPassword!=null?"valid":"")">
+                                            <label asp-for="OldPassword" class="@(Model?.OldPassword!=null?"active":"")">Old Password</label>
+                                            <span class="text-danger" asp-validation-for="OldPassword"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="Password" class="validate @(Model?.Password!=null?"valid":"")">
+                                            <label asp-for="Password" class="@(Model?.Password!=null?"active":"")">Password</label>
+                                            <span class="text-danger" asp-validation-for="Password"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="ConfirmPassword" class="validate @(Model?.ConfirmPassword!=null?"valid":"")">
+                                            <label asp-for="ConfirmPassword" class="@(Model?.ConfirmPassword!=null?"active":"")">Confirm Password</label>
+                                            <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <select class="form-control form-control-user p-3 validate @(Model?.Role!=null?"valid":"")" style="height:65%" asp-for="Role" asp-items="@(new SelectList(ViewBag.Roles, "Name","Name"))">
+                                            </select>
+                                            <label asp-for="Role" class="active">Roles: </label>
+                                            <span class="text-danger" asp-validation-for="Role"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="waves-effect waves-light btn btn-success" style="width:180px">Edit</button>
+                                    <a asp-action="index" class="waves-effect waves-light btn btn-danger m-lt-buttons-1" style="width:180px">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

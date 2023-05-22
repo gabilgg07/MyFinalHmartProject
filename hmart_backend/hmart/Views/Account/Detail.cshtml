@@ -1,0 +1,186 @@
+﻿@model AccountDetailVM
+@{
+    ViewData["Title"] = "Detail";
+    Setting setting = ViewBag.Setting;
+}
+
+<!-- Main Start -->
+<main>
+    <!-- Main-header start -->
+    <section id="main-header" data-bg-image=../uploads/setting/@setting.MainBgImgSrc>
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 text-center">
+                    <h2 class="header-title">Account</h2>
+                    <ul class="page-list">
+                        <li class="page-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                        <li class="page-item active">Account</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main-header end -->
+    <!-- Account start -->
+    <section id="account" class="py-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <div class="tab-buttons">
+                        <ul class="tab-list">
+                            <li>
+                                <a asp-action="detail" class="nav-link active">
+                                    Account
+                                    details
+                                </a>
+                            </li>
+                            <li><a asp-action="address" class="nav-link">Addresses</a></li>
+                            <li> <a asp-action="orders" class="nav-link">Orders</a></li>
+                            <li><a asp-action="logout" class="nav-link">logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-9 col-lg-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-details">
+                            <h3>Account details </h3>
+                            <div class="details">
+                                <div class="details_form_container">
+                                    <div class="account_details_form">
+                                        <form method="post" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                                                    <div class="input-radio">
+                                                        @foreach (var gender in Model?.Genders)
+                                                        {
+                                                            <span class="custom-radio">
+                                                                <input type="radio" asp-for="Gender" value="@gender" />@gender<br disable />
+                                                            </span>
+                                                        }
+
+                                                        <span class="text-danger" asp-validation-for="Gender"></span>
+                                                    </div> <br>
+                                                    <div class="account-form-box mb-4">
+                                                        <label asp-for="FirstName">First Name</label>
+                                                        <input asp-for="FirstName">
+                                                        <span class="text-danger" asp-validation-for="FirstName"></span>
+                                                    </div>
+                                                    <div class="account-form-box mb-4">
+                                                        <label asp-for="LastName">Last Name</label>
+                                                        <input asp-for="LastName">
+                                                        <span class="text-danger" asp-validation-for="LastName"></span>
+                                                    </div>
+                                                    <div class="account-form-box mb-4">
+                                                        <label asp-for="UserName">UserName</label>
+                                                        <input asp-for="UserName">
+                                                        <span class="text-danger" asp-validation-for="UserName"></span>
+                                                    </div>
+                                                    <div class="account-form-box mb-4">
+                                                        <label asp-for="Email">Email</label>
+                                                        <input asp-for="Email">
+                                                        <span class="text-danger" asp-validation-for="Email"></span>
+                                                    </div>
+                                                    <div class="account-form-box mb-4">
+                                                        <label asp-for="Phone">Phone</label>
+                                                        <input asp-for="Phone">
+                                                        <span class="text-danger" asp-validation-for="Phone"></span>
+                                                    </div>
+                                                    <div class="account-form-box mb-4">
+                                                        <label asp-for="OldPassword">Old Password</label>
+                                                        <input asp-for="OldPassword">
+                                                        <span class="text-danger" asp-validation-for="OldPassword"></span>
+                                                    </div>
+                                                    <div class="account-form-box mb-4">
+                                                        <label asp-for="Password">Password</label>
+                                                        <input asp-for="Password">
+                                                        <span class="text-danger" asp-validation-for="Password"></span>
+                                                    </div>
+                                                    <div class="account-form-box mb-4">
+                                                        <label asp-for="ConfirmPassword">Confirm Password</label>
+                                                        <input asp-for="ConfirmPassword">
+                                                        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                                                    </div>
+                                                    <div class="account-form-box mb-4">
+                                                        <label asp-for="BirthDay">Birthdate</label>
+                                                        <input asp-for="BirthDay">
+                                                        <span class="text-danger" asp-validation-for="BirthDay"></span>
+                                                    </div>
+                                                    <span class="example">
+                                                        (E.g.: 07-Jul-1991)
+                                                    </span>
+                                                    <br>
+                                                    <div class="save_button mt-3">
+                                                        <button class="btn-save" type="submit">Save</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="detail-profil-image">
+                                                        @{
+                                                            string src = "";
+                                                            if (Model.Image == null)
+                                                            {
+                                                                src = "user-default.png";
+                                                            }
+                                                            else
+                                                            {
+                                                                src = Model.Image;
+                                                            }
+                                                        }
+                                                        <div class="image-content" id="profilImg" style="background-image: url(@Url.Content("/uploads/users/" + src))">
+                                                        </div>
+                                                        <div class="hidden-input">
+                                                            <input asp-for="Image" type="hidden">
+                                                        </div>
+                                                        <div class="image-input-conten">
+                                                            <span class="choose-info">Choose File for Change Profil Image</span>
+                                                            <div class="image-input-wrap">
+                                                                <label asp-for="ImageFile">
+                                                                    <input class="detail-image-input" asp-for="ImageFile">
+                                                                    <span id="imageFileName" class="file-custom">
+                                                                        Choose File ...
+                                                                    </span>
+                                                                </label>
+                                                                <span class="text-danger" asp-validation-for="ImageFile"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Account end -->
+</main>
+<!-- Main End -->
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            let imageInputValue;
+            $(document).on("change", ".detail-image-input", function (e) {
+                let inputFile = "";
+                if ($(this)[0].files[0]) {
+                    inputFile = $(this)[0].files[0].name;
+                    if (inputFile.length > 25) {
+                        inputFile = inputFile.substring(0, 22) + "..."
+                    }
+                    $(this).next().text("");
+                    $(this).next().append(inputFile);
+                    imageInputValue = URL.createObjectURL(e.target.files[0]);
+
+                    $("#profilImg").fadeIn("fast").css('background-image', "url("+imageInputValue+")");
+                    $(".hidden-input").remove();
+                }
+            });
+        });
+    </script>
+}
+
+

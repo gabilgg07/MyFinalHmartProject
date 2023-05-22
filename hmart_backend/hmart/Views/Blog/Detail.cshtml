@@ -1,0 +1,185 @@
+﻿@inject Microsoft.AspNetCore.Identity.UserManager<AppUser> userM
+@model BlogDetailVM
+@{
+    ViewData["Title"] = "Detail";
+    AppUser user = null;
+
+    if (User.Identity.IsAuthenticated)
+    {
+        user = userM.FindByNameAsync(User.Identity.Name).Result;
+    }
+}
+
+<!-- Main Start -->
+<main>
+    <!-- Main-header start -->
+    <section id="main-header" data-bg-image="@Url.Content("/uploads/setting/" + Model.Setting.MainBgImgSrc)">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 text-center">
+                    <h2 class="header-title">Blog Single</h2>
+                    <ul class="page-list">
+                        <li class="page-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                        <li class="page-item"><a asp-controller="blog" asp-action="index">Blog</a></li>
+                        <li class="page-item active"> Blog Single</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main-header end -->
+    <!-- Blog Single start -->
+    <section id="blog-single" class="py-section">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-2 col-lg-8 col-md-12">
+                    <div class="blog-post">
+                        <div class="blog-image">
+                            <div class="image" data-bg-image="@Url.Content("/uploads/blogs/" + Model.Blog.Image)"></div>
+                        </div>
+                        <div class="blog-info">
+                            <div class="blog-single-tags d-flex">
+                                <span class="title">Tages:</span>
+                                <ul class="tag-list d-flex">
+                                    @foreach (var item in Model.Blog.BlogTagBlogs)
+                                    {
+                                        <li class="@(item.Id==Model.Blog.BlogTagBlogs.LastOrDefault().Id?"m-0":"")">
+                                            <a asp-action="index" asp-route-tagId="@item.BlogTagId">@item.BlogTag.Name @(item.Id==Model.Blog.BlogTagBlogs.LastOrDefault().Id?"":", ")</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="blog-athor-date">
+                                <span class="blog-date">
+                                    <i class="icon-calendar"></i>
+                                    @Model.Blog.Date.ToString("dd,MMM yyyy")
+                                </span>
+                                <span class="blog-author">
+                                    <i class="icon-user"></i>
+                                    @Model.Blog.Author
+                                </span>
+                            </div>
+                        </div>
+                        <h4 class="blog-title">
+                            @Model.Blog.Title
+                        </h4>
+                        <div class="blog-content">
+                            @if (Model.Blog.TeaxtImage != null)
+                            {
+                                <div class="image" data-bg-image="@Url.Content("/uploads/blogs/" + Model.Blog.TeaxtImage)"></div>
+                            }
+
+                            <p class="blog-text">
+                                @Model.Blog.Text
+                            </p>
+                        </div>
+                        @if (Model.Blog.Quote != null && Model.Blog.Quoter != null)
+                        {
+                            <div class="quate-speech-area">
+                                <p class="quate-speech" data-aos="fade-up" data-aos-delay="200">
+                                    @Model.Blog.Quote
+                                </p>
+                                <span class="quater">@Model.Blog.Quoter</span>
+                            </div>
+                        }
+                        <div class="blog-nav">
+                            <div class="blog-nav-wrap">
+                                <div class="nav-left d-flex justify-content-start align-items-center">
+                                    <a class="nav-img" asp-action="detail" asp-route-id="@Model.BeforeBlog.Id">
+                                        <div class="image" data-bg-image="@Url.Content("/uploads/blogs/" + Model.BeforeBlog.Image)"></div>
+                                        <i class="icon-angle-left"></i>
+                                    </a>
+                                    <div class="media-side">
+                                        <span class="date">
+                                            <i class="icon-calendar"></i>
+                                            @Model.BeforeBlog.Date.ToString("dd MMM, yyyy")
+                                        </span>
+                                        <h5>
+                                            <a asp-action="detail">
+                                                @Model.BeforeBlog.Title
+                                            </a>
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="nav-right d-flex justify-content-end align-items-center">
+                                    <a class="nav-img" asp-action="detail" asp-route-id="@Model.AfterBlog.Id">
+                                        <div class="image" data-bg-image="@Url.Content("/uploads/blogs/" + Model.AfterBlog.Image)"></div>
+                                        <i class="icon-angle-right"></i>
+                                    </a>
+                                    <div class="media-side">
+                                        <span class="date">
+                                            <i class="icon-calendar"></i>
+                                            @Model.AfterBlog.Date.ToString("dd MMM, yyyy")
+                                        </span>
+                                        <h5>
+                                            <a asp-action="detail">
+                                                @Model.AfterBlog.Title
+                                            </a>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-area">
+                        <h2 class="comment-heading">Comments (@(Model.Blog.BlogComments.Count()>0? Model.Blog.BlogComments.Count():0))</h2>
+                        <div class="review-wrapper">
+                            @if (Model.Blog.BlogComments.Count() > 0)
+                            {
+                                @foreach (var item in Model.Blog.BlogComments)
+                                {
+                                    <div class="single-review">
+                                        <div class="review-img">
+                                            <div class="image" data-bg-image="@Url.Content("/uploads/users/" + item.AppUser.Image)"></div>
+                                        </div>
+                                        <div class="review-content">
+                                            <div class="review-top-wrap">
+                                                <div class="review-left">
+                                                    <div class="review-name">
+                                                        <h4 class="title">
+                                                            @item.AppUser.FisrtName @item.AppUser.LastName
+                                                            <span class="date">- @item.Date.ToString("dd, MMM yyyy"),</span>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="review-bottom">
+                                                <p>
+                                                    @item.Message
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    @if (user != null)
+                    {
+                        <form method="post" asp-controller="blog" asp-action="addcomment">
+                            <input type="hidden" asp-for="CommentCreateVM.BlogId" value="@Model.Blog.Id" />
+                            <div class="blog-comment-form">
+                                <h2 class="comment-heading">Leave a Comment</h2>
+                                <div class="form-inner">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="single-form m-0">
+                                                <textarea asp-for="CommentCreateVM.Message" placeholder="Message"></textarea>
+                                                <span class="text-danger" asp-validation-for="CommentCreateVM.Message"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="submit-btn mt-30px" type="submit">Send a Comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Single end -->
+</main>
+<!-- Main End -->

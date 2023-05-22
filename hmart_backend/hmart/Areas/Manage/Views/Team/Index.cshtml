@@ -1,0 +1,54 @@
+﻿@model List<Team>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-action">
+                        Teams Table
+                        <div class="create-div d-flex j-c-fe">
+                            <a asp-action="create" class="btn btn-success">Create Team</a>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Order</th>
+                                        <th>Fullname</th>
+                                        <th>Position</th>
+                                        <th style="width:125px">Image</th>
+                                        <th>Button</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Team team in Model)
+                                    {
+                                        <tr>
+                                            <td>@team.Order</td>
+                                            <td>@team.Fullname</td>
+                                            <td>@team.Position</td>
+                                            <td class="d-flex j-c-c">
+                                                <img class="" style="width:100%" src="/uploads/teams/@team.Image" alt="Team Image" />
+                                            </td>
+                                            <th>
+                                                <a asp-action="edit" asp-route-id="@team.Id" class="btn btn-warning w-100 mb-1">Edit</a>
+                                                <a asp-action="delete" asp-route-id="@team.Id" class="btn btn-danger w-100">Delete</a>
+                                            </th>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

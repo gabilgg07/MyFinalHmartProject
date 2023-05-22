@@ -1,0 +1,289 @@
+﻿@model PagenationVM
+@{ 
+    double newPrice = 0;
+}
+
+<div class="shop-top-bar d-flex">
+    <p class="compare-product"> <span>@Model.Products.Count()</span> Product Found of <span>@Model.TotalProducts</span></p>
+    <div class="shop-tab-style">
+        <a class="active btn-tab-style shop-grid">
+            <i class="icon-th"></i>
+        </a>
+        <a class="btn-tab-style shop-list">
+            <i class="icon-list"></i>
+        </a>
+    </div>
+    <div class="select-sorting-wrap d-flex align-items-center">
+        <div class="sort-product">
+            <p>Sort By:</p>
+        </div>
+        <div class="header-bottom-set dropdown pagination">
+            <button class="dropdown-toggle header-action-btn">
+                @{ 
+                    string btnText = "Default";
+                }
+                @switch (Model.SortingBy)
+                {
+                    case "a_to_z":
+                        btnText = "Name, A to Z";
+                        break;
+                    case "z_to_a":
+                        btnText = "Name, Z to A";
+                        break;
+                    case "low_to_high":
+                        btnText = "Price, low to high";
+                        break;
+                    case "high_to_low":
+                        btnText = "Price, high to low";
+                        break;
+                    case "new":
+                        btnText = "Sort By new";
+                        break;
+                    case "old":
+                        btnText = "Sort By old";
+                        break;
+                    default:
+                        break;
+                }
+                @btnText
+                <i class="icon-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pagination_list">
+                <li><a class="dropdown-item" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="a_to_z">Name, A to Z</a></li>
+                <li><a class="dropdown-item"  asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="z_to_a">Name, Z to A</a></li>
+                <li><a class="dropdown-item"  asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="low_to_high">Price, low to high</a></li>
+                <li><a class="dropdown-item"  asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="high_to_low">Price, high to low</a></li>
+                <li><a class="dropdown-item"  asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="new">Sort By new</a></li>
+                <li><a class="dropdown-item"  asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="old">Sort By old</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="shop-bottom-products">
+    <div class="row">
+        <div class="col">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="shop-grid">
+                    <div class="shop-grid-wrap">
+                        <div class="row">
+                            @foreach (var item in Model.Products)
+                            {
+
+                                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-product">
+                                    <div class="product">
+                                        <span class="badges">
+                                            @if (item.Count != 0)
+                                            {
+                                                @if (item.DiscountPercent != null)
+                                                {
+                                                    <span class="sale">-@item.DiscountPercent%</span>
+                                                }
+                                                @if (item.CreatedAt > DateTime.Today.AddDays(-7))
+                                                {
+                                                    <span class="new">New</span>
+                                                }
+                                            }
+                                            else if (item.Count == 0)
+                                            {
+                                                <span class="new">Sale</span>
+                                            }
+                                        </span>
+                                        <div class="product-image">
+                                            <a asp-action="detail" asp-route-id="@item.Id" class="image w-custom-100">
+                                                <div class="poster w-custom-100" data-bg-image='../uploads/products/@item.GetPosterImage()'></div>
+                                                <div class="hover-poster w-custom-100" data-bg-image='../uploads/products/@item.GetHoverPosterImage()'></div>
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <span class="category">
+                                                <a asp-controller="shop" asp-action="index" asp-route-categoryId="@item.Category.Id">@item.Category.Name</a>
+                                            </span>
+                                            <h5 class="title">
+                                                <a asp-action="detail" asp-route-id="@item.Id">
+                                                    @item.Name
+                                                </a>
+                                            </h5>
+                                            <span class="price">
+                                                @if (item.DiscountPercent != null && item.Count > 0)
+                                                {
+                                                    newPrice = (double)(item.Price - item.Price * item.DiscountPercent / 100);
+
+                                                    <span class="old">$@item.Price.ToString("#.00")</span>
+                                                    <span class="new">$@newPrice.ToString("#.00")</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="new">$@item.Price.ToString("#.00")</span>
+                                                }
+                                            </span>
+                                        </div>
+                                        <div class="actions">
+                                            <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" title="Add To Cart" class="action add-to-cart">
+                                                <i class="icon-basket"></i>
+                                            </a>
+                                            <a asp-controller="shop" asp-action="addtowishlist" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" class="action wishlist" title="Wishlist">
+                                                <i class="icon-heart1"></i>
+                                            </a>
+                                            <a asp-controller="shop" asp-action="getdetail" asp-route-id="@item.Id" class="action quickview" title="Quick view">
+                                                <i class="icon-eye"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="shop-list">
+                    @foreach (var item in Model.Products)
+                    {
+                        <div class="shop-list-wrap mb-5">
+                            <div class="row">
+                                <div class="col-md-5 col-lg-5 col-xl-4">
+                                    <div class="product">
+                                        <div class="thumb">
+                                            <div class="product-image">
+                                                <a asp-action="detail" asp-route-id="@item.Id" class="image w-custom-100">
+                                                    <div class="poster w-custom-100" data-bg-image='../uploads/products/@item.GetPosterImage()'></div>
+                                                    <div class="hover-poster w-custom-100" data-bg-image='../uploads/products/@item.GetHoverPosterImage()'></div>
+                                                </a>
+                                            </div>
+                                            <span class="badges">
+                                                @if (item.Count != 0)
+                                                {
+                                                    @if (item.DiscountPercent != null)
+                                                    {
+                                                        <span class="sale">-@item.DiscountPercent%</span>
+                                                    }
+                                                    @if (item.CreatedAt > DateTime.Today.AddDays(-7))
+                                                    {
+                                                        <span class="new">New</span>
+                                                    }
+                                                }
+                                                else if (item.Count == 0)
+                                                {
+                                                    <span class="new">Sale</span>
+                                                }
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-lg-7 col-xl-8">
+                                    <div class="content-desc-wrap">
+                                        <div class="content">
+                                            <span class="category">
+                                                <a asp-controller="shop" asp-action="index" asp-route-categoryId="@item.Category.Id">@item.Category.Name</a>
+                                            </span>
+                                            <h5 class="title">
+                                                <a asp-action="detail" asp-route-id="@item.Id">
+                                                    @item.Name
+                                                </a>
+                                            </h5>
+                                            <p>
+                                                @item.Desc
+                                            </p>
+                                        </div>
+                                        <div class="box-inner">
+                                            <span class="price">
+                                                @if (item.DiscountPercent != null && item.Count > 0)
+                                                {
+                                                    newPrice = (double)(item.Price - item.Price * item.DiscountPercent / 100);
+
+                                                    <span class="old">$@item.Price.ToString("#.00")</span>
+                                                    <span class="new">$@newPrice.ToString("#.00")</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="new">$@item.Price.ToString("#.00")</span>
+                                                }
+                                            </span>
+                                            <div class="actions">
+                                                <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" title="Add To Cart" class="action add-to-cart">
+                                                    <i class="icon-basket"></i>
+                                                </a>
+                                                <a asp-controller="shop" asp-action="addtowishlist" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" class="action wishlist" title="Wishlist">
+                                                    <i class="icon-heart1"></i>
+                                                </a>
+                                                <a asp-controller="shop" asp-action="getdetail" asp-route-id="@item.Id" class="action quickview" title="Quick view">
+                                                    <i class="icon-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination text-center text-lg-end">
+        <div class="pages">
+            <ul class="pagination_list">
+                <li class="li @(Model.SelectedPage<=1?"disabled":"")">
+                    <a asp-action="pagenation" asp-route-page="@(Model.SelectedPage-1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy" class="page-link"><i class="icon-angle-left"></i></a>
+                </li>
+                @if (Model.SelectedPage == 1)
+                {
+                    @if (Model.TotalPages >= 3)
+                    {
+                        <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="1" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">1</a></li>
+                        <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="2" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">2</a></li>
+                        <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="3" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">3</a></li>
+                    }
+                    else if (Model.TotalPages == 2)
+                    {
+                        <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="1" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">1</a></li>
+                        <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="2" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">2</a></li>
+                    }
+                    else
+                    {
+                        <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="1" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">1</a></li>
+                    }
+
+                }
+                else if (Model.SelectedPage == Model.TotalPages)
+                {
+                    @if (Model.TotalPages >= 3)
+                    {
+                        <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.TotalPages-2)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@(Model.TotalPages-2)</a></li>
+                        <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.TotalPages-1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@(Model.TotalPages-1)</a></li>
+                        <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.TotalPages" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@Model.TotalPages</a></li>
+                    }
+                    else if (Model.TotalPages == 2)
+                    {
+                        <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.TotalPages-1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@(Model.TotalPages-1)</a></li>
+                        <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.TotalPages" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@Model.TotalPages</a></li>
+                    }
+                    else
+                    {
+                        <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.TotalPages" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@Model.TotalPages</a></li>
+                    }
+                }
+                else
+                {
+                    @if (Model.TotalPages >= 3)
+                    {
+                        <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.SelectedPage-1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@(Model.SelectedPage-1)</a></li>
+                        <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@Model.SelectedPage</a></li>
+                        <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.SelectedPage+1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@(Model.SelectedPage+1)</a></li>
+                    }
+                    else if (Model.TotalPages == 2)
+                    {
+                        <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.SelectedPage-1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@(Model.SelectedPage-1)</a></li>
+                        <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@Model.SelectedPage</a></li>
+                    }
+                    else
+                    {
+                        <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy">@Model.SelectedPage</a></li>
+                    }
+
+                }
+                <li class="li @(Model.SelectedPage>Model.TotalPages-1?"disabled":"")">
+                    <a asp-action="pagenation" asp-route-page="@(Model.SelectedPage+1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="@Model.SortingBy" class="page-link"><i class="icon-angle-right"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

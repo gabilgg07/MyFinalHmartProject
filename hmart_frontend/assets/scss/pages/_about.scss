@@ -1,0 +1,201 @@
+// Main Start
+main {
+    // About start
+    #about {
+        background-color: #f4f4f4;
+        max-height: 685px;
+        .about-wrapper {
+            .about-contant {
+                max-width: 890px;
+                margin: auto;
+                .title {
+                    font-size: 60px;
+                    font-weight: 700;
+                    color: #444141;
+                    line-height: 40px;
+                    margin-bottom: 50px;
+                    span {
+                        font-size: 48px;
+                        font-weight: 300;
+                        display: block;
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+            .promo-video {
+                position: relative;
+                margin-top: 110px;
+                img {
+                    max-width: 100%;
+                    border-radius: 25px;
+                }
+                .overlay-box {
+                    width: 80px;
+                    height: 80px;
+                    transition: all 0.3s ease;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    span {
+                        position: absolute;
+                        width: 80px;
+                        height: 80px;
+                        left: 50%;
+                        top: 50%;
+                        z-index: 10;
+                        color: #fff;
+                        font-weight: 400;
+                        font-size: 36px;
+                        border-radius: 50%;
+                        transform: translate(-50%, -50%);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: all 0.9s ease;
+                        background-color: $primary-color;
+                        .animate {
+                            background-color: transparent;
+                            transform: translate(-50%, -50%);
+                            border-radius: 50%;
+                            box-shadow: 0 0 0 0 rgba(255, 255, 255, 80%);
+                            animation: ripple 3s infinite;
+                            &::before,
+                            &::after {
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                width: 80px;
+                                height: 80px;
+                                transform: translate(-50%, -50%);
+                                border-radius: 50%;
+                                box-shadow: 0 0 0 0 rgba(255, 255, 255, 80%);
+                                animation: ripple 3s infinite;
+                                content: "";
+                            }
+                            &::after {
+                                animation-delay: 0.6s;
+                            }
+                            &::before {
+                                animation-delay: 0.9s;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // About end
+    // Teams start
+    #teams {
+        margin-top: 385px;
+        .team-wrapper {
+            .team-image {
+                img {
+                    max-width: 100%;
+                    transition: all 0.3s ease 0s;
+                    width: 100%;
+                    transform: scale(1.01) rotate(0);
+                }
+            }
+            &:hover {
+                .team-image {
+                    img {
+                        transform: scale(1.1) rotate(3deg);
+                    }
+                }
+            }
+            .team-content {
+                margin-top: 30px;
+                transition: all 0.3s ease 0s;
+                background-color: #fff;
+                position: relative;
+                text-align: center;
+                line-height: 1;
+                .title {
+                    font-size: 24px;
+                    color: #000;
+                    font-weight: 500;
+                    transition: all 0.3s ease 0s;
+                }
+                .sub-title {
+                    font-size: 16px;
+                    font-weight: 400;
+                    color: #000;
+                    text-transform: uppercase;
+                    margin: 9px 0 0;
+                    display: block;
+                    transition: all 0.3s ease 0s;
+                }
+            }
+        }
+    }
+    // Teams end
+    // Features start
+    #features {
+        .feature-wrapper {
+            position: relative;
+            border: 2px solid #e1e1e1;
+            padding: 100px 55px;
+            border-radius: 20px;
+            .single-feature {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                background-color: #fff;
+                .feature-icon {
+                    width: 70px;
+                    height: 70px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+                    margin-right: 30px;
+                    background-color: $primary-color;
+                    img {
+                        transition: all 0.3s ease 0s;
+                    }
+                }
+                &:hover {
+                    .feature-icon {
+                        img {
+                            transform: scale(0.9) rotate(3deg);
+                        }
+                    }
+                }
+                .feature-content {
+                    width: calc(100% - 100px);
+                    .title {
+                        font-size: 24px;
+                        color: #000;
+                        font-weight: 600;
+                        margin: 0 0 3px;
+                    }
+                    .sub-title {
+                        font-size: 16px;
+                        color: #000;
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+    // Features end
+}
+// Main End
+
+// Animation Start
+
+@keyframes ripple {
+    70% {
+        -webkit-box-shadow: 0 0 0 70px rgba(255, 255, 255, 0);
+        box-shadow: 0 0 0 70px rgba(255, 255, 255, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+// Animation End

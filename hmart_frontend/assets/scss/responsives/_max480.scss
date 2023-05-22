@@ -1,0 +1,357 @@
+@media screen and (max-width: 480px) {
+    //#region Common
+
+    // Col sizes start
+
+    .col-xs-6 {
+        width: 100%;
+    }
+
+    // Col sizes end
+
+    // Header start
+    header {
+        #productsList {
+            ul {
+                .product-search-li {
+                    .product-search-item {
+                        .content {
+                            width: 65%;
+                            .product-name {
+                                font-size: 12px;
+                                margin-left: 5px;
+                            }
+                        }
+                        .price {
+                            font-size: 12px;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Header end
+
+    //#region Canvas
+    #mobile-menu {
+        .menu {
+            width: 300px;
+        }
+    }
+    .list-wrapper {
+        width: 300px;
+    }
+    //#endregion
+
+    //#region Other Styles
+
+    // Section Title start
+    .section-title {
+        margin-bottom: 30px;
+    }
+    // Section Title end
+
+    //#endregion
+
+    // Footer start
+    footer {
+        .footer-bottom {
+            .copy-text {
+                font-size: 13px;
+            }
+        }
+    }
+    // Footer end
+
+    // Modals start
+    .modal {
+        &#quickview-modal {
+            .modal-wrapper {
+                .modal-content {
+                    .modal-details-content {
+                        .product-name {
+                            font-size: 26px;
+                        }
+                        .price {
+                            font-size: 26px;
+                        }
+                        .product-action {
+                            .add-to-cart {
+                                padding: 0 10px;
+                                font-size: 12px;
+                                margin-left: 5px;
+                            }
+                            .wishlist {
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Modals end
+
+    //#endregion
+
+    //#region Pages
+
+    //#region Home Page
+
+    // Main Start
+    main {
+        // Slider start
+        #slider {
+            .main-slider {
+                .slider-content {
+                    height: 400px;
+                    span {
+                        font-size: 14px;
+                    }
+                    h2.title-slider {
+                        font-size: 20px;
+                        margin-bottom: 20px;
+                        line-height: 35px;
+                    }
+                }
+                .slider-product {
+                    .product-image {
+                        img {
+                            width: 50%;
+                            margin: auto;
+                        }
+                    }
+                }
+            }
+        }
+        // Slider end
+
+        // Product start
+        #product {
+            .product-tab-nav {
+                .product-tab-nav-list {
+                    .product-nav-item {
+                        .product-nav-btn {
+                            width: auto;
+                            font-size: 12px;
+                            padding: 0 15px;
+                        }
+                    }
+                }
+            }
+            .tab-pane {
+                margin-top: 40px;
+                .product {
+                    .product-image {
+                        .image {
+                            div {
+                                height: 350px;
+                            }
+                        }
+                    }
+                    .content {
+                        .title {
+                            a {
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Product end
+
+        // Fashion start
+        #fashion {
+            .title {
+                font-size: 28px;
+            }
+        }
+        // Fashion end
+
+        // Feature start
+        #feature_product {
+            .single-feature-content {
+                .top-content {
+                    .title {
+                        font-size: 20px;
+                    }
+                    .price {
+                        font-size: 18px;
+                    }
+                }
+                .bottom-content {
+                    .deal-timing {
+                        .cdown {
+                            .cdown-1 {
+                                width: 50px;
+                                height: 50px;
+                                font-size: 20px;
+                            }
+                            p {
+                                margin: 5px 0 5px 0;
+                            }
+                        }
+                    }
+                }
+            }
+            .feature-right-content {
+                flex-direction: column;
+                .image-side {
+                    width: 100%;
+                    &::after {
+                        display: none;
+                    }
+                }
+                .content-side {
+                    width: 100%;
+                    padding-right: 30px;
+                }
+            }
+        }
+        // Feature end
+    }
+    // Main End
+
+    //#endregion
+
+    //#region About Page
+
+    // Main start
+    main {
+        // About start
+        #about {
+            max-height: 630px;
+        }
+        // About end
+        // Teams start
+        #teams {
+            margin-top: 150px;
+        }
+        // Teams end
+        // Features start
+        #features {
+            .feature-wrapper {
+                padding: 50px 15px;
+                .single-feature {
+                    .feature-icon {
+                        margin-right: 20px;
+                    }
+                }
+                .feature-content {
+                    width: calc(100% - 90px);
+                    .title {
+                        font-size: 20px;
+                    }
+                    .sub-title {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        // Features end
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Single Product Page
+
+    // Main start
+    main {
+        #product-detail {
+            .product-details-content {
+                .price {
+                    font-size: 26px;
+                }
+                .product-action {
+                    .add-to-cart {
+                        padding: 0 10px;
+                        font-size: 15px;
+                        margin-left: 5px;
+                    }
+                    .wishlist {
+                        margin-left: 5px;
+                    }
+                }
+            }
+            .description-review-wrapper {
+                .description-review-topbar {
+                    .tab-btn {
+                        margin-right: 4px;
+                        font-size: 14px;
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Contact Us Page
+
+    // Main start
+    main {
+        #contact {
+            .contact-wrapper {
+                padding: 50px 20px;
+                .contact-info {
+                    .single-contact {
+                        .info-box {
+                            .title {
+                                font-size: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region 404 Page
+
+    // Main Start
+    main {
+        #not-fount {
+            height: 400px;
+            .content-404 {
+                text-align: center;
+                flex-direction: column;
+                align-items: center;
+                display: flex;
+                .title {
+                    font-size: 50px;
+                    margin-bottom: 10px;
+                }
+                .sub-title {
+                    font-size: 20px;
+                    width: 100%;
+                }
+                p {
+                    margin-bottom: 30px;
+                    width: 100%;
+                }
+                .buttons {
+                    a {
+                        font-size: 14px;
+                        padding: 6px 12px;
+                        &.btn-homepage {
+                            margin-left: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#endregion
+}

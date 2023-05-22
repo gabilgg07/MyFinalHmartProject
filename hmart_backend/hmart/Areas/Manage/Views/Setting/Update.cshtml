@@ -1,0 +1,328 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-action">
+                        Setting Edit
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="row m-0">
+                                        <div class="input-field col s12">
+                                            <input asp-for="WellComeText" class="validate @(Model.WellComeText!=null?"valid":"")">
+                                            <label asp-for="WellComeText" class="@(Model.WellComeText!=null?"active":"")">Wellcome Text</label>
+                                            <span class="text-danger" asp-validation-for="WellComeText"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                    <div class="card p-1 grey">
+                                        <div class="card-image waves-effect waves-block waves-light">
+                                            <img class="activator" style="width:auto" src="/uploads/setting/@Model.TitleIconSrc" alt="Title Icon">
+                                            <input type="hidden" asp-for="TitleIconSrc" value="@Model.TitleIconSrc" />
+                                            <span class="text-danger" asp-validation-for="TitleIconSrc"></span>
+                                        </div>
+                                        <div class="input-field mt-3">
+                                            <input asp-for="TitleIcon" class="d-none image-file">
+                                            <label asp-for="TitleIcon" class="p-s input-file white">
+                                                <span class="d-i-b p-a">Title Icon</span>
+                                            </label>
+                                            <span class="text-danger" asp-validation-for="TitleIcon"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                    <div class="card p-1 grey">
+                                        <div class="card-image waves-effect waves-block waves-light">
+                                            <img class="activator" src="/uploads/setting/@Model.HeaderLogoSrc" alt="Header Logo">
+                                            <input type="hidden" asp-for="HeaderLogoSrc" value="@Model.HeaderLogoSrc" />
+                                            <span class="text-danger" asp-validation-for="HeaderLogoSrc"></span>
+                                        </div>
+                                        <div class="input-field mt-3">
+                                            <input asp-for="HeaderLogo" class="d-none image-file">
+                                            <label asp-for="HeaderLogo" class="p-s input-file white">
+                                                <span class="d-i-b p-a">Header Logo</span>
+                                            </label>
+                                            <span class="text-danger" asp-validation-for="HeaderLogo"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                    <div class="card p-1 grey">
+                                        <div class="card-image waves-effect waves-block waves-light">
+                                            <img class="activator" src="/uploads/setting/@Model.FooterLogoSrc" alt="Footer Logo">
+                                            <input type="hidden" asp-for="FooterLogoSrc" value="@Model.FooterLogoSrc" />
+                                            <span class="text-danger" asp-validation-for="FooterLogoSrc"></span>
+                                        </div>
+                                        <div class="input-field mt-3">
+                                            <input asp-for="FooterLogo" class="d-none image-file">
+                                            <label asp-for="FooterLogo" class="p-s input-file white">
+                                                <span class="d-i-b p-a">Footer Logo</span>
+                                            </label>
+                                            <span class="text-danger" asp-validation-for="FooterLogo"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="card light-blue darken-3 p-1">
+                                        <div class="card-image waves-effect waves-block waves-light">
+                                            <img class="activator" src="/uploads/setting/@Model.SliderBgImgSrc" alt="Slider Background Image">
+                                            <input type="hidden" asp-for="SliderBgImgSrc" value="@Model.SliderBgImgSrc" />
+                                            <span class="text-danger" asp-validation-for="SliderBgImgSrc"></span>
+                                        </div>
+                                        <div class="input-field mt-3">
+                                            <input asp-for="SliderBgImg" class="d-none image-file">
+                                            <label asp-for="SliderBgImg" class="p-s input-file white">
+                                                <span class="d-i-b p-a">Slider Background Image</span>
+                                            </label>
+                                            <span class="text-danger" asp-validation-for="SliderBgImg"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="card red darken-3 p-1">
+                                        <div class="card-image waves-effect waves-block waves-light">
+                                            <img class="activator" src="/uploads/setting/@Model.FashionBgImgSrc" alt="Fashion Background Image">
+                                            <input type="hidden" asp-for="FashionBgImgSrc" value="@Model.FashionBgImgSrc" />
+                                            <span class="text-danger" asp-validation-for="FashionBgImgSrc"></span>
+                                        </div>
+                                        <div class="input-field mt-3">
+                                            <input asp-for="FashionBgImg" class="d-none image-file">
+                                            <label asp-for="FashionBgImg" class="p-s input-file white">
+                                                <span class="d-i-b p-a">Fashion Background Image</span>
+                                            </label>
+                                            <span class="text-danger" asp-validation-for="FashionBgImg"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="card blue-grey darken-1 p-1">
+                                        <div class="card-image waves-effect waves-block waves-light">
+                                            <img class="activator" src="/uploads/setting/@Model.MainBgImgSrc" alt="Main Background Image">
+                                            <input type="hidden" asp-for="MainBgImgSrc" value="@Model.MainBgImgSrc" />
+                                            <span class="text-danger" asp-validation-for="MainBgImgSrc"></span>
+                                        </div>
+                                        <div class="input-field mt-3">
+                                            <input asp-for="MainBgImg" class="d-none image-file">
+                                            <label asp-for="MainBgImg" class="p-s input-file white">
+                                                <span class="d-i-b p-a">Main Background Image</span>
+                                            </label>
+                                            <span class="text-danger" asp-validation-for="MainBgImg"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="row m-0">
+                                        <div class="input-field col s12">
+                                            <input asp-for="FeaturedTitle" class="validate @(Model.FeaturedTitle!=null?"valid":"")">
+                                            <label asp-for="FeaturedTitle" class="@(Model.FeaturedTitle!=null?"active":"")">Featured Title</label>
+                                            <span class="text-danger" asp-validation-for="FeaturedTitle"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <textarea asp-for="FeaturedDesc" class="validate materialize-textarea @(Model.FeaturedDesc!=null?"valid":"")" rows="3"></textarea>
+                                            <label asp-for="FeaturedDesc" class="@(Model.FeaturedDesc!=null?"active":"")">Featured Description</label>
+                                            <span class="text-danger" asp-validation-for="FeaturedDesc"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="TestimonialsTitle" class="validate @(Model.TestimonialsTitle!=null?"valid":"")">
+                                            <label asp-for="TestimonialsTitle" class="@(Model.TestimonialsTitle!=null?"active":"")">Testimonials Title</label>
+                                            <span class="text-danger" asp-validation-for="TestimonialsTitle"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <textarea asp-for="TestimonialsDesc" class="validate materialize-textarea @(Model.TestimonialsDesc!=null?"valid":"")" rows="3"></textarea>
+                                            <label asp-for="TestimonialsDesc" class="@(Model.TestimonialsDesc!=null?"active":"")">Testimonials Description</label>
+                                            <span class="text-danger" asp-validation-for="TestimonialsDesc"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="BlogsTitle" class="validate @(Model.BlogsTitle!=null?"valid":"")">
+                                            <label asp-for="BlogsTitle" class="@(Model.BlogsTitle!=null?"active":"")">Blogs Title</label>
+                                            <span class="text-danger" asp-validation-for="BlogsTitle"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <textarea asp-for="BlogsDesc" class="validate materialize-textarea @(Model.BlogsDesc!=null?"valid":"")" rows="3"></textarea>
+                                            <label asp-for="BlogsDesc" class="@(Model.BlogsDesc!=null?"active":"")">Blogs Description</label>
+                                            <span class="text-danger" asp-validation-for="FeaturedDesc"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="RelatedTitle" class="validate @(Model.RelatedTitle!=null?"valid":"")">
+                                            <label asp-for="RelatedTitle" class="@(Model.RelatedTitle!=null?"active":"")">Related Title</label>
+                                            <span class="text-danger" asp-validation-for="RelatedTitle"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <textarea asp-for="RelatedDesc" class="validate materialize-textarea @(Model.RelatedDesc!=null?"valid":"")" rows="3"></textarea>
+                                            <label asp-for="RelatedDesc" class="@(Model.RelatedDesc!=null?"active":"")">Related Description</label>
+                                            <span class="text-danger" asp-validation-for="RelatedDesc"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="row m-0">
+                                        <div class="input-field col s12">
+                                            <input asp-for="FashionTitle" class="validate @(Model.FashionTitle!=null?"valid":"")">
+                                            <label asp-for="FashionTitle" class="@(Model.FashionTitle!=null?"active":"")">Fashion Title</label>
+                                            <span class="text-danger" asp-validation-for="FashionTitle"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="FashionSubTitle" class="validate materialize-textarea @(Model.FashionSubTitle!=null?"valid":"")">
+                                            <label asp-for="FashionSubTitle" class="@(Model.FashionSubTitle!=null?"active":"")">Fashion Subtitle</label>
+                                            <span class="text-danger" asp-validation-for="FashionSubTitle"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="FashionBtnText" class="validate @(Model.FashionBtnText!=null?"valid":"")">
+                                            <label asp-for="FashionBtnText" class="@(Model.FashionBtnText!=null?"active":"")">Fashion Button Text</label>
+                                            <span class="text-danger" asp-validation-for="FashionBtnText"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <textarea asp-for="AboutText" class="validate materialize-textarea @(Model.AboutText!=null?"valid":"")" rows="3"></textarea>
+                                            <label asp-for="AboutText" class="@(Model.AboutText!=null?"active":"")">About Text</label>
+                                            <span class="text-danger" asp-validation-for="AboutText"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="Address" class="validate @(Model.Address!=null?"valid":"")">
+                                            <label asp-for="Address" class="@(Model.Address!=null?"active":"")">Address</label>
+                                            <span class="text-danger" asp-validation-for="Address"></span>
+                                        </div>
+                                        <div class="input-field col-lg-6 col-md-6 col-sm-12">
+                                            <input asp-for="Phone1" class="validate @(Model.Phone1!=null?"valid":"")">
+                                            <label asp-for="Phone1" class="@(Model.Phone1!=null?"active":"")">Phone 1</label>
+                                            <span class="text-danger" asp-validation-for="Phone1"></span>
+                                        </div>
+                                        <div class="input-field col-lg-6 col-md-6 col-sm-12">
+                                            <input asp-for="Phone2" class="validate @(Model.Phone2!=null?"valid":"")">
+                                            <label asp-for="Phone2" class="@(Model.Phone2!=null?"active":"")">Phone 2</label>
+                                            <span class="text-danger" asp-validation-for="Phone2"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="Email" class="validate @(Model.Email!=null?"valid":"")">
+                                            <label asp-for="Email" class="@(Model.Email!=null?"active":"")">E-mail</label>
+                                            <span class="text-danger" asp-validation-for="Email"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="Site" class="validate @(Model.Site!=null?"valid":"")">
+                                            <label asp-for="Site" class="@(Model.Site!=null?"active":"")">Site</label>
+                                            <span class="text-danger" asp-validation-for="Site"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-4">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="card-action">
+                                        About Setting
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="row m-0">
+                                        <div class="input-field col s12">
+                                            <input asp-for="AboutTitle" class="validate @(Model?.AboutTitle!=null?"valid":"")">
+                                            <label asp-for="AboutTitle" class="@(Model?.AboutTitle!=null?"active":"")">About Title</label>
+                                            <span class="text-danger" asp-validation-for="AboutTitle"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="row m-0">
+                                        <div class="input-field col s12">
+                                            <input asp-for="AboutSubtitle" class="validate @(Model?.AboutSubtitle!=null?"valid":"")">
+                                            <label asp-for="AboutSubtitle" class="@(Model?.AboutSubtitle!=null?"active":"")">About Subtitle</label>
+                                            <span class="text-danger" asp-validation-for="AboutSubtitle"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="row m-0">
+                                        <div class="input-field col s12">
+                                            <textarea asp-for="AboutDesc" class="validate materialize-textarea @(Model?.AboutDesc!=null?"valid":"")"></textarea>
+                                            <label asp-for="AboutDesc" class="@(Model?.AboutDesc!=null?"active":"")">About Description</label>
+                                            <span class="text-danger" asp-validation-for="AboutDesc"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="card grey p-1">
+                                        <div class="card-image waves-effect waves-block waves-light">
+                                            <img class="activator" src="/uploads/setting/@Model?.PromoImgSrc" style=" border-radius: 30px;" alt="Slider Background Image">
+                                            <input type="hidden" asp-for="PromoImgSrc" value="@Model.PromoImgSrc" />
+                                            <span class="text-danger" asp-validation-for="PromoImgSrc"></span>
+                                        </div>
+                                        <div class="input-field mt-3">
+                                            <input asp-for="PromoImg" class="d-none image-file">
+                                            <label asp-for="PromoImg" class="p-s input-file white">
+                                                <span class="d-i-b p-a">Promo Image</span>
+                                            </label>
+                                            <span class="text-danger" asp-validation-for="PromoImg"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="row m-0">
+                                        <div class="input-field col s12">
+                                            <input asp-for="PromoVideoLink" class="validate @(Model?.PromoVideoLink!=null?"valid":"")">
+                                            <label asp-for="PromoVideoLink" class="@(Model?.PromoVideoLink!=null?"active":"")">Promo Video Link</label>
+                                            <span class="text-danger" asp-validation-for="PromoVideoLink"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="AboutTeamTitle" class="validate @(Model?.AboutTeamTitle!=null?"valid":"")">
+                                            <label asp-for="AboutTeamTitle" class="@(Model?.AboutTeamTitle!=null?"active":"")">About Team Title</label>
+                                            <span class="text-danger" asp-validation-for="AboutTeamTitle"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <textarea asp-for="AboutTeamDesc" class="validate materialize-textarea @(Model?.AboutTeamDesc!=null?"valid":"")"></textarea>
+                                            <label asp-for="AboutTeamDesc" class="@(Model?.AboutTeamDesc!=null?"active":"")">About Team Description</label>
+                                            <span class="text-danger" asp-validation-for="AboutTeamDesc"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="waves-effect waves-light btn btn-success" style="width:180px">Update</button>
+                                    <a asp-action="index" class="waves-effect waves-light btn btn-danger m-lt-buttons-1" style="width:180px">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(document).on("change", ".image-file", function () {
+                let inputFile = "";
+                if ($(this)[0].files[0]) {
+                    inputFile = $(this)[0].files[0].name;
+                    if (inputFile.length > 25) {
+                        inputFile = inputFile.substring(0, 22) + "..."
+                    }
+                    $(this).next().text("");
+                    $(this).next().append(inputFile);
+                }
+                $(this).next().addClass("valid");
+                $(this).next().children().addClass("active");
+            });
+        });
+    </script>
+}
+

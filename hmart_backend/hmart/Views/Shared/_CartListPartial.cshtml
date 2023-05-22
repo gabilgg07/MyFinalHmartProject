@@ -1,0 +1,229 @@
+﻿@model CartVM
+@{
+    double price = 0;
+    double stPrice = 0;
+    double exPrice = 0;
+}
+
+<h3 class="page-title">Your cart items</h3>
+<div class="row">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="product-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Until Price</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.BasketItemVMs.Count > 0)
+                    {
+                        @foreach (var item in Model.BasketItemVMs)
+                        {
+                            Product p = item.Product;
+                            <tr>
+                                <td class="product-image">
+                                    <a asp-controller="shop" asp-action="detail" asp-route-id="@p.Id">
+                                        <img class="ms-2" src="~/uploads/products/@p.GetPosterImage()"
+                                             alt="@p.Name">
+                                    </a>
+                                </td>
+                                <td class="product-name">
+                                    <a asp-controller="shop" asp-action="detail" asp-route-id="@p.Id">@p.Name</a>
+                                </td>
+                                <td class="product-price">
+                                    @{
+                                        price = (double)(p.DiscountPercent == null ? p.Price : p.Price - p.Price * p.DiscountPercent / 100);
+                                    }
+                                    <span class="amount">$@price.ToString("#.00")</span>
+                                </td>
+                                <td class="product-quantity">
+                                    <div class="plus-minus">
+                                        <a asp-controller="shop"  asp-action="deletefrombasket" asp-route-id="@p.Id" asp-route-isCanvas="no" class="minus-remove ope">-</a>
+                                        <input type="text" class="count" value="@(item.Count)">
+                                        <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@p.Id" class="plus-add ope">+</a>
+                                    </div>
+                                </td>
+                                <td class="product-subtotal">$@((price*item.Count).ToString("#.00"))</td>
+                                <td class="product-remove">
+                                    <a asp-controller="shop" asp-action="deletefrombasket" asp-route-id="@p.Id" asp-route-isCanvas="no" asp-route-keyWord="out" class="out_from_basket"><i class="icon-close"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr class="empty-tr">
+                            <td colspan="6"> Cart is empty!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="shopping-btn-wrapper">
+            <div class="continue-shopping">
+                <a asp-controller="shop" asp-action="index">Continue Shopping</a>
+            </div>
+            <div class="clear-cart">
+                <a asp-controller="shop" asp-action="deletefrombasket" asp-route-isCanvas="no" asp-route-keyWord="clear"  id="clear_cartList">Clear Shopping Cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-6 mb-col">
+        <div class="cart-wrapper">
+            <div class="title-wrapper">
+                <h4 class="title">Standart Shipping Info</h4>
+            </div>
+            <div class="count-percent">
+                <p class="count-info">For one product</p>
+                <span class="percent">8%</span>
+            </div>
+            <div class="count-percent">
+                <p class="count-info">For 2 products</p>
+                <span class="percent">7.5%</span>
+            </div>
+            <div class="count-percent">
+                <p class="count-info">For 3 products</p>
+                <span class="percent">7%</span>
+            </div>
+            <div class="count-percent">
+                <p class="count-info">For 4 products</p>
+                <span class="percent">6%</span>
+            </div>
+            <div class="count-percent">
+                <p class="count-info">For 5 and more products</p>
+                <span class="percent">5%</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-col">
+        <div class="cart-wrapper">
+            <div class="title-wrapper">
+                <h4 class="title">Express Shipping Info</h4>
+            </div>
+            <div class="count-percent">
+                <p class="count-info">For one product</p>
+                <span class="percent">12%</span>
+            </div>
+            <div class="count-percent">
+                <p class="count-info">For 2 products</p>
+                <span class="percent">11.5%</span>
+            </div>
+            <div class="count-percent">
+                <p class="count-info">For 3 products</p>
+                <span class="percent">11%</span>
+            </div>
+            <div class="count-percent">
+                <p class="count-info">For 4 products</p>
+                <span class="percent">10.5%</span>
+            </div>
+            <div class="count-percent">
+                <p class="count-info">For 5 and more products</p>
+                <span class="percent">10%</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+        <div class="cart-wrapper">
+            <div class="title-wrapper">
+                <h4 class="title">Cart Total</h4>
+            </div>
+            <h4 class="total-price">Total products <span class="price">$@Model.TotalPrice.ToString("#.00")</span></h4>
+            <div class="total-shipping">
+                <h5>Total shipping</h5>
+                <ul>
+                    <li>
+                        <div class="checkbox">
+                            <input type="checkbox" id="standartPrice" @((string)ViewData["keyWord"]=="standartPrice"?"checked":"")> Standard
+                        </div>
+                        @if (Model.Count < 5)
+                        {
+                            @switch (Model.Count)
+                            {
+                                case 1:
+                                    stPrice = Model.TotalPrice * 8 / 100;
+                                    break;
+                                case 2:
+                                    stPrice = Model.TotalPrice * 7.5 / 100;
+                                    break;
+                                case 3:
+                                    stPrice = Model.TotalPrice * 7 / 100;
+                                    break;
+                                case 4:
+                                    stPrice = Model.TotalPrice * 6 / 100;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            stPrice = Model.TotalPrice * 5 / 100;
+                        }
+                        <span>$@stPrice.ToString("#.00")</span>
+                    </li>
+                    <li>
+                        <div class="checkbox">
+                            <input type="checkbox" id="expressPrice" @((string)ViewData["keyWord"]=="expressPrice"?"checked":"")> Express
+                        </div>
+                        @if (Model.Count < 5)
+                        {
+                            @switch (Model.Count)
+                            {
+                                case 1:
+                                    exPrice = Model.TotalPrice * 12 / 100;
+                                    break;
+                                case 2:
+                                    exPrice = Model.TotalPrice * 11.5 / 100;
+                                    break;
+                                case 3:
+                                    exPrice = Model.TotalPrice * 11 / 100;
+                                    break;
+                                case 4:
+                                    exPrice = Model.TotalPrice * 10.5 / 100;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            exPrice = Model.TotalPrice * 10 / 100;
+                        }
+                        <span>$@exPrice.ToString("#.00")</span>
+                    </li>
+                </ul>
+            </div>
+            @{ 
+                string isExpress="";
+                double shPrice = 0;
+                double grPrice = 0;
+                if ((string)ViewData["keyWord"] == "standartPrice")
+                {
+                    shPrice = stPrice;
+                    grPrice = Model.TotalPrice + stPrice;
+                    isExpress = "no";
+                }
+                else if((string)ViewData["keyWord"] == "expressPrice")
+                {
+                    shPrice = exPrice;
+                    grPrice = Model.TotalPrice + exPrice;
+                    isExpress = "yes";
+                }
+                else
+                {
+                    grPrice = Model.TotalPrice;
+                }
+            }
+            <h4 class="grand-totall-price">Grand Total <span class="grand-price">$@grPrice.ToString("#.00")</span></h4>
+            <a asp-controller="order" asp-action="checkout" asp-route-isExpress="@isExpress" asp-route-shippingPrice="@shPrice.ToString("0.00")">Proceed to Checkout</a>
+        </div>
+    </div>
+</div>

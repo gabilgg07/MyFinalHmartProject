@@ -1,0 +1,37 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-action">
+                        Create Category
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input asp-for="Name" class="validate @(Model?.Name!=null?"valid":"")">
+                                    <label asp-for="Name" class="@(Model?.Name!=null?"active":"")">Name</label>
+                                    <span class="text-danger" asp-validation-for="Name"></span>
+                                </div>
+                                <div class="input-field col s3">
+                                    <input asp-for="Order" class="validate @(Model?.Order!=null?"valid":"")">
+                                    <label asp-for="Order" class="@(Model?.Order!=null?"active":"")">Order</label>
+                                    <span class="text-danger" asp-validation-for="Order"></span>
+                                </div>
+                            </div>
+                            <button type="submit" class="waves-effect waves-light btn btn-success" style="width:200px">Create</button>
+                            <a asp-action="index" class="waves-effect waves-light btn btn-danger ml-2" style="width:200px">Cancel</a>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

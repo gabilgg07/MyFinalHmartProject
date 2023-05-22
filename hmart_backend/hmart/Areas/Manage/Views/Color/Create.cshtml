@@ -1,0 +1,66 @@
+﻿@model Color
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-9 col-md-12">
+                <div class="card">
+                    <div class="card-action">
+                        Create Color
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 col-sm-6">
+                                    <div class="input-field">
+                                        <input asp-for="Name" class="validate @(Model?.Name!=null?"valid":"")">
+                                        <label asp-for="Name" class="@(Model?.Name!=null?"active":"")">Name</label>
+                                        <span class="text-danger" asp-validation-for="Name"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-5 col-sm-6">
+                                    <div class="input-field">
+                                        <input autocomplete="off" asp-for="Code" class="validate @(Model?.Code!=null?"valid":"")">
+                                        <span class="color-code create d-none"></span>
+                                        <label asp-for="Code" class="@(Model?.Code!=null?"active":"")">Code</label>
+                                        <span class="text-danger" asp-validation-for="Code"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-6">
+                                    <div class="input-field">
+                                        <input asp-for="Order" class="validate @(Model?.Order!=null?"valid":"")">
+                                        <label asp-for="Order" class="@(Model?.Order!=null?"active":"")">Order</label>
+                                        <span class="text-danger" asp-validation-for="Order"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-sm-6">
+                                    <div class="input-field">
+                                        <input type="text" name="countColor" value="@ViewBag.ColorsCount" id="countColor" class="validate valid" disabled>
+                                        <label for="countColor" class="active">Count Color</label>
+                                    </div>
+                                </div>
+                            </div>
+                                <button type="submit" class="waves-effect waves-light btn btn-success" style="width:200px">Create</button>
+                                <a asp-action="index" class="waves-effect waves-light btn btn-danger ml-2" style="width:200px">Cancel</a>
+</form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function (e) {
+            $("#Code").on("input", function (e) {
+                $(".color-code.create").css("background-color", "#" + $(this).val())
+                $(".color-code.create").removeClass("d-none");
+            });
+        });
+    </script>
+}

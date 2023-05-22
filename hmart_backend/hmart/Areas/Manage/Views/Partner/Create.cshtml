@@ -1,0 +1,71 @@
+﻿@model Partner
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-action">
+                        Create Partner
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col s12">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="card p-1">
+                                                <div class="input-field mt-12">
+                                                    <input asp-for="ImageFile" class="d-none image-file">
+                                                    <label asp-for="ImageFile" class="p-s input-file white">
+                                                        <span class="d-i-b p-a">Banner Image</span>
+                                                    </label>
+                                                    <span class="text-danger" asp-validation-for="ImageFile"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="card p-1">
+                                                <div class="input-field mt-12">
+                                                    <input asp-for="Order" class="validate @(Model?.Order!=null?"valid":"")">
+                                                    <label asp-for="Order" class="@(Model?.Order!=null?"active":"")">Order</label>
+                                                    <span class="text-danger" asp-validation-for="Order"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="waves-effect waves-light btn btn-success" style="width:200px">Create</button>
+                            <a asp-action="index" class="waves-effect waves-light btn btn-danger ml-2" style="width:200px">Cancel</a>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(document).on("change", ".image-file", function () {
+                let inputFile = "";
+                if ($(this)[0].files[0]) {
+                    inputFile = $(this)[0].files[0].name;
+                    if (inputFile.length > 25) {
+                        inputFile = inputFile.substring(0, 22) + "..."
+                    }
+                    $(this).next().text("");
+                    $(this).next().append(inputFile);
+                }
+                $(this).next().addClass("valid");
+                $(this).next().children().addClass("active");
+            })
+        })
+    </script>
+}

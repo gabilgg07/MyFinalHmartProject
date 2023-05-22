@@ -1,0 +1,110 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-action">
+                        Edit Slider
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col s12">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="card p-1">
+                                                <div class="image-poster">
+                                                    @if (Model?.Image != null)
+                                                    {
+                                                        <div class="image-wrapper d-flex j-c-c" style="position:relative">
+                                                            <span id="deleteImage" class="delete-image" style="position:absolute"><i class="fas fa-times"></i></span>
+                                                            <img style="width:50%" src="~/uploads/sliders/@Model.Image" />
+                                                            <input type="hidden" name="Image" value="@Model.Image" />
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h3 class="mt-2">Have not image</h3>
+                                                    }
+
+                                                </div>
+                                                <div class="input-field mt-12">
+                                                    <input asp-for="ImageFile" class="d-none image-file">
+                                                    <label asp-for="ImageFile" class="p-s input-file white">
+                                                        <span class="d-i-b p-a">About Image</span>
+                                                    </label>
+                                                    <span class="text-danger" asp-validation-for="ImageFile"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="row m-0">
+                                                <div class="input-field col s12">
+                                                    <input asp-for="Title" class="validate @(Model?.Title!=null?"valid":"")">
+                                                    <label asp-for="Title" class="@(Model?.Title!=null?"active":"")">Title</label>
+                                                    <span class="text-danger" asp-validation-for="Title"></span>
+                                                </div>
+                                                <div class="input-field col s12">
+                                                    <input asp-for="Subtitle" class="validate @(Model?.Subtitle!=null?"valid":"")">
+                                                    <label asp-for="Subtitle" class="@(Model?.Subtitle!=null?"active":"")">Subtitle</label>
+                                                    <span class="text-danger" asp-validation-for="Subtitle"></span>
+                                                </div>
+                                                <div class="input-field col s12">
+                                                    <input asp-for="BtnText" class="validate @(Model?.BtnText!=null?"valid":"")">
+                                                    <label asp-for="BtnText" class="@(Model?.BtnText!=null?"active":"")">Description</label>
+                                                    <span class="text-danger" asp-validation-for="BtnText"></span>
+
+                                                </div>
+                                                <div class="input-field col s4">
+                                                    <input asp-for="Order" class="validate @(Model?.Order!=null?"valid":"")">
+                                                    <label asp-for="Order" class="@(Model?.Order!=null?"active":"")">Order</label>
+                                                    <span class="text-danger" asp-validation-for="Order"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="waves-effect waves-light btn btn-success" style="width:180px">Edit</button>
+                                    <a asp-action="index" class="waves-effect waves-light btn btn-danger m-lt-buttons-1" style="width:180px">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(document).on("change", ".image-file", function () {
+                let inputFile = "";
+                if ($(this)[0].files[0]) {
+                    inputFile = $(this)[0].files[0].name;
+                    if (inputFile.length > 25) {
+                        inputFile = inputFile.substring(0, 22) + "..."
+                    }
+                    $(this).next().text("");
+                    $(this).next().append(inputFile);
+                }
+                $(this).next().addClass("valid");
+                $(this).next().children().addClass("active");
+            });
+
+            $(document).on("click", "span#deleteImage", function (e) {
+                $(this).parent().parent().remove();
+            });
+        });
+    </script>
+}

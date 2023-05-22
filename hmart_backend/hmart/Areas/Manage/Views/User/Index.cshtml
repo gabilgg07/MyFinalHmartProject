@@ -1,0 +1,48 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Advanced Tables -->
+                <div class="card">
+                    <div class="card-action">
+                        Advanced Tables
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>E-mail</th>
+                                        <th>UserName</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (AppUser us in Model)
+                                    {
+                                    <tr>
+                                        <td>@us.FisrtName</td>
+                                        <td>@us.LastName</td>
+                                        <td>@us.Email</td>
+                                        <td>@us.UserName</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <!--End Advanced Tables -->
+            </div>
+        </div>
+    </div>
+</div>
+
+

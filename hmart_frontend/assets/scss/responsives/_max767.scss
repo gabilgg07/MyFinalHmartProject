@@ -1,0 +1,636 @@
+@media screen and (max-width: 767px) {
+    //#region Common
+    //#region Spaces
+    .py-section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    //#endregion
+
+    //#region Other Styles
+
+    // Swiper Arrows start
+    .swiper {
+        &:hover {
+            .swiper-buttons {
+                .swiper-button-next {
+                    right: 20px;
+                }
+                .swiper-button-prev {
+                    left: 20px;
+                }
+            }
+        }
+    }
+    // Swiper Arrows end
+
+    // Section Title start
+    .section-title {
+        margin-bottom: 40px;
+        .title {
+            font-size: 30px;
+            margin: 0 0 15px;
+        }
+    }
+    // Section Title end
+
+    //#endregion
+
+    // Modals start
+    .modal {
+        .modal-wrapper {
+            padding: 35px 0;
+            .modal-content {
+                .btn-close {
+                    width: 30px;
+                    height: 30px;
+                    right: 0;
+                    font-size: 8px;
+                }
+            }
+        }
+        &#quickview-modal {
+            .modal-wrapper {
+                width: 98%;
+                max-width: 100%;
+                padding: 35px 0;
+                .modal-content {
+                    padding: 15px;
+                    .modal-details-content {
+                        .product-name {
+                            font-size: 28px;
+                        }
+                        .price {
+                            font-size: 28px;
+                        }
+                        .product-action {
+                            .add-to-cart {
+                                padding: 0 12px;
+                                letter-spacing: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Modals end
+
+    // Footer start
+    footer {
+        .footer-top {
+            padding: 50px 0 50px 0;
+            .wedge {
+                margin-bottom: 30px;
+                .about-text {
+                    max-width: 454px;
+                }
+            }
+            .service-wedge {
+                margin-bottom: 30px;
+            }
+        }
+        .footer-bottom {
+            .copy-text {
+                text-align: center;
+            }
+        }
+    }
+    // Footer end
+
+    // Main start
+    main {
+        #main-header {
+            .header-title {
+                font-size: 36px;
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Pages
+
+    //#region Home Page
+
+    // Main Start
+    main {
+        // Slider start
+        #slider {
+            height: 450px;
+            .main-slider {
+                .slide-animate {
+                    .slider-content {
+                        height: 450px;
+                        span {
+                            font-size: 16px;
+                        }
+                        h2.title-slider {
+                            font-size: 27px;
+                            margin-bottom: 30px;
+                            line-height: 46px;
+                        }
+                    }
+                    .slider-product {
+                        height: 450px;
+                        .product-image {
+                            img {
+                                width: 60%;
+                                margin: auto;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Slider end
+
+        // Banner start
+        #banner {
+            .double-banners {
+                .single-banner {
+                    &:first-child {
+                        margin-top: 30px;
+                    }
+                }
+            }
+        }
+        // Banner end
+
+        // Products start
+        #product {
+            .tab-pane {
+                .product {
+                    .product-image {
+                        .image {
+                            div {
+                                height: 235px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Products end
+
+        // Product start
+        #product {
+            .product-tab-content {
+                margin-top: 40px;
+            }
+        }
+        // Product end
+
+        // Feature start
+        #feature_product {
+            .single-feature-content {
+                &.resposive-height {
+                    height: 600px;
+                    justify-content: flex-start;
+                    align-items: center;
+                    overflow: hidden;
+                    .feature-image {
+                        margin-top: 50px;
+                    }
+                }
+                .top-content {
+                    top: 30px;
+                    .title {
+                        font-size: 24px;
+                        margin: 0 0 10px;
+                    }
+                    .price {
+                        font-size: 24px;
+                    }
+                }
+                .bottom-content {
+                    bottom: 40px;
+                    .deal-timing {
+                        .cdown {
+                            .cdown-1 {
+                                width: 70px;
+                                height: 70px;
+                                font-size: 24px;
+                            }
+                        }
+                    }
+                }
+            }
+            .feature-right-content {
+                .image-side {
+                    width: 230px;
+                }
+                .content-side {
+                    width: calc(100% - 230px);
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+            }
+        }
+        // Feature end
+
+        // Testimonial start
+        #testimonial {
+            .testimonial-slider {
+                .swiper-slide {
+                    .testi-inner {
+                        .testi-content {
+                            p {
+                                font-size: 18px;
+                                line-height: 32px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Testimonial end
+
+        // Partners start
+        #partners {
+            .partners-slider {
+                padding: 50px 0;
+            }
+        }
+        // Partners end
+
+        // Blog start
+        #blog {
+            .single-blog {
+                .blog-content {
+                    .blog-date-author {
+                        span {
+                            font-size: 14px;
+                            & + span {
+                                margin-left: 8px;
+                            }
+                        }
+                    }
+                    .blog-heading {
+                        margin: 15px 0 15px 0;
+                        font-size: 20px;
+                        line-height: 30px;
+                    }
+                    p {
+                        line-height: 28px;
+                        margin-bottom: 20px;
+                        font-size: 14px;
+                    }
+                    a.blog-btn {
+                        font-size: 16px;
+                        width: 150px;
+                        height: 50px;
+                    }
+                }
+            }
+        }
+        // Blog end
+    }
+    // Main End
+
+    //#endregion
+
+    //#region About Page
+
+    // Main start
+    main {
+        // About start
+        #about {
+            max-height: 550px;
+            .about-wrapper {
+                .about-contant {
+                    .title {
+                        font-size: 32px;
+                    }
+                }
+                .promo-video {
+                    margin-top: 60px;
+                    .overlay-box {
+                        width: 60px;
+                        height: 60px;
+                        span {
+                            width: 60px;
+                            height: 60px;
+                            font-size: 24px;
+                            .animate {
+                                width: 60px;
+                                height: 60px;
+                                &::after,
+                                &::before {
+                                    width: 60px;
+                                    height: 60px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // About end
+        // Teams start
+        #teams {
+            margin-top: 190px;
+        }
+        // Teams end
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Shop Page
+
+    // Main Start
+    main {
+        #shop-products {
+            .shop-top-bar {
+                display: block !important;
+                & > * {
+                    margin-bottom: 20px;
+                }
+                .shop-tab-style {
+                    margin-top: 15px;
+                    margin-bottom: 20px;
+                }
+            }
+            .shop-bottom-products {
+                .pagination {
+                    a {
+                        height: 40px;
+                        width: 40px;
+                        line-height: 40px;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#region Single Product Page
+
+    // Main start
+    main {
+        #product-detail {
+            .product-details-content {
+                h2 {
+                    font-size: 28px;
+                }
+                .price {
+                    font-size: 28px;
+                }
+                .product-action {
+                    .add-to-cart {
+                        padding: 0 12px;
+                        letter-spacing: 0;
+                    }
+                }
+            }
+            .description-review-wrapper {
+                .description-review-topbar {
+                    .tab-btn {
+                        margin-right: 10px;
+                    }
+                }
+                .description-review-bottom {
+                    .single-review {
+                        display: block;
+                        .review-img {
+                            margin: 0 0 20px 0;
+                        }
+                        &.child-review {
+                            margin-left: 0;
+                        }
+                    }
+                    .ratting-form-wrapper {
+                        margin-top: 50px;
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Login-Register
+
+    // Main start
+    main {
+        #login-register {
+            .form-container {
+                padding: 40px 15px;
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Cart
+
+    // Main start
+    main {
+        #cart-items {
+            .shopping-btn-wrapper {
+                display: block;
+                padding: 30px 0;
+                .continue-shopping {
+                    margin-bottom: 30px;
+                }
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Blog Page
+
+    // Main Start
+    main {
+        #blog {
+            .pagination {
+                a {
+                    height: 40px;
+                    width: 40px;
+                    line-height: 40px;
+                    font-size: 16px;
+                }
+            }
+            &.blogs {
+                .single-blog {
+                    height: 820px;
+                    .blog-text {
+                        .blog-athor-date {
+                            span {
+                                font-size: 14px;
+                                & + span {
+                                    margin-left: 8px;
+                                }
+                            }
+                        }
+                        .blog-heading {
+                            margin: 15px 0 15px 0;
+                            font-size: 20px;
+                            line-height: 30px;
+                        }
+                        p {
+                            line-height: 28px;
+                            margin-bottom: 20px;
+                            font-size: 14px;
+                        }
+                        .blog-btn {
+                            font-size: 16px;
+                            width: 150px;
+                            height: 50px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#region Single Blog Page
+
+    // Main Start
+    main {
+        .blog-post {
+            .blog-info {
+                flex-direction: column;
+                align-items: flex-start;
+                .blog-single-tags {
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid #acacac;
+                }
+                .blog-athor-date {
+                    margin-top: 15px;
+                }
+            }
+            .blog-title {
+                font-size: 24px;
+            }
+            .blog-content {
+                img {
+                    max-width: 100%;
+                    display: block;
+                    width: 80%;
+                    float: none;
+                    margin: 0 auto;
+                    margin-bottom: 20px;
+                }
+            }
+            .quate-speech-area {
+                padding: 30px 35px;
+                .quate-speech {
+                    font-size: 18px;
+                    line-height: 32px;
+                }
+                .quater {
+                    margin: 15px 0 0;
+                    font-size: 20px;
+                }
+            }
+        }
+        .comment-area {
+            .single-review {
+                display: block;
+                padding: 0;
+                .review-img {
+                    margin: 0 0 20px 0;
+                }
+                .review-content {
+                    padding-left: 0;
+                    .review-top-wrap {
+                        .review-left {
+                            .review-name {
+                                .title {
+                                    font-size: 20px;
+                                }
+                            }
+                        }
+                    }
+                }
+                &.child-review {
+                    margin-left: 0;
+                }
+            }
+        }
+        .blog-comment-form {
+            margin-top: 50px;
+        }
+        .blog-nav {
+            .blog-nav-wrap {
+                flex-direction: column;
+                .nav-right {
+                    margin-top: 15px;
+                    text-align: left;
+                    flex-direction: row;
+                    .media-side {
+                        margin-left: 20px;
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#region Account Page
+
+    // Main Start
+    main {
+        #account {
+            .tab-buttons {
+                margin-bottom: 50px;
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#region 404 Page
+
+    // Main Start
+    main {
+        #not-fount {
+            height: 400px;
+            .content-404 {
+                padding: 40px 0;
+                .title {
+                    font-size: 55px;
+                }
+                .sub-title {
+                    font-size: 25px;
+                }
+                p {
+                    margin-bottom: 30px;
+                    width: 50%;
+                }
+                .buttons {
+                    a {
+                        font-size: 14px;
+                        padding: 6px 12px;
+                        &.btn-homepage {
+                            margin-left: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#endregion
+}

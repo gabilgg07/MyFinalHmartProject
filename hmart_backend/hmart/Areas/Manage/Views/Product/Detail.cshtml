@@ -1,0 +1,273 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row d-flex j-c-sb a-i-c before_after-none">
+            <div class="col-md-3">
+                <h1>Product</h1>
+            </div>
+            <div class="col-md-3">
+                <a asp-action="index" class="waves-effect waves-light btn btn-info" style="width:100%">Back To Table</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="card bg-orange">
+                            <div class="card-content white-text">
+                                <span class="card-title">Name</span>
+                                <p>
+                                    @Model.Name
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="card bg-red">
+                            <div class="card-content white-text">
+                                <span class="card-title">Code</span>
+                                <p>
+                                    @Model.Code
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12">
+                        <div class="card bg-yellow">
+                            <div class="card-content white-text">
+                                <span class="card-title">Dimensions</span>
+                                <p>
+                                    @Model.Dimensions
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12">
+                        <div class="card bg-green">
+                            <div class="card-content white-text">
+                                <span class="card-title">Materials</span>
+                                <p>
+                                    @Model.Materials
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card bg-purple">
+                            <div class="card-content white-text">
+                                <span class="card-title">Cost Price</span>
+                                <p>
+                                    @Model.CostPrice.ToString("#.##")
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-violet">
+                            <div class="card-content white-text">
+                                <span class="card-title">Price</span>
+                                <p>
+                                    @Model.Price.ToString("#.##")
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card bg-light-blue">
+                            <div class="card-content white-text">
+                                <span class="card-title">Discount Percent</span>
+                                <p>
+                                    @Model.DiscountPercent
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card bg-blue">
+                            <div class="card-content white-text">
+                                <span class="card-title">Weight</span>
+                                <p>
+                                    @Model.Weight
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-7">
+                <div class="card bg-light-blue">
+                    <div class="card-content white-text">
+                        <span class="card-title">Other Info</span>
+                        <p>
+                            @Model.OtherInfo
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-5">
+                <div class="card @(Model.IsOnOffer?"bg-green":"bg-red")">
+                    <div class="card-content white-text">
+                        <span class="card-title">Is On Offer</span>
+                        <p>
+                            @(Model.IsOnOffer ? "Yes" : "No")
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="card bg-green">
+                    <div class="card-content white-text">
+                        <span class="card-title">Description</span>
+                        <p>
+                            @Model.Desc
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card bg-yellow">
+                    <div class="card-content white-text">
+                        <span class="card-title">Tags</span>
+                        @{
+                            var tags = "";
+                        }
+                        @foreach (var item in Model.ProductTagProducts)
+                        {
+                            if (item.Id != Model.ProductTagProducts.LastOrDefault().Id)
+                            {
+                                tags += item.ProductTag.Name + ", ";
+                            }
+                            else
+                            {
+                                tags += item.ProductTag.Name;
+                            }
+
+                        }
+                        <p>
+                            @tags
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Colors: </span>
+                        <p>
+                            @foreach (var item in Model.ProductColors)
+                            {
+                                <span class="color-name mr-1"
+                                      style="background-color:#@item.Color.Code">@item.Color.Name</span>
+                                }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row m-0">
+                    <div class="col-md-3">
+                        <div class="card orange">
+                            <div class="card-content white-text">
+                                <span class="card-title">Category: </span>
+                                <p>
+                                    @Model.Category.Name
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card red">
+                            <div class="card-content white-text">
+                                <span class="card-title">Brand: </span>
+                                <p>
+                                    @Model.Brand.Name
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-purple">
+                            <div class="card-content white-text">
+                                <span class="card-title">Count: </span>
+                                <p>
+                                    @Model.Count
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card bg-violet">
+                            <div class="card-content white-text">
+                                <span class="card-title">Create At: </span>
+                                <p>
+                                    @Model.CreatedAt.ToString("dd-MM-yyyy");
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @{
+
+                ProImage poster = Model?.ProImages.FirstOrDefault(x => x.PosterStatus == true);
+                ProImage hoverPoster = Model?.ProImages.FirstOrDefault(x => x.PosterStatus == false);
+                List<ProImage> images = Model?.ProImages.Where(x => x.PosterStatus == null).ToList();
+            }
+            <div class="col-md-4">
+                <div class="card bg-blue">
+                    <div class="card-content white-text">
+                        <span class="card-title">Poster Image</span>
+                        <div class="image">
+                            <img style="width: 100%" src="/uploads/products/@poster.Image" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-light-blue">
+                    <div class="card-content white-text">
+                        <span class="card-title">Poster Image</span>
+                        <div class="image">
+                            <img style="width: 100%" src="/uploads/products/@hoverPoster.Image" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @if (images != null)
+            {
+                @foreach (var item in images)
+                {
+                    <div class="col-md-3">
+                        <div class="card bg-light-green">
+                            <div class="card-content white-text">
+                                <span class="card-title">Poster Image</span>
+                                <div class="image">
+                                    <img style="width: 100%" src="/uploads/products/@item.Image" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    </div>
+

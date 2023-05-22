@@ -1,0 +1,19 @@
+﻿ <!-- Main Start -->
+<main>
+    <!-- 404 Not Found start -->
+    <section id="not-fount" data-bg-image="@Url.Content("/assets/uploads/404bg/bg-404.png")">
+        <div class="container">
+            <div class="content-404">
+                <h1 class="title">Oops!</h1>
+                <h2 class="sub-title">@ViewBag.errorMessage!</h2>
+                <p>You could either go back or go to homepage</p>
+                <div class="buttons">
+                    <a class="btn-go-back" href="javascript: history.go(-1)">Go back</a>
+                    <a class="btn-homepage" asp-controller="home" asp-action="index">Homepage</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 404 Not Found end -->
+</main>
+<!-- Main End -->

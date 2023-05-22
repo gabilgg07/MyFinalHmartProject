@@ -1,0 +1,374 @@
+// Main Start
+main {
+    #account {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 32px;
+        visibility: visible;
+        color: #3a3a3a;
+        .tab-buttons {
+            .tab-list {
+                display: flex;
+                flex-direction: column;
+            }
+            li {
+                margin-bottom: 10px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                .nav-link {
+                    padding: 0.5rem 1rem;
+                    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+                        border-color 0.15s ease-in-out;
+                    border: 0;
+                    font-weight: 600;
+                    color: #fff;
+                    background-color: #000;
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    display: block;
+                    &.active {
+                        background-color: $primary-color;
+                    }
+                }
+            }
+        }
+        .tab-content {
+            .tab-pane {
+                display: block;
+                overflow: hidden;
+                height: 0;
+                visibility: hidden;
+                max-width: 100%;
+                opacity: 0;
+                &.active {
+                    height: auto;
+                    visibility: visible;
+                    opacity: 1;
+                    overflow: visible;
+                }
+                &.fade {
+                    transition: opacity 0.15s linear;
+                }
+                &.fade:not(.show) {
+                    opacity: 0;
+                }
+                h3 {
+                    font-size: 1.75rem;
+                    margin-top: 0;
+                    margin-bottom: 0.5rem;
+                    font-weight: 500;
+                    line-height: 1.2;
+                }
+                h4 {
+                    font-size: 24px;
+                    text-transform: capitalize;
+                    font-weight: 600;
+                    margin-bottom: 15px;
+                }
+                .details {
+                    input {
+                        display: inline-block;
+                        line-height: 50px;
+                        height: 50px;
+                        font-size: 15px;
+                        width: 100%;
+                        background: 0 0;
+                        border-radius: 0;
+                        text-align: left;
+                        box-shadow: none;
+                        padding-left: 20px;
+                        padding-right: 10px;
+                        outline: 0;
+                    }
+                    .input-radio {
+                        span {
+                            font-weight: 600;
+                            padding-right: 10px;
+                            input {
+                                &[type="radio"] {
+                                    width: 15px;
+                                    height: 15px;
+                                    margin-right: 2px;
+                                    position: relative;
+                                    top: 2px;
+                                }
+                            }
+                        }
+                    }
+                    .account-form-box {
+                        label {
+                            font-weight: 400;
+                            font-size: 16px;
+                            margin-bottom: 10px;
+                            display: block;
+                        }
+                        input {
+                            display: block;
+                            width: 100%;
+                            height: 45px;
+                            padding: 0 10px 0 20px;
+                            font-size: 16px;
+                            font-weight: 400;
+                            color: #474747;
+                            border-radius: 3px;
+                            background-color: #fff;
+                            border: 1px solid #e2e2e2;
+                            line-height: 45px;
+                            &:focus {
+                                border-color: $primary-color;
+                            }
+                        }
+                    }
+                    .save_button {
+                        .btn-save {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            transition: all 0.3s ease 0s;
+                            outline: 0;
+                            box-shadow: none;
+                            border-width: 2px;
+                            border-style: solid;
+                            border-radius: 18px;
+                            background-color: #3b3b3b;
+                            border-color: #3b3b3b;
+                            color: #fff;
+                            font-weight: 400;
+                            font-size: 14px;
+                            width: 130px;
+                            height: 45px;
+                            line-height: 45px;
+                            cursor: pointer;
+                            &:hover {
+                                border-color: $primary-color;
+                                background-color: $primary-color;
+                            }
+                        }
+                    }
+                    .detail-profil-image {
+                        width: 100%;
+                        .image-content {
+                            width: 100%;
+                            height: 400px;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            border: 1px solid #eee;
+                            border-radius: 10px;
+                        }
+                        .image-input-conten {
+                            .choose-info {
+                                display: block;
+                                margin: 14px 0;
+                            }
+                            .image-input-wrap {
+                                margin: 10px 0;
+                                label {
+                                    position: relative;
+                                    display: inline-block;
+                                    cursor: pointer;
+                                    height: 2.5rem;
+                                    width: 100%;
+                                    input {
+                                        display: inline-block;
+                                        line-height: 50px;
+                                        height: 50px;
+                                        font-size: 15px;
+                                        width: 100%;
+                                        background: 0 0;
+                                        border-radius: 0;
+                                        text-align: left;
+                                        box-shadow: none;
+                                        padding-left: 20px;
+                                        padding-right: 10px;
+                                        outline: 0;
+                                        &.detail-image-input {
+                                            min-width: 14rem;
+                                            margin: 0;
+                                            opacity: 0;
+                                        }
+                                    }
+                                    .file-custom {
+                                        position: absolute;
+                                        top: 0;
+                                        right: 0;
+                                        left: 0;
+                                        z-index: 5;
+                                        height: 2.5rem;
+                                        padding: 0.5rem 1rem;
+                                        line-height: 1.5;
+                                        color: #555;
+                                        background-color: #fff;
+                                        border: 0.075rem solid #ddd;
+                                        border-radius: 0.25rem;
+                                        box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.05);
+                                        user-select: none;
+                                        &::before {
+                                            position: absolute;
+                                            top: -0.075rem;
+                                            right: -0.075rem;
+                                            bottom: -0.075rem;
+                                            z-index: 6;
+                                            display: block;
+                                            content: "Browse";
+                                            padding: 0.5rem 1rem;
+                                            line-height: 1.5;
+                                            color: #555;
+                                            background-color: #eee;
+                                            border: 0.075rem solid #ddd;
+                                            border-radius: 0 0.25rem 0.25rem 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .billing-address {
+                    font-size: 20px;
+                    text-transform: capitalize;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                    margin-top: 10px;
+                }
+                a {
+                    color: $primary-color;
+                    &:hover {
+                        color: #0a58ca;
+                    }
+                }
+                .edit-address-form {
+                    input {
+                        display: inline-block;
+                        line-height: 50px;
+                        height: 50px;
+                        font-size: 15px;
+                        width: 100%;
+                        background: 0 0;
+                        border-radius: 0;
+                        text-align: left;
+                        box-shadow: none;
+                        padding-left: 20px;
+                        padding-right: 10px;
+                        outline: 0;
+                    }
+                    .input-radio {
+                        span {
+                            font-weight: 600;
+                            padding-right: 10px;
+                            input {
+                                &[type="radio"] {
+                                    width: 15px;
+                                    height: 15px;
+                                    margin-right: 2px;
+                                    position: relative;
+                                    top: 2px;
+                                }
+                            }
+                        }
+                    }
+                    .address-form-box {
+                        label {
+                            font-weight: 500;
+                            font-size: 16px;
+                            margin-bottom: 10px;
+                            display: block;
+                        }
+                        input {
+                            display: block;
+                            width: 100%;
+                            height: 45px;
+                            padding: 0 10px 0 20px;
+                            font-size: 16px;
+                            font-weight: 400;
+                            color: #474747;
+                            border-radius: 3px;
+                            background-color: #fff;
+                            border: 1px solid #e2e2e2;
+                            line-height: 45px;
+                            &:focus {
+                                border-color: $primary-color;
+                            }
+                        }
+                    }
+                    .save_button {
+                        .btn-save {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            transition: all 0.3s ease 0s;
+                            outline: 0;
+                            box-shadow: none;
+                            border-width: 2px;
+                            border-style: solid;
+                            border-radius: 18px;
+                            background-color: #3b3b3b;
+                            border-color: #3b3b3b;
+                            color: #fff;
+                            font-weight: 400;
+                            font-size: 14px;
+                            width: 130px;
+                            height: 45px;
+                            line-height: 45px;
+                            cursor: pointer;
+                            &:hover {
+                                border-color: $primary-color;
+                                background-color: $primary-color;
+                            }
+                        }
+                    }
+                }
+                .table_page {
+                    table {
+                        width: 100%;
+                        caption-side: bottom;
+                        border-collapse: collapse;
+                        thead {
+                            background: #f2f2f2;
+                            tr {
+                                th {
+                                    color: #24262b;
+                                    border-bottom: 3px solid $primary-color;
+                                    font-size: 16px;
+                                    font-weight: 600;
+                                    text-transform: capitalize;
+                                    padding: 10px;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                        tbody {
+                            tr {
+                                td {
+                                    font-weight: 600;
+                                    text-transform: capitalize;
+                                    font-size: 14px;
+                                    // min-width: 150px;
+                                    border-bottom: 1px solid #ededed;
+                                    border-right: 1px solid #ededed;
+                                    text-align: center;
+                                    padding: 10px;
+                                    &.product_price {
+                                        font-weight: 500;
+                                        span {
+                                            margin-right: 5px;
+                                            font-weight: 600;
+                                            &.total_price {
+                                                color: $primary-color;
+                                            }
+                                            &.product_count {
+                                                color: #000;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// Main End

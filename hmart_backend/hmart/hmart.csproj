@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\assets\scss\**" />
+    <Content Remove="wwwroot\assets\scss\**" />
+    <EmbeddedResource Remove="wwwroot\assets\scss\**" />
+    <None Remove="wwwroot\assets\scss\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.15.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.20" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.20">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="MimeKit" Version="2.15.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\uploads\setting\" />
+    <Folder Include="wwwroot\uploads\banners\" />
+    <Folder Include="wwwroot\uploads\features\" />
+    <Folder Include="wwwroot\uploads\blogs\" />
+    <Folder Include="wwwroot\uploads\users\" />
+    <Folder Include="wwwroot\uploads\products\" />
+    <Folder Include="wwwroot\uploads\teams\" />
+    <Folder Include="wwwroot\uploads\partners\" />
+    <Folder Include="wwwroot\uploads\testimonials\" />
+    <Folder Include="wwwroot\uploads\setting\" />
+    <Folder Include="wwwroot\uploads\sliders\" />
+  </ItemGroup>
+
+</Project>

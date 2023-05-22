@@ -1,0 +1,74 @@
+﻿@model Banner
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-action">
+                        Delete Banner
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col s12">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="card p-1">
+                                                <div class="image-poster">
+                                                    @if (Model?.Image != null)
+                                                    {
+                                                        <div class="image-wrapper" style="position:relative">
+                                                            <img style="width:100%" src="~/uploads/banners/@Model.Image" alt="Banner Image" />
+                                                            <input type="hidden" name="Image" value="@Model.Image" />
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h3 class="mt-2">Have not image</h3>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0">
+                                        <div class="input-field col s6">
+                                            <input asp-for="Title" class="validate @(Model?.Title!=null?"valid":"")" disabled>
+                                            <label asp-for="Title" class="@(Model?.Title!=null?"active":"")">Title</label>
+                                            <span class="text-danger" asp-validation-for="Title"></span>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <input asp-for="Price" class="validate @(Model?.Price!=null?"valid":"")" disabled>
+                                            <label asp-for="Price" class="@(Model?.Price!=null?"active":"")">Price</label>
+                                            <span class="text-danger" asp-validation-for="Price"></span>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <input asp-for="IsMain" class="validate filled-in @(Model?.IsMain!=null?"valid":"")" disabled>
+                                            <label asp-for="IsMain">IsMain</label>
+                                            <span class="text-danger" asp-validation-for="IsMain"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <h3 class="ml-25">Are you sure?</h3>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button type="submit" class="waves-effect waves-light btn btn-danger" style="width:180px">Delete</button>
+                                    <a asp-action="index" class="waves-effect waves-light btn btn-success m-lt-buttons-1" style="width:180px">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,44 @@
+﻿@model RoleVM
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-action">
+                        Delete Admin Role
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="row m-0">
+                                        <div class="input-field col s12">
+                                            <input asp-for="Name" class="validate @(Model?.Name!=null?"valid":"")" disabled>
+                                            <label asp-for="Name" class="@(Model?.Name!=null?"active":"")">Role Name</label>
+                                            <span class="text-danger" asp-validation-for="Name"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <h3 class="ml-25">Are you sure?</h3>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button type="submit" class="waves-effect waves-light btn btn-danger" style="width:180px">Delete</button>
+                                    <a asp-action="index" class="waves-effect waves-light btn btn-success m-lt-buttons-1" style="width:180px">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

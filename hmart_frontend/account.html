@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hmart – Account</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="./assets/uploads/titles/logo_title.png"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+
+  <body>
+    <!-- Loading -->
+    <div id="loading">
+      <div class="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <!-- Header Start -->
+    <header>
+      <!-- Header top start -->
+      <div id="header-top">
+        <div class="container">
+          <div class="row justify-content-between align-items-center">
+            <div class="col">
+              <div class="welcome-text">
+                <p>World Wide Completely Free Returns and Shipping</p>
+              </div>
+            </div>
+            <div class="col d-none d-lg-block">
+              <div class="top-nav">
+                <ul>
+                  <li>
+                    <a href="tel:0123456789">
+                      <i class="icon-phone"></i> +012 3456 789
+                    </a>
+                  </li>
+                  <li>
+                    <a href="mailto:demo@example.com">
+                      <i class="icon-envelope-o"></i> demo@example.com
+                    </a>
+                  </li>
+                  <li>
+                    <a href=""> <i class="icon-user"></i> Account </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Header top end -->
+      <!-- Header bottom start -->
+      <div id="header-bottom" class="d-none d-lg-block">
+        <div class="container">
+          <div class="row justify-content-between align-items-center">
+            <div class="col-3">
+              <div class="header-logo">
+                <a href="index.html">
+                  <img
+                    src="./assets/uploads/logos/logo.png"
+                    alt="Header logo"
+                  />
+                </a>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="search-element">
+                <form class="form-search" autocomplete="off">
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    name="search"
+                    class="search_product"
+                  />
+                  <a href="" class="product_search_btn">
+                    <i class="icon-search"></i>
+                  </a>
+                </form>
+                <div id="productsList" class="d-none">
+                  <ul>
+                    <li class="product-search-li">
+                      <a href="">
+                        <div class="product-search-item">
+                          <div class="content">
+                            <img src="./assets/uploads/products/1.png" />
+                            <span class="product-name">Modern Smart Phone</span>
+                          </div>
+                          <span class="price">
+                            <span class="old">$48.50</span>
+                            <span class="new">$38.50</span>
+                          </span>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="header-actions">
+                <a href="" class="action_icon" id="wishlist-button">
+                  <i class="icon-heart1"></i>
+                </a>
+                <a href="" class="shop-bag action_icon" id="cartlist-button">
+                  <i class="icon-basket"></i>
+                  <span>01</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Header bottom end -->
+      <!-- Header nav start -->
+      <div id="header-nav-menu" class="d-none d-lg-block animate__animated">
+        <div class="container">
+          <div class="nav-menu-list">
+            <ul>
+              <li>
+                <a href="index.html">Home</a>
+              </li>
+              <li>
+                <a href="about.html">About</a>
+              </li>
+              <li>
+                <a href="shop.html">Shop</a>
+              </li>
+              <li>
+                <a href="blog.html">Blog</a>
+              </li>
+              <li>
+                <a href="contact.html">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Header nav end -->
+      <!-- Header sticky bottom start -->
+      <div
+        id="sticky-header-bottom"
+        class="stiky-nav d-lg-none animate__animated"
+      >
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="header-logo">
+                <a href="index.html">
+                  <img
+                    src="./assets/uploads/logos/logo.png"
+                    alt="Header logo"
+                  />
+                </a>
+              </div>
+            </div>
+            <div class="col">
+              <div class="header-actions">
+                <a href="" class="action_icon" id="wishlist-button">
+                  <i class="icon-heart1"></i>
+                </a>
+                <a href="" class="shop-bag action_icon" id="cartlist-button">
+                  <i class="icon-basket"></i>
+                  <span>01</span>
+                </a>
+                <a href="" class="menu" id="menu-button">
+                  <i class="icon-menu"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Header sticky bottom end -->
+      <!-- Mobile search nav start -->
+      <div id="mobile-search-nav" class="d-lg-none">
+        <div class="container">
+          <div class="search-element">
+            <form class="form-search" autocomplete="off">
+              <input
+                type="text"
+                placeholder="Search"
+                name="search"
+                class="search_product"
+              />
+              <a href="" class="product_search_btn">
+                <i class="icon-search"></i>
+              </a>
+            </form>
+            <div id="productsList" class="d-none">
+              <ul>
+                <li class="product-search-li">
+                  <a href="">
+                    <div class="product-search-item">
+                      <div class="content">
+                        <img src="./assets/uploads/products/1.png" />
+                        <span class="product-name">Modern Smart Phone</span>
+                      </div>
+                      <span class="price">
+                        <span class="old">$48.50</span>
+                        <span class="new">$38.50</span>
+                      </span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Mobile search nav end -->
+    </header>
+    <!-- Header End -->
+    <!-- =============================== -->
+    <!-- Shadow Layout -->
+    <div id="shadow-layout" class="d-none"></div>
+    <!-- WishList Start -->
+    <div id="wishlist">
+      <div class="list-wrapper">
+        <div class="list-header">
+          <h3>Wishlist</h3>
+          <button class="canvas-close"></button>
+        </div>
+        <div class="list-items">
+          <ul>
+            <li>
+              <div class="row">
+                <div class="col-4">
+                  <a href="" class="img">
+                    <img src="./assets/uploads/products/1.png" alt="phone" />
+                  </a>
+                </div>
+                <div class="col-8">
+                  <div class="content">
+                    <a href="" class="title">Modern Smart Phone</a>
+                    <span class="quantity-price">
+                      <span class="amount"> $ 21.86 </span>
+                    </span>
+                    <a href="" id="remove">×</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-4">
+                  <a href="" class="img">
+                    <img src="./assets/uploads/products/1.png" alt="phone" />
+                  </a>
+                </div>
+                <div class="col-8">
+                  <div class="content">
+                    <a href="" class="title">Modern Smart Phone</a>
+                    <span class="quantity-price">
+                      <span class="amount"> $ 21.86 </span>
+                    </span>
+                    <a href="" id="remove">×</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-4">
+                  <a href="" class="img">
+                    <img src="./assets/uploads/products/1.png" alt="phone" />
+                  </a>
+                </div>
+                <div class="col-8">
+                  <div class="content">
+                    <a href="" class="title">Modern Smart Phone</a>
+                    <span class="quantity-price">
+                      <span class="amount"> $ 21.86 </span>
+                    </span>
+                    <a href="" id="remove">×</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="list-view">
+          <a href="wishlist.html">view wishlist</a>
+        </div>
+      </div>
+    </div>
+    <!-- WishList End -->
+    <!-- Cart Start -->
+    <div id="cart">
+      <div class="list-wrapper">
+        <div class="list-header">
+          <h3>Cart</h3>
+          <button class="canvas-close"></button>
+        </div>
+        <div class="list-items">
+          <ul>
+            <li>
+              <div class="row">
+                <div class="col-4">
+                  <a href="" class="img">
+                    <img src="./assets/uploads/products/1.png" alt="phone" />
+                  </a>
+                </div>
+                <div class="col-8">
+                  <div class="content">
+                    <a href="" class="title">Modern Smart Phone</a>
+                    <span class="quantity-price">
+                      1 x
+                      <span class="amount"> $ 21.86 </span>
+                    </span>
+                    <a href="" id="remove">×</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-4">
+                  <a href="" class="img">
+                    <img src="./assets/uploads/products/1.png" alt="phone" />
+                  </a>
+                </div>
+                <div class="col-8">
+                  <div class="content">
+                    <a href="" class="title">Modern Smart Phone</a>
+                    <span class="quantity-price">
+                      1 x
+                      <span class="amount"> $ 21.86 </span>
+                    </span>
+                    <a href="" id="remove">×</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="row">
+                <div class="col-4">
+                  <a href="" class="img">
+                    <img src="./assets/uploads/products/1.png" alt="phone" />
+                  </a>
+                </div>
+                <div class="col-8">
+                  <div class="content">
+                    <a href="" class="title">Modern Smart Phone</a>
+                    <span class="quantity-price">
+                      1 x
+                      <span class="amount"> $ 21.86 </span>
+                    </span>
+                    <a href="" id="remove">×</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="list-view">
+          <a href="cart.html">View Cart</a>
+          <a href="checkout.html" class="checkout">Checkout</a>
+        </div>
+      </div>
+    </div>
+    <!-- Cart End -->
+    <!-- Mobile Menu Start -->
+    <div id="mobile-menu">
+      <div class="menu">
+        <button class="canvas-close"></button>
+        <ul class="menu-list">
+          <li class="info">
+            <ul class="info-list">
+              <li>
+                <a href="tel:0123456789">
+                  <i class="icon-phone"></i>+012 3456 789
+                </a>
+              </li>
+              <li>
+                <a href="mailto:demo@example.com">
+                  <i class="icon-envelope-o"></i>demo@example.com
+                </a>
+              </li>
+              <li>
+                <a href=""> <i class="icon-user"></i>Account </a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a href="about.html">About</a>
+          </li>
+          <li>
+            <a href="shop.html">Shop</a>
+          </li>
+          <li>
+            <a href="blog.html">Blog</a>
+          </li>
+          <li>
+            <a href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Mobile Menu End -->
+    <!-- =============================== -->
+    <!-- Main Start -->
+    <main>
+      <!-- Main-header start -->
+      <section
+        id="main-header"
+        data-bg-image="./assets/uploads/commons/main-header-bg.png"
+      >
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-12 text-center">
+              <h2 class="header-title">Account</h2>
+              <ul class="page-list">
+                <li class="page-item"><a href="index.html">Home</a></li>
+                <li class="page-item active">Account</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Main-header end -->
+      <!-- Account start -->
+      <section id="account" class="py-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+              <div class="tab-buttons">
+                <ul class="tab-list">
+                  <li>
+                    <a
+                      href="#account-details"
+                      data-bs-toggle="tab"
+                      class="nav-link active"
+                      >Account details</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#address" data-bs-toggle="tab" class="nav-link"
+                      >Addresses</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#orders" data-bs-toggle="tab" class="nav-link"
+                      >Orders</a
+                    >
+                  </li>
+                  <li><a href="login.html" class="nav-link">logout</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+              <div class="tab-content">
+                <div class="tab-pane fade active show" id="account-details">
+                  <h3>Account details</h3>
+                  <div class="details">
+                    <div class="details_form_container">
+                      <div class="account_details_form">
+                        <form action="#">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="input-radio">
+                                <span class="custom-radio"
+                                  ><input
+                                    type="radio"
+                                    value="0"
+                                    name="id_gender"
+                                  />
+                                  Mr.</span
+                                >
+                                <span class="custom-radio"
+                                  ><input
+                                    type="radio"
+                                    value="1"
+                                    name="id_gender"
+                                  />
+                                  Mrs.</span
+                                >
+                              </div>
+                              <br />
+                              <div class="account-form-box mb-4">
+                                <label>First Name</label>
+                                <input type="text" name="first-name" />
+                              </div>
+                              <div class="account-form-box mb-4">
+                                <label>Last Name</label>
+                                <input type="text" name="last-name" />
+                              </div>
+                              <div class="account-form-box mb-4">
+                                <label>Email</label>
+                                <input type="text" name="email-name" />
+                              </div>
+                              <div class="account-form-box mb-4">
+                                <label>Password</label>
+                                <input type="password" name="user-password" />
+                              </div>
+                              <div class="account-form-box mb-4">
+                                <label>Birthdate</label>
+                                <input type="date" name="birthday" />
+                              </div>
+                              <span class="example"> (E.g.: 07-Jul-1991) </span>
+                              <br />
+                              <div class="save_button mt-3">
+                                <button class="btn-save" type="submit">
+                                  Save
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="detail-profil-image">
+                                <div
+                                  class="image-content"
+                                  style="
+                                    background-image: url(assets/uploads/users/user-default.png);
+                                  "
+                                ></div>
+                                <div class="image-input-conten">
+                                  <span class="choose-info"
+                                    >Choose File for Change Profil Image</span
+                                  >
+                                  <div class="image-input-wrap">
+                                    <label asp-for="ImageFile">
+                                      <input
+                                        class="detail-image-input"
+                                        asp-for="ImageFile"
+                                      />
+                                      <span
+                                        id="imageFileName"
+                                        class="file-custom"
+                                      >
+                                        Choose File ...
+                                      </span>
+                                    </label>
+                                    <span
+                                      class="text-danger"
+                                      asp-validation-for="ImageFile"
+                                    ></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="address">
+                  <p>
+                    The following addresses will be used on the checkout page by
+                    default.
+                  </p>
+                  <h5 class="billing-address">Billing address</h5>
+                  <div class="address">
+                    <a href="#" class="edit-address">Edit</a>
+                    <br />
+                    <strong>Address:</strong>
+                    <span class="mb-1 d-inline-block street-apt">
+                      Michael M Hoskins st. Apr.25</span
+                    >,
+                    <br />
+                    <strong>City:</strong>
+                    <span class="mb-1 d-inline-block city"> Seattle</span>,
+                    <br />
+                    <strong>State/Region:</strong>
+                    <span class="mb-1 d-inline-block state-region">
+                      Washington(WA)</span
+                    >,
+                    <br />
+                    <strong>ZIP/Postal Code:</strong>
+                    <span class="mb-1 d-inline-block zip-postal"> 98101</span>,
+                    <br />
+                    <strong>Country:</strong>
+                    <span class="country"> USA</span>
+                  </div>
+                  <div class="edit-address-form d-none">
+                    <form action="#">
+                      <div class="address-form-box mb-4">
+                        <label>Address</label>
+                        <input
+                          type="text"
+                          name="street_apt"
+                          id="street_apt"
+                          value="Michael M Hoskins st. Apr.25"
+                        />
+                      </div>
+                      <div class="address-form-box mb-4">
+                        <label>City</label>
+                        <input
+                          type="text"
+                          name="city"
+                          id="city"
+                          value="Seattle"
+                        />
+                      </div>
+                      <div class="address-form-box mb-4">
+                        <label>State/Region</label>
+                        <input
+                          type="text"
+                          name="state_region"
+                          id="state_region"
+                          value="Washington(WA)"
+                        />
+                      </div>
+                      <div class="address-form-box mb-4">
+                        <label>ZIP/Postal Code</label>
+                        <input
+                          type="text"
+                          name="zip_postal"
+                          id="zip_postal"
+                          value="98101"
+                        />
+                      </div>
+                      <div class="address-form-box mb-4">
+                        <label>Country</label>
+                        <input
+                          type="text"
+                          name="country"
+                          id="country"
+                          value="USA"
+                        />
+                      </div>
+                      <div class="save_button mt-3">
+                        <button
+                          class="btn-save"
+                          id="btn_save_address"
+                          type="submit"
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="orders">
+                  <h4>Orders</h4>
+                  <div class="table_page table-responsive">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Order</th>
+                          <th>Date</th>
+                          <th>Status</th>
+                          <th>Transport Type</th>
+                          <th>Total</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>May 10, 2018</td>
+                          <td><span class="success">Completed</span></td>
+                          <td>-</td>
+                          <td>$25.00 for 1 type item</td>
+                          <td><a href="cart.html" class="view">view</a></td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>May 10, 2018</td>
+                          <td>Processing</td>
+                          <td>Express</td>
+                          <td>$17.00 for 1 type item</td>
+                          <td><a href="cart.html" class="view">view</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Account end -->
+    </main>
+    <!-- Main End -->
+    <!-- =============================== -->
+    <!-- Footer Start -->
+    <footer>
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 col-md-6">
+              <div class="wedge">
+                <div class="footer-logo">
+                  <a href="index.html">
+                    <img
+                      src="./assets/uploads/logos/footer-logo.png"
+                      alt="Footer Logo"
+                    />
+                  </a>
+                </div>
+                <p class="about-text">
+                  Lorem ipsum dolor sit amet consl adipisi elit, sed do eiusmod
+                  templ incididunt ut labore
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+              <div class="service-wedge">
+                <h4 class="title">Services</h4>
+                <ul class="services-list">
+                  <li>
+                    <a href="">My Account</a>
+                  </li>
+                  <li>
+                    <a href="">Contact</a>
+                  </li>
+                  <li>
+                    <a href="">Shopping Cart</a>
+                  </li>
+                  <li>
+                    <a href="">Shop</a>
+                  </li>
+                  <li>
+                    <a href="">Services Login</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div class="contact-info">
+                <h4 class="title">Contact Info</h4>
+                <ul class="info-list">
+                  <li>Address: Your Address Goes Here.</li>
+                  <li>
+                    Phone/Fax:
+                    <a href="tel:0123456789">0123456789</a>
+                  </li>
+                  <li>
+                    Email:
+                    <a href="mailto:demo@example.com">demo@example.com</a>
+                  </li>
+                  <li>
+                    <a href="https://demo@example.com">demo@example.com</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="copy-text">
+                © 2021 <strong>Hmart</strong> Made With
+                <i class="icon-heart"></i> By
+                <a
+                  class="company-name"
+                  href="https://themeforest.net/user/codecarnival/portfolio"
+                >
+                  <strong> GabilGG </strong></a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- =============================== -->
+    <!-- Scroll Up button -->
+    <a href="#" id="scrollUp" class="d-none">
+      <i class="icon-angle-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="./assets/js/jquery.countdown.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script>
+      $(document).ready(function (e) {
+        $(document).on("click", ".edit-address", function (e) {
+          e.preventDefault();
+          let address = {
+            stritApt: $(".street-apt").text(),
+            city: $(".city").text(),
+            stateRegion: $(".state-region").text(),
+            zipPostal: $(".zip-postal").text(),
+            country: $(".country").text(),
+          };
+          $(".address").addClass("d-none");
+
+          $("#street_apt").val(address.stritApt);
+          $("#city").val(address.city);
+          $("#state_region").val(address.stateRegion);
+          $("#zip_postal").val(address.zipPostal);
+          $("#country").val(address.country);
+
+          $(".edit-address-form").removeClass("d-none");
+        });
+        $(document).on("click", "#btn_save_address", function (e) {
+          e.preventDefault();
+          let address = {
+            stritApt: $("#street_apt").val(),
+            city: $("#city").val(),
+            stateRegion: $("#state_region").val(),
+            zipPostal: $("#zip_postal").val(),
+            country: $("#country").val(),
+          };
+          $(".edit-address-form").addClass("d-none");
+
+          $(".street-apt").text(address.stritApt);
+          $(".city").text(address.city);
+          $(".state-region").text(address.stateRegion);
+          $(".zip-postal").text(address.zipPostal);
+          $(".country").text(address.country);
+
+          $(".address").removeClass("d-none");
+        });
+      });
+    </script>
+  </body>
+</html>

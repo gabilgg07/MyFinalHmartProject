@@ -1,0 +1,375 @@
+@media screen and (min-width: 993px) and (max-width: 1200px) {
+    //#region Common
+
+    //#region Spaces
+    .py-section {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+    .pt-section {
+        padding-top: 80px;
+    }
+    .pb-section {
+        padding-bottom: 80px;
+    }
+    //#endregion
+
+    // Footer start
+    footer {
+        .footer-top {
+            padding: 80px 0 60px 0;
+            ul {
+                li {
+                    a {
+                        font-size: 14px;
+                        line-height: 24px;
+                    }
+                }
+            }
+            .wedge {
+                .about-text {
+                    font-size: 14px;
+                    line-height: 28px;
+                }
+            }
+        }
+    }
+    // Footer end
+
+    //#endregion
+
+    //#region Pages
+
+    //#region Home Page
+
+    // Main Start
+    main {
+        // Banner start
+        #banner {
+            .single-banner {
+                .banner-content {
+                    top: 20px;
+                    h3 {
+                        font-size: 32px;
+                        line-height: 44px;
+                    }
+                }
+            }
+        }
+        // Banner end
+
+        // Products start
+        #product {
+            .tab-pane {
+                .product {
+                    .product-image {
+                        .image {
+                            div {
+                                height: 285px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Products end
+
+        // Feature start
+        #feature_product {
+            .single-feature-content {
+                height: 612px;
+                &.resposive-height {
+                    height: 612px;
+                    align-items: flex-start;
+                    .feature-image {
+                        margin-top: 50px;
+                    }
+                }
+                .top-content {
+                    top: 30px;
+                    .title {
+                        font-size: 24px;
+                        margin: 0 0 10px;
+                    }
+                    .price {
+                        font-size: 24px;
+                    }
+                }
+                .bottom-content {
+                    bottom: 40px;
+                    .deal-timing {
+                        .cdown {
+                            .cdown-1 {
+                                width: 70px;
+                                height: 70px;
+                                font-size: 24px;
+                            }
+                        }
+                    }
+                }
+            }
+            .feature-right-content {
+                .image-side {
+                    width: 180px;
+                }
+                .content-side {
+                    width: calc(100% - 180px);
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    .prize-content {
+                        padding: 15px 0;
+                    }
+                    .product-feature {
+                        margin-top: 20px;
+                        ul {
+                            li {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Feature end
+
+        // Testimonial start
+        #testimonial {
+            padding-bottom: 60px;
+            .testimonial-slider {
+                .swiper-slide {
+                    .testi-inner {
+                        height: 325px;
+                    }
+                }
+            }
+        }
+        // Testimonial end
+
+        // Partners start
+        #partners {
+            .partners-slider {
+                padding: 80px 0;
+            }
+        }
+        // Partners end
+
+        // Blog start
+        #blog {
+            .single-blog {
+                .blog-content {
+                    .blog-date-author {
+                        span {
+                            font-size: 14px;
+                            & + span {
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                    .blog-heading {
+                        margin: 15px 0 15px 0;
+                        font-size: 20px;
+                        line-height: 30px;
+                    }
+                    p {
+                        line-height: 28px;
+                        margin-bottom: 20px;
+                        font-size: 14px;
+                    }
+                    a.blog-btn {
+                        font-size: 16px;
+                        width: 150px;
+                        height: 50px;
+                    }
+                }
+            }
+        }
+        // Blog end
+    }
+    // Main End
+
+    //#endregion
+
+    //#region About Page
+
+    // Main start
+    main {
+        // About start
+        #about {
+            max-height: 584px;
+            .about-wrapper {
+                .promo-video {
+                    margin-top: 90px;
+                }
+            }
+        }
+        // About end
+        // Teams start
+        #teams {
+            margin-top: 329px;
+        }
+        // Teams end
+        // Features start
+        #features {
+            .feature-wrapper {
+                padding: 80px 25px;
+                .single-feature {
+                    .feature-icon {
+                        margin-right: 20px;
+                    }
+                }
+                .feature-content {
+                    width: calc(100% - 90px);
+                    .title {
+                        font-size: 20px;
+                    }
+                    .sub-title {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        // Features end
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Shop Page
+
+    // Main Start
+    main {
+        #shop-products {
+            .shop-sidebar-wrapper {
+                padding: 10px 10px 40px 20px;
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#region Single Product Page
+
+    // Main start
+    main {
+        #product-detail {
+            .product-details-content {
+                .product-action {
+                    .add-to-cart {
+                        padding: 0 15px;
+                    }
+                }
+            }
+            .description-review-wrapper {
+                .description-review-topbar {
+                    .tab-btn {
+                        margin-right: 18px;
+                    }
+                }
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Contact Us Page
+
+    // Main start
+    main {
+        #contact {
+            .contact-wrapper {
+                padding: 70px 80px;
+                .contact-info {
+                    margin-top: 80px;
+                    .single-contact {
+                        width: 240px;
+                        height: 250px;
+                    }
+                }
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Blog Page
+
+    // Main start
+    main {
+        #blog.blogs {
+            .single-blog {
+                height: 820px;
+                .blog-text {
+                    .blog-athor-date {
+                        span {
+                            font-size: 14px;
+                            & + span {
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                    .blog-heading {
+                        margin: 15px 0 15px 0;
+                        font-size: 20px;
+                        line-height: 30px;
+                    }
+                    p {
+                        line-height: 28px;
+                        margin-bottom: 20px;
+                        font-size: 14px;
+                    }
+                    .blog-btn {
+                        font-size: 16px;
+                        width: 150px;
+                        height: 50px;
+                    }
+                }
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Single Blog Page
+
+    // Main Start
+    main {
+        .blog-post {
+            .quate-speech-area {
+                .quate-speech {
+                    font-size: 18px;
+                    line-height: 32px;
+                }
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#region 404 Page
+
+    // Main Start
+    main {
+        #not-fount {
+            height: 500px;
+            .content-404 {
+                padding: 80px 0;
+                .title {
+                    font-size: 80px;
+                }
+                .sub-title {
+                    font-size: 50px;
+                }
+            }
+        }
+    }
+    // Main End
+
+    //#endregion
+
+    //#endregion
+}

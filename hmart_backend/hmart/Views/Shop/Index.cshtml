@@ -1,0 +1,543 @@
+﻿@model ShopVM
+@{
+    ViewData["Title"] = "Index";
+    double newPrice = 0;
+}
+
+<!-- Main Start -->
+<main>
+    <input id="categoryId" type="hidden" value="@Model.CategoryId" />
+    <!-- Main-header start -->
+    <section id="main-header" data-bg-image="@Url.Content("/uploads/setting/" + @Model.Setting.MainBgImgSrc)">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 text-center">
+                    <h2 class="header-title">Products</h2>
+                    <ul class="page-list">
+                        <li class="page-item"><a asp-controller="home">Home</a></li>
+                        <li class="page-item active">Shop</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main-header end -->
+    <!-- Shop Products start -->
+    <section id="shop-products" class="py-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-12 mb-col">
+                    <div class="shop-sidebar-wrapper">
+                        <div class="sidebar-item sidebar-list">
+                            <h4 class="sidebar-title">Top Categories</h4>
+                            <div class="sidebar-widget-category">
+                                <ul>
+                                    <li>
+                                        <a asp-action="pagenation" class="@(Model.CategoryId==null?"selected":"") m-0 sidebar-btn btn-category all">
+                                            All
+                                            <span>(@ViewBag.AllProductsCount)</span>
+                                        </a>
+                                    </li>
+                                    @foreach (var item in Model.Categories)
+                                    {
+                                        <li>
+                                            <button data-categoryId="@item.Id" class="@(item.Id==Model.CategoryId?"selected":"") m-0 sidebar-btn btn-category single">
+                                                @item.Name
+                                                <span>(@item.Products.Count())</span>
+                                            </button>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-item mt-4">
+                            <h4 class="sidebar-title">Price Filter</h4>
+                            <div class="price-filter">
+                                <div class="price-slider-amount">
+                                    <input type="text" id="amount" class="p-0 h-auto" name="price"
+                                           placeholder="Add Your Price">
+                                </div>
+                                <div id="slider-range" class="range">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <h4 class="sidebar-title">Color</h4>
+                            <div class="sidebar-widget-color">
+                                <ul class="d-flex flex-wrap">
+                                    @foreach (var item in Model.Colors)
+                                    {
+                                        <li><button data-colorId="@item.Id" class="btn-color color-1 @(item.Id==Model.ColorId?"selected":"")" style="background-color:@("#"+item.Code)" title="@item.Name">@item.ProductColors.Count()</button></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-item sidebar-list">
+                            <h4 class="sidebar-title">Brands</h4>
+                            <div class="sidebar-widget-brand">
+                                <ul>
+                                    @foreach (var item in Model.Brands)
+                                    {
+                                        <li>
+                                            <button data-brandId="@item.Id" class="sidebar-btn btn-brand @(item.Id==Model.BrandId?"selected":"")">
+                                                @item.Name<span>(@item.Products?.Count())</span>
+                                            </button>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-button">
+                            <a asp-action="pagenation" class="filter-btn" id="btn-filter-search">Search</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12" id="for_fetch_div">
+                    <div class="shop-top-bar d-flex">
+                        <p class="compare-product"> <span>@Model.Products.Count()</span> Product Found of <span>@Model.TotalProducts</span></p>
+                        <div class="shop-tab-style">
+                            <a href="" class="active btn-tab-style shop-grid">
+                                <i class="icon-th"></i>
+                            </a>
+                            <a href="" class="btn-tab-style shop-list">
+                                <i class="icon-list"></i>
+                            </a>
+                        </div>
+                        <div class="select-sorting-wrap d-flex align-items-center">
+                            <div class="sort-product">
+                                <p>Sort By:</p>
+                            </div>
+                            <div class="header-bottom-set dropdown pagination">
+                                <button class="dropdown-toggle header-action-btn">
+                                    Default
+                                    <i class="icon-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pagination_list">
+                                    <li><a class="dropdown-item" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="a_to_z">Name, A to Z</a></li>
+                                    <li><a class="dropdown-item" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="z_to_a">Name, Z to A</a></li>
+                                    <li><a class="dropdown-item" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="low_to_high">Price, low to high</a></li>
+                                    <li><a class="dropdown-item" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="high_to_low">Price, high to low</a></li>
+                                    <li><a class="dropdown-item" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="new">Sort By new</a></li>
+                                    <li><a class="dropdown-item" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" asp-route-sortingBy="old">Sort By old</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shop-bottom-products">
+                        <div class="row">
+                            <div class="col">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="shop-grid">
+                                        <div class="shop-grid-wrap">
+                                            <div class="row">
+                                                @foreach (var item in Model.Products)
+                                                {
+
+                                                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-product">
+                                                        <div class="product">
+                                                            <span class="badges">
+                                                                @if (item.Count != 0)
+                                                                {
+                                                                    @if (item.DiscountPercent != null)
+                                                                    {
+                                                                        <span class="sale">-@item.DiscountPercent%</span>
+                                                                    }
+                                                                    @if (item.CreatedAt > DateTime.Today.AddDays(-7))
+                                                                    {
+                                                                        <span class="new">New</span>
+                                                                    }
+                                                                }
+                                                                else if (item.Count == 0)
+                                                                {
+                                                                    <span class="new">Sale</span>
+                                                                }
+                                                            </span>
+                                                            <div class="product-image">
+                                                                <a asp-action="detail" asp-route-id="@item.Id" class="image w-custom-100">
+                                                                    <div class="poster w-custom-100" data-bg-image='../uploads/products/@item.GetPosterImage()'></div>
+                                                                    <div class="hover-poster w-custom-100" data-bg-image='../uploads/products/@item.GetHoverPosterImage()'></div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="content">
+                                                                <span class="category">
+                                                                    <a asp-controller="shop" asp-action="index" asp-route-categoryId="@item.Category.Id">@item.Category.Name</a>
+                                                                </span>
+                                                                <h5 class="title">
+                                                                    <a asp-action="detail" asp-route-id="@item.Id">
+                                                                        @item.Name
+                                                                    </a>
+                                                                </h5>
+                                                                <span class="price">
+                                                                    @if (item.DiscountPercent != null && item.Count > 0)
+                                                                    {
+                                                                        newPrice = (double)(item.Price - item.Price * item.DiscountPercent / 100);
+
+                                                                        <span class="old">$@item.Price.ToString("#.00")</span>
+                                                                        <span class="new">$@newPrice.ToString("#.00")</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="new">$@item.Price.ToString("#.00")</span>
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                            <div class="actions">
+                                                                <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" title="Add To Cart" class="action add-to-cart">
+                                                                    <i class="icon-basket"></i>
+                                                                </a>
+                                                                <a asp-controller="shop" asp-action="addtowishlist" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" class="action wishlist" title="Wishlist">
+                                                                    <i class="icon-heart1"></i>
+                                                                </a>
+                                                                <a asp-controller="shop" asp-action="getdetail" asp-route-id="@item.Id" class="action quickview" title="Quick view">
+                                                                    <i class="icon-eye"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="shop-list">
+                                        @foreach (var item in Model.Products)
+                                        {
+                                            <div class="shop-list-wrap mb-5">
+                                                <div class="row">
+                                                    <div class="col-md-5 col-lg-5 col-xl-4">
+                                                        <div class="product">
+                                                            <div class="thumb">
+                                                                <div class="product-image">
+                                                                    <a asp-action="detail" asp-route-id="@item.Id" class="image w-custom-100">
+                                                                        <div class="poster w-custom-100" data-bg-image='../uploads/products/@item.GetPosterImage()'></div>
+                                                                        <div class="hover-poster w-custom-100" data-bg-image='../uploads/products/@item.GetHoverPosterImage()'></div>
+                                                                    </a>
+                                                                </div>
+                                                                <span class="badges">
+                                                                    @if (item.Count != 0)
+                                                                    {
+                                                                        @if (item.DiscountPercent != null)
+                                                                        {
+                                                                            <span class="sale">-@item.DiscountPercent%</span>
+                                                                        }
+                                                                        @if (item.CreatedAt > DateTime.Today.AddDays(-7))
+                                                                        {
+                                                                            <span class="new">New</span>
+                                                                        }
+                                                                    }
+                                                                    else if (item.Count == 0)
+                                                                    {
+                                                                        <span class="new">Sale</span>
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7 col-lg-7 col-xl-8">
+                                                        <div class="content-desc-wrap">
+                                                            <div class="content">
+                                                                <span class="category">
+                                                                    <a asp-controller="shop" asp-action="index" asp-route-categoryId="@item.Category.Id">@item.Category.Name</a>
+                                                                </span>
+                                                                <h5 class="title">
+                                                                    <a asp-action="detail" asp-route-id="@item.Id">
+                                                                        @item.Name
+                                                                    </a>
+                                                                </h5>
+                                                                <p>
+                                                                    @item.Desc
+                                                                </p>
+                                                            </div>
+                                                            <div class="box-inner">
+                                                                <span class="price">
+                                                                    @if (item.DiscountPercent != null && item.Count>0)
+                                                                    {
+                                                                        newPrice = (double)(item.Price - item.Price * item.DiscountPercent / 100);
+
+                                                                        <span class="old">$@item.Price.ToString("#.00")</span>
+                                                                        <span class="new">$@newPrice.ToString("#.00")</span>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <span class="new">$@item.Price.ToString("#.00")</span>
+                                                                    }
+                                                                </span>
+                                                                <div class="actions">
+                                                                    <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" title="Add To Cart" class="action add-to-cart">
+                                                                        <i class="icon-basket"></i>
+                                                                    </a>
+                                                                    <a asp-controller="shop" asp-action="addtowishlist" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" class="action wishlist" title="Wishlist">
+                                                                        <i class="icon-heart1"></i>
+                                                                    </a>
+                                                                    <a asp-controller="shop" asp-action="getdetail" asp-route-id="@item.Id" class="action quickview" title="Quick view">
+                                                                        <i class="icon-eye"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination text-center text-lg-end">
+                            <div class="pages">
+                                <ul class="pagination_list">
+                                    <li class="li @(Model.SelectedPage<=1?"disabled":"")">
+                                        <a asp-action="pagenation" asp-route-page="@(Model.SelectedPage-1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" class="page-link"><i class="icon-angle-left"></i></a>
+                                    </li>
+                                    @if (Model.SelectedPage == 1)
+                                    {
+                                        @if (Model.TotalPages >= 3)
+                                        {
+                                            <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="1" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">1</a></li>
+                                            <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="2" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">2</a></li>
+                                            <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="3" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">3</a></li>
+                                        }
+                                        else if (Model.TotalPages == 2)
+                                        {
+                                            <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="1" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">1</a></li>
+                                            <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="2" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">2</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="1" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">1</a></li>
+                                        }
+
+                                    }
+                                    else if (Model.SelectedPage == Model.TotalPages)
+                                    {
+                                        @if (Model.TotalPages >= 3)
+                                        {
+                                            <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.TotalPages-2)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@(Model.TotalPages-2)</a></li>
+                                            <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.TotalPages-1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@(Model.TotalPages-1)</a></li>
+                                            <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.TotalPages" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@Model.TotalPages</a></li>
+                                        }
+                                        else if (Model.TotalPages == 2)
+                                        {
+                                            <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.TotalPages-1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@(Model.TotalPages-1)</a></li>
+                                            <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.TotalPages" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@Model.TotalPages</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.TotalPages" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@Model.TotalPages</a></li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @if (Model.TotalPages >= 3)
+                                        {
+                                            <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.SelectedPage-1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@(Model.SelectedPage-1)</a></li>
+                                            <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@Model.SelectedPage</a></li>
+                                            <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.SelectedPage+1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@(Model.SelectedPage+1)</a></li>
+                                        }
+                                        else if (Model.TotalPages == 2)
+                                        {
+                                            <li class="li"><a class="page-link" asp-action="pagenation" asp-route-page="@(Model.SelectedPage-1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@(Model.SelectedPage-1)</a></li>
+                                            <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@Model.SelectedPage</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="li"><a class="page-link active" asp-action="pagenation" asp-route-page="@Model.SelectedPage" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId">@Model.SelectedPage</a></li>
+                                        }
+
+                                    }
+                                    <li class="li @(Model.SelectedPage>Model.TotalPages-1?"disabled":"")">
+                                        <a asp-action="pagenation" asp-route-page="@(Model.SelectedPage+1)" asp-route-categoryId="@Model.CategoryId" asp-route-brandId="@Model.BrandId" asp-route-name="@Model.SearchName" asp-route-tagId="@Model.TagId" asp-route-colorId="@Model.ColorId" class="page-link"><i class="icon-angle-right"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Products end -->
+</main>
+<!-- Main End -->
+@section Scripts{
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            $(document).on("click", ".sidebar-btn.btn-category", function (e) {
+                e.preventDefault();
+                $(".sidebar-btn.btn-category").removeClass("selected");
+                $(this).addClass("selected");
+            });
+            $(document).on("click", ".sidebar-btn.btn-brand", function (e) {
+                e.preventDefault();
+                $(".sidebar-btn.btn-brand").removeClass("selected");
+                $(this).addClass("selected");
+            });
+            $(document).on("click", ".btn-color", function (e) {
+                e.preventDefault();
+                $(".btn-color").removeClass("selected");
+                $(this).addClass("selected");
+            });
+
+            // Shop range start
+            $("#slider-range").slider({
+                range: true,
+                min: @(Model.MinPrice-1),
+                max: @(Model.MaxPrice+1),
+                values: [@(Model.MinPrice+(Model.MaxPrice- Model.MinPrice)*15/100), @(Model.MaxPrice-(Model.MaxPrice- Model.MinPrice)*15/100)],
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                },
+            });
+            $("#amount").val(
+                "$" +
+                $("#slider-range").slider("values", 0) +
+                " - $" +
+                $("#slider-range").slider("values", 1)
+            );
+             // Shop range end
+
+            let min = 0;
+            let max = 0;
+
+            $(document).on("click", "#btn-filter-search", function (e) {
+                e.preventDefault();
+                let val = $("#amount").val();
+                let cdata = val.replace(/[^0-9.]/g, " ").split(" ");
+                let arrNum = [];
+                let count = 0;
+                for (var i = 0; i < cdata.length; i++) {
+                    if (+(cdata[i]) !== 0) {
+                        arrNum[count] = parseInt(cdata[i], 10);
+                        count++;
+                    }
+                }
+                if (arrNum.length == 1) {
+                    max = arrNum[0];
+                } else {
+                    min = arrNum[0];
+                    max = arrNum[1];
+                }
+            });
+
+            $(document).on("click", ".pagination ul.pagination_list a", function (e) {
+                e.preventDefault();
+                let url = $(this).attr("href");
+
+                async function ResponseHtml() {
+                    const response = await fetch(url)
+                        .then(resp => resp.text())
+                        .then(data => {
+
+                            $("#for_fetch_div").html(data);
+                            if ($("[data-bg-image]")) {
+                                $("[data-bg-image]").each(function (e) {
+                                    $(this).css(
+                                        "background-image",
+                                        "url(" + $(this).attr("data-bg-image") + ")"
+                                    );
+                                });
+                            }
+                        }
+                        );
+                }
+
+                ResponseHtml();
+            });
+
+            $(document).on("click", ".btn-category.all", function (e) {
+                e.preventDefault();
+                let url = $(this).attr("href");
+
+                async function ResponseHtml() {
+                    const response = await fetch(url)
+                        .then(resp => resp.text())
+                        .then(data => {
+
+                            $("#for_fetch_div").html(data);
+                            if ($("[data-bg-image]")) {
+                                $("[data-bg-image]").each(function (e) {
+                                    $(this).css(
+                                        "background-image",
+                                        "url(" + $(this).attr("data-bg-image") + ")"
+                                    );
+                                });
+                            }
+                        }
+                        );
+                }
+
+                ResponseHtml();
+            });
+
+            $(document).on("click", "#btn-filter-search", function (e) {
+                e.preventDefault();
+                let url = $(this).attr("href");
+
+                let categoryId = "";
+                $(".btn-category.single").each(function (e) {
+                    if ($(this).hasClass("selected")) {
+                        categoryId = $(this).attr("data-categoryId");
+                        url = url + "?categoryId=" + categoryId;
+                        console.log(url + " - category");
+                    }
+                });
+
+                let colorId = "";
+                $(".btn-color").each(function (e) {
+                    if ($(this).hasClass("selected")) {
+                        colorId = $(this).attr("data-colorId");
+                        if (url.indexOf("?")>-1) {
+                            url = url + "&colorId=" + colorId;
+                        } else {
+                            url = url + "?colorId=" + colorId;
+                        }
+                        console.log(url + " - color");
+                    }
+                });
+
+                let brandId = "";
+                $(".btn-brand").each(function (e) {
+                    if ($(this).hasClass("selected")) {
+                        brandId = $(this).attr("data-brandId");
+                        if (url.indexOf("?") > -1) {
+                            url = url + "&brandId=" + brandId;
+                        } else {
+                            url = url + "?brandId=" + brandId;
+                        }
+                        console.log(url + " - brand");
+                    }
+                });
+
+                if (min > 0 && max > 0 && max > min) {
+                    if (url.indexOf("?") > -1) {
+                        url = url + "&min=" + min + "&max=" + max;
+                    } else {
+                        url = url + "?min=" + min + "&max=" + max;
+                    }
+                    console.log(url + " - min-max");
+                }
+
+
+                async function ResponseHtml() {
+                    const response = await fetch(url)
+                        .then(resp => resp.text())
+                        .then(data => {
+
+                            $("#for_fetch_div").html(data);
+                            if ($("[data-bg-image]")) {
+                                $("[data-bg-image]").each(function (e) {
+                                    $(this).css(
+                                        "background-image",
+                                        "url(" + $(this).attr("data-bg-image") + ")"
+                                    );
+                                });
+                            }
+                        }
+                        );
+                }
+
+                ResponseHtml();
+            });
+        });
+    </script>
+}

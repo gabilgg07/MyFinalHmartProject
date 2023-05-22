@@ -1,0 +1,65 @@
+﻿@model ContactMessage
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-action">
+                        Delete Contact Message
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post">
+                            <div class="row">
+                                <div class="input-field col-lg-4">
+                                    <input asp-for="FirstName" class="validate @(Model?.FirstName!=null?"valid":"")" disabled>
+                                    <label asp-for="FirstName" class="@(Model?.FirstName!=null?"active":"")">First Name</label>
+                                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                                </div>
+                                <div class="input-field col col-lg-4">
+                                    <input asp-for="LastName" class="validate @(Model?.LastName!=null?"valid":"")" disabled>
+                                    <label asp-for="LastName" class="@(Model?.LastName!=null?"active":"")">Last Name</label>
+                                    <span class="text-danger" asp-validation-for="LastName"></span>
+                                </div>
+                                <div class="input-field col col-lg-6">
+                                    <input asp-for="Email" class="validate @(Model?.Email!=null?"valid":"")" disabled>
+                                    <label asp-for="Email" class="@(Model?.Email!=null?"active":"")">Email</label>
+                                    <span class="text-danger" asp-validation-for="Email"></span>
+                                </div>
+                                <div class="input-field col col-lg-2">
+                                    <input asp-for="CreateAt" class="validate @(Model?.CreateAt!=null?"valid":"")" disabled>
+                                    <label asp-for="CreateAt" class="@(Model?.CreateAt!=null?"active":"")">Create At</label>
+                                    <span class="text-danger" asp-validation-for="CreateAt"></span>
+                                </div>
+                                <div class="input-field col col-lg-5">
+                                    <input asp-for="Subject" class="validate @(Model?.Subject!=null?"valid":"")" disabled>
+                                    <label asp-for="Subject" class="@(Model?.Subject!=null?"active":"")">Subject</label>
+                                    <span class="text-danger" asp-validation-for="Subject"></span>
+                                </div>
+                                <div class="input-field col col-lg-8">
+                                    <textarea asp-for="Message" class="validate @(Model?.Message!=null?"valid":"")" disabled></textarea>
+                                    <label asp-for="Message" class="@(Model?.Message!=null?"active":"")">Message</label>
+                                    <span class="text-danger" asp-validation-for="Message"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <h3 class="ml-25">Are you sure?</h3>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button type="submit" class="waves-effect waves-light btn btn-danger" style="width:180px">Delete</button>
+                                    <a asp-action="index" class="waves-effect waves-light btn btn-success m-lt-buttons-1" style="width:180px">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

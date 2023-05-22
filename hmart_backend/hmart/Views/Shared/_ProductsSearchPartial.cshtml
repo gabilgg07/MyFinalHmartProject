@@ -1,0 +1,34 @@
+﻿@model List<Product>
+@{ 
+    double newPrice = 0;
+}
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li class="product-search-li">
+            <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id">
+                <div class="product-search-item">
+                    <div class="content">
+                        <img src="~/uploads/products/@item.GetPosterImage()" alt="@item.Name">
+                        <span class="product-name">@item.Name</span>
+                    </div>
+                    <span class="price">
+                        @if (item.DiscountPercent != null && item.Count > 0)
+                        {
+
+                            newPrice = (double)(item.Price - item.Price * item.DiscountPercent / 100);
+
+                            <span class="old">$@item.Price.ToString("#.00")</span>
+                            <span class="new">$@newPrice.ToString("#.00")</span>
+                        }
+                        else
+                        {
+                            <span class="new">$@item.Price.ToString("#.00")</span>
+                        }
+                    </span>
+                </div>
+            </a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,85 @@
+﻿@model WishListVM
+@{
+    ViewData["Title"] = "Wishlist";
+}
+
+<!-- Main Start -->
+<main>
+    <!-- Main-header start -->
+    <section id="main-header" data-bg-image="@Url.Content("/uploads/setting/" + Model.Setting.MainBgImgSrc)">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 text-center">
+                    <h2 class="header-title">Wishlist</h2>
+                    <ul class="page-list">
+                        <li class="page-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                        <li class="page-item active"> Wishlist</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main-header end -->
+    <!-- Product detail start -->
+    <section id="wishlist-items" class="py-section">
+        <div class="container">
+            <h3 class="page-title">Your wishlist items</h3>
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="product-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Until Price</th>
+                                    <th>Add To Cart</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Products)
+                                {
+                                    <tr>
+                                        <td class="product-image">
+                                            <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id">
+                                                <img class="ms-2" src="~/uploads/products/@item.GetPosterImage()"
+                                                     alt="@item.Name">
+                                            </a>
+                                        </td>
+                                        <td class="product-name">
+                                            <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id">@item.Name</a>
+                                        </td>
+                                        <td class="product-price">
+                                            <span class="amount">$@((item.DiscountPercent==null?item.Price:item.Price-item.Price*item.DiscountPercent/100)?.ToString("#.00"))</span>
+                                        </td>
+                                        <td class="product-to-cart">
+                                            <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@item.Id" data-img="/uploads/products/@item.GetPosterImage()" data-name="@item.Name" class="add-to-cart">add to cart</a>
+                                        </td>
+                                        <td class="product-remove">
+                                            <a asp-controller="shop" asp-action="deletefromwishlist" asp-route-id="@item?.Id" asp-route-isCanvas="false" class="remove-from-wishList"><i class="icon-close"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product detail end -->
+</main>
+<!-- Main End -->
+@section Scripts{ 
+<script>
+    $(document).ready(function (e) {
+        $(document).on("click", ".remove-from-wishList", function (e) {
+            $("#wishlist .list-wrapper").removeClass("canvas-opening");
+            setTimeout(() => {
+                location.reload();
+            }, 100);
+        });
+    });
+</script>
+}

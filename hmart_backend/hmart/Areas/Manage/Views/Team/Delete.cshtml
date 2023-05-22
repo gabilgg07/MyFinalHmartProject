@@ -1,0 +1,76 @@
+﻿@model Team
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-action">
+                        Delete Team
+                    </div>
+                    <div class="card-content">
+                        <form class="col s12" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col s12">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="card p-1">
+                                                <div class="image-poster">
+                                                    @if (Model?.Image != null)
+                                                    {
+                                                        <div class="image-wrapper d-flex j-c-c" style="position:relative">
+                                                            <img style="width:100%" src="~/uploads/teams/@Model.Image" alt="Team Image" />
+                                                            <input type="hidden" name="Image" value="@Model.Image" />
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h3 class="mt-2">Have not image</h3>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="row m-0">
+                                                <div class="input-field col s6">
+                                                    <input asp-for="Fullname" class="validate @(Model?.Fullname!=null?"valid":"")" disabled>
+                                                    <label asp-for="Fullname" class="@(Model?.Fullname!=null?"active":"")">Fullname</label>
+                                                    <span class="text-danger" asp-validation-for="Fullname"></span>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <input asp-for="Position" class="validate @(Model?.Position!=null?"valid":"")" disabled>
+                                                    <label asp-for="Position" class="@(Model?.Position!=null?"active":"")">Position</label>
+                                                    <span class="text-danger" asp-validation-for="Position"></span>
+                                                </div>
+                                                <div class="input-field col s4">
+                                                    <input asp-for="Order" class="validate @(Model?.Order!=null?"valid":"")" disabled>
+                                                    <label asp-for="Order" class="@(Model?.Order!=null?"active":"")">Order</label>
+                                                    <span class="text-danger" asp-validation-for="Order"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <h3 class="ml-25">Are you sure?</h3>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button type="submit" class="waves-effect waves-light btn btn-danger" style="width:180px">Delete</button>
+                                    <a asp-action="index" class="waves-effect waves-light btn btn-success m-lt-buttons-1" style="width:180px">Cancel</a>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="clearBoth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

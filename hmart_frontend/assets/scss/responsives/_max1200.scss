@@ -1,0 +1,41 @@
+@media screen and (max-width: 1200px) {
+    //#region Comman
+
+    // Header start
+    header {
+        #header-top {
+            .top-nav {
+                ul {
+                    li {
+                        &:not(:last-child) {
+                            margin-right: 12px;
+                            padding-right: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Header end
+
+    // Footer start
+    footer {
+        .footer-bottom {
+            .copy-text {
+                font-size: 14px;
+                line-height: 24px;
+            }
+        }
+    }
+    // Footer end
+
+    // Main start
+    main {
+        #main-header {
+            height: 300px;
+        }
+    }
+    // Main end
+
+    //#endregion
+}

@@ -1,0 +1,247 @@
+@media screen and (max-width: 992px) {
+    //#region Common
+
+    //#region Spaces
+
+    .pt-section {
+        padding-top: 60px;
+    }
+    .pb-section {
+        padding-bottom: 60px;
+    }
+    .mb-col {
+        margin-bottom: 30px;
+    }
+    //#endregion
+
+    //#region Other Styles
+
+    // Section Title start
+    .section-title {
+        p {
+            font-size: 16px;
+            line-height: 26px;
+        }
+    }
+    // Section Title end
+
+    //#endregion
+
+    // Header Start
+    header {
+        #header-top {
+            .welcome-text {
+                justify-content: center;
+            }
+        }
+    }
+    // Header End
+
+    // Footer start
+    footer {
+        .footer-top {
+            .service-wedge {
+                padding-left: 0;
+            }
+        }
+    }
+    // Footer end
+
+    // Main start
+    main {
+        #main-header {
+            .header-title {
+                font-size: 42px;
+            }
+            .page-list {
+                .page-item {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Pages
+
+    //#region Home Page
+
+    // Main Start
+    main {
+        // Slider start
+        #slider {
+            height: 500px;
+            .main-slider {
+                .slide-animate {
+                    .slider-content {
+                        height: 500px;
+                        h2.title-slider {
+                            font-size: 38px;
+                            margin-bottom: 30px;
+                            line-height: 56px;
+                        }
+                        a.btn-slider {
+                            width: 150px;
+                            height: 50px;
+                            font-size: 14px;
+                        }
+                    }
+                    .slider-product {
+                        height: 500px;
+                        .product-image {
+                            img {
+                                max-width: 80%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Slider end
+
+        // Product start
+        #product {
+            .product-tab-nav {
+                .product-tab-nav-list {
+                    .product-nav-item {
+                        .product-nav-btn {
+                            width: 150px;
+                            height: 48px;
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+        }
+        // Product end
+
+        // Fashion start
+        #fashion {
+            height: 356px;
+            .title {
+                font-size: 48px;
+                line-height: 60px;
+                margin-bottom: 32px;
+                span {
+                    font-size: 36px;
+                }
+            }
+        }
+        // Fashion end
+
+        // Feature start
+        #feature_product {
+            .mb-feature {
+                margin-bottom: 35px;
+            }
+            .single-feature-content {
+                flex-direction: column;
+                .feature-image {
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        // Feature end
+
+        // Testimonial start
+        #testimonial {
+            padding-bottom: 40px;
+        }
+        // Testimonial end
+
+        // Blog start
+        #blog {
+            .single-blog {
+                flex-direction: column;
+                .blog-image {
+                    width: 100%;
+                }
+                .blog-content {
+                    width: 100%;
+                    margin-left: 0;
+                    margin-top: 30px;
+                }
+            }
+        }
+        // Blog end
+    }
+    // Main End
+
+    //#endregion
+
+    //#region About Page
+
+    // Main start
+    main {
+        // About start
+        #about {
+            .about-wrapper {
+                .about-contant {
+                    .title {
+                        font-size: 40px;
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+        }
+        // About end
+        // Features start
+        #features {
+            .feature-wrapper {
+                padding: 60px 25px;
+            }
+        }
+        // Features end
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Single Product Page
+
+    // Main start
+    main {
+        #product-detail {
+            .product-details-content {
+                margin-left: 0;
+                margin-top: 50px;
+            }
+            .description-review-wrapper {
+                margin-left: 0;
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#region Contact Us Page
+
+    // Main start
+    main {
+        #contact {
+            .contact-wrapper {
+                padding: 50px 60px;
+                .contact-info {
+                    margin-top: 60px;
+                    flex-direction: column;
+                    .single-contact {
+                        width: auto;
+                        height: auto;
+                        margin-bottom: 50px;
+                        padding: 40px 0;
+                    }
+                }
+            }
+        }
+    }
+    // Main end
+
+    //#endregion
+
+    //#endregion
+}

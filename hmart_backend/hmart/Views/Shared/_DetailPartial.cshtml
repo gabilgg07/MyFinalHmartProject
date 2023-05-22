@@ -1,0 +1,108 @@
+﻿@model Product
+
+<div class="row">
+    <div class="col-lg-6 col-sm-12 col-xs-12 mb-col">
+        <div class="modal-view-big-slider swiper">
+            <div class="swiper-wrapper">
+                @foreach (var item in Model.ProImages)
+                {
+                    <div class="swiper-slide big-slider-item  text-center">
+                        <img src="~/uploads/products/@item.Image" alt="@Model.Name">
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="modal-view-small-slider swiper">
+            <div class="swiper-wrapper">
+                @foreach (var item in Model.ProImages)
+                {
+                    <div class="swiper-slide small-slider-item  text-center">
+                        <img src="~/uploads/products/@item.Image" alt="@Model.Name">
+                    </div>
+                }
+            </div>
+            <div class="swiper-buttons">
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-12 col-xs-12">
+        <div class="modal-details-content">
+            <h2 class="product-name">
+                @Model.Name
+            </h2>
+            <span class="price">
+                @if (Model.DiscountPercent != null)
+                {
+                   double newPrice = (double)(Model.Price - Model.Price * Model.DiscountPercent / 100);
+
+                    <span class="old">$@Model.Price.ToString("#.00")</span>
+                    <span class="new">$@newPrice.ToString("#.00")</span>
+                }
+                else
+                {
+                    <span class="new">$@Model.Price.ToString("#.00")</span>
+                }
+            </span>
+            <div class="rating-wrapper">
+                <div class="rating">
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        if (i < (int)Math.Round(Model.Rate.Value))
+                        {
+                            <i class="icon-star"></i>
+                        }
+                        else
+                        {
+                            <i class="icon-star-o"></i>
+                        }
+                    }
+                </div>
+                <span class="reviews">
+                    <a asp-controller="shop" asp-action="detail" asp-route-id="@Model.Id">( @Model.Reviews.Count() Review )</a>
+                </span>
+            </div>
+            <p class="description">
+                @Model.Desc
+            </p>
+            <div class="product-code info">
+                <span>Code:</span>
+                <span>@Model.Code</span>
+            </div>
+            <div class="product-category info">
+                <span>Category:</span>
+                <a href="#">@Model.Category.Name</a>
+            </div>
+            <div class="product-tags info">
+                <span>Tags:</span>
+                <ul>
+                    @foreach (var item in Model.ProductTagProducts)
+                    {
+                        <li>
+                            <a asp-controller="shop" asp-action="index" asp-route-id="@item.ProductTagId">
+                                @item.ProductTag.Name @(item.Id!= Model.ProductTagProducts.LastOrDefault().Id?",":"")
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="product-action">
+                <div class="product-count">
+                    <button class="minus operator">-</button>
+                    <input type="text" id="count_for_basket" class="count" value="1">
+                    <button class="plus operator">+</button>
+                </div>
+                <a asp-controller="shop" asp-action="addtobasket" asp-route-id="@Model.Id" data-img="/uploads/products/@Model.GetPosterImage()" data-name="@Model.Name" class="action add-to-cart detail_cart">
+                    Add To Cart
+                </a>
+                <a asp-controller="shop" asp-action="addtowishlist" asp-route-id="@Model.Id" data-img="/uploads/products/@Model.GetPosterImage()" data-name="@Model.Name" class="action wishlist">
+                    <i class="icon-heart1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn-close">
+    <i class="icon-close1"></i>
+</button>
